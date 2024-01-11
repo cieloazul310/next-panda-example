@@ -5,7 +5,7 @@ import { readFile, access } from "fs/promises";
 export type PostFrontmatter = {
   title: string;
   date: string;
-}
+};
 
 export const postPath = path.resolve(process.cwd(), "content/post");
 

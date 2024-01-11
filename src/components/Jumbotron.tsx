@@ -84,14 +84,18 @@ function Jumbotron({
             y={90}
             width={40}
             height={40}
-            className={css({ fill: { base: "secondary.100", _dark: "secondary.950" } })}
+            className={css({
+              fill: { base: "secondary.100", _dark: "secondary.950" },
+            })}
           />
           <rect
             x={100}
             y={80}
             width={40}
             height={40}
-            className={css({ fill: { base: "primary.200", _dark: "primary.900" }})}
+            className={css({
+              fill: { base: "primary.200", _dark: "primary.900" },
+            })}
           />
         </svg>
       </div>

@@ -8,10 +8,21 @@ export type ButtonProps = {
 } & JSX.IntrinsicElements["button"] &
   RecipeVariantProps<typeof button>;
 
-function Button({ children, colorPalette = "primary", size, variant, className, ...props }: ButtonProps) {
+function Button({
+  children,
+  colorPalette = "primary",
+  size,
+  variant,
+  className,
+  ...props
+}: ButtonProps) {
   return (
     <button
-      className={cx(css({ colorPalette }), button({ size, variant }), className)}
+      className={cx(
+        css({ colorPalette }),
+        button({ size, variant }),
+        className,
+      )}
       type="button"
       {...props}
     >
