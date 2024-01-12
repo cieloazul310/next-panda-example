@@ -17,9 +17,7 @@ function Footer() {
         py: 16,
       })}
     >
-      <h1 className={css({ fontWeight: "bold", color: "black" })}>
-        Site Title
-      </h1>
+      <h1 className={css({ fontWeight: "bold" })}>Site Title</h1>
     </header>
   );
 }

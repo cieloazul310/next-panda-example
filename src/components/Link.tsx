@@ -6,7 +6,7 @@ function Link({ ...props }: PropsWithChildren<NextLinkProps>) {
   return (
     <NextLink
       className={css({
-        color: { base: "teal.700", _dark: "teal.200" },
+        color: { base: "teal.600", _dark: "teal.200" },
         textDecoration: { base: "none", _hover: "underline" },
       })}
       {...props}
