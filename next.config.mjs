@@ -14,6 +14,7 @@ const withMdx = createMDX({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
+  basePath: "/next-panda-example",
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
 };
 
