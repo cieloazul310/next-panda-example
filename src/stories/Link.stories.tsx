@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "../components";
+import { Link } from "../components";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: "Example/Button",
-  component: Button,
+  title: "Example/Link",
+  component: Link,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: "centered",
@@ -12,10 +12,11 @@ const meta = {
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
+  /*
   argTypes: {
-    // backgroundColor: { control: 'color' },
   },
-} satisfies Meta<typeof Button>;
+  */
+} satisfies Meta<typeof Link>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -23,33 +24,21 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   args: {
-    colorPalette: "primary",
-    variant: "contained",
-    size: "md",
-    children: "Primary",
+    href: "/",
+    children: "Link",
   },
 };
 
-export const Secondary: Story = {
+export const Inline: Story = {
+  render: ({ children, ...props }) => (
+    <article>
+      <p>
+        This is <Link {...props}>{children}</Link>. Please check out.
+      </p>
+    </article>
+  ),
   args: {
-    colorPalette: "secondary",
-    variant: "contained",
-    size: "md",
-    children: "Secondary",
-  },
-};
-
-export const Large: Story = {
-  args: {
-    size: "lg",
-    children: "Large",
-  },
-};
-
-export const Rounded: Story = {
-  args: {
-    size: "md",
-    variant: "contained",
-    children: "Rounded",
+    href: "/",
+    children: "Inline link",
   },
 };
