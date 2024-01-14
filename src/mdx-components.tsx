@@ -9,6 +9,10 @@ import {
   Tr,
   Th,
   Td,
+  Ol,
+  Ul,
+  Blockquote,
+  Link,
 } from "@/components";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -21,6 +25,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     tr: Tr,
     th: Th,
     td: Td,
+    ol: Ol,
+    ul: Ul,
+    a: Link,
+    blockquote: Blockquote,
     ...createHeadings(),
     ...components,
   };
