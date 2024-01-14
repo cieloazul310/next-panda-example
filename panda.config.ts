@@ -1,5 +1,5 @@
 import { defineConfig } from "@pandacss/dev";
-import { globalCss, recipes, semanticTokens, tokens } from "./src/theme";
+import { globalCss, patterns, recipes, semanticTokens, textStyles, tokens, utilities } from "./src/theme";
 
 export default defineConfig({
   // Whether to use css reset
@@ -24,10 +24,14 @@ export default defineConfig({
   theme: {
     extend: {
       recipes,
+      textStyles,
       tokens,
       semanticTokens,
     },
   },
+  patterns,
+  utilities,
+  
   jsxFramework: "react",
 
   // The output directory for your css system

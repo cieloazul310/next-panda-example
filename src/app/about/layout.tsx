@@ -1,4 +1,4 @@
-import { Jumbotron } from "../../components";
+import { Jumbotron } from "@/components";
 
 export default function PageLayout({
   children,

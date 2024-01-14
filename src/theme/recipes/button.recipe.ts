@@ -4,9 +4,13 @@ const buttonRecipe = defineRecipe({
   className: "button",
   base: {
     py: 2,
-    px: 4,
+    px: 3,
     rounded: "xl",
     cursor: "pointer",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 1,
   },
   variants: {
     variant: {
