@@ -1,14 +1,20 @@
 import type { PropsWithChildren } from "react";
 import NextLink, { type LinkProps as NextLinkProps } from "next/link";
-import { css } from "../../styled-system/css";
+import { isInternal } from "@/utils";
+import { anchor } from "./mdx";
 
-function Link({ ...props }: PropsWithChildren<NextLinkProps>) {
+function Link({ href, ...props }: Omit<React.ComponentProps<"a">, "ref">) {
+  const internal = isInternal(href);
+
+  if (href && internal) {
+    return <NextLink className={anchor} href={href} {...props} />;
+  }
   return (
-    <NextLink
-      className={css({
-        color: { base: "teal.600", _dark: "teal.200" },
-        textDecoration: { base: "none", _hover: "underline" },
-      })}
+    <a
+      className={anchor}
+      href={href}
+      target="_blank"
+      rel="noreffer noopener"
       {...props}
     />
   );
