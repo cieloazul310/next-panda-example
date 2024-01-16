@@ -3,6 +3,7 @@
 - [Next.js] v14 (App Router)
 - [Panda CSS] v0
 - [Storybook] v7
+- [MDX]
 
 Demo  
 <https://cieloazul310.github.io/next-panda-example/>
@@ -11,6 +12,9 @@ Demo
 
 ```txt
 .
+├── content
+│   └── post // MDX posts 
+├── public
 ├── src
 │   ├── app // Next.js App Router 
 │   ├── components
@@ -23,7 +27,6 @@ Demo
 ├── package.json
 ├── panda.config.ts
 ├── postcss.config.cjs
-├── public
 └── tsconfig.json
 ```
 
@@ -47,3 +50,4 @@ Panda CSS - Website
 [Next.js]: https://nextjs.org/
 [Panda CSS]: https://panda-css.com/
 [Storybook]: https://storybook.js.org/
+[MDX]: https://mdxjs.com/
