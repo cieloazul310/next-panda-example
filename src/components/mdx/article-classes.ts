@@ -148,6 +148,12 @@ export const iframe = css({
   maxWidth: "100%",
 });
 
+export const kbd = css({
+  bg: { base: "neutral.50", _dark: "neutral.900" },
+  px: 1,
+  rounded: "md",
+});
+
 export const rehypeClassNamesOptions = {
   h1: heading1,
   h2: heading2,
@@ -169,4 +175,5 @@ export const rehypeClassNamesOptions = {
   pre,
   code,
   iframe,
+  kbd,
 };
