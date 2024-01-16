@@ -2,6 +2,7 @@ import type { MDXComponents } from "mdx/types";
 import {
   createHeadings,
   Paragraph,
+  Kbd,
   Code,
   Pre,
   Table,
@@ -15,7 +16,9 @@ import {
   Link,
 } from "@/components";
 
-export function useMDXComponents(components: MDXComponents): MDXComponents {
+export function useMDXComponents(
+  components: MDXComponents = {},
+): MDXComponents {
   return {
     p: Paragraph,
     code: Code,
@@ -29,6 +32,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ul: Ul,
     a: Link,
     blockquote: Blockquote,
+    kbd: Kbd,
     ...createHeadings(),
     ...components,
   };

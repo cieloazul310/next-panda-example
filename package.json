@@ -14,6 +14,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "gray-matter": "^4.0.3",
     "next": "14.0.4",
     "next-mdx-remote": "^4.4.1",
     "next-themes": "^0.2.1",
@@ -44,12 +45,14 @@
     "eslint-plugin-storybook": "^0.6.15",
     "lint-staged": "^15.2.0",
     "prettier": "^3.1.1",
+    "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.0",
     "storybook": "^7.6.7",
     "typescript": "^5"
   },
   "lint-staged": {
     "*/**/*.{js,mjs,cjs,jsx,ts,tsx}": [
+      "eslint --fix",
       "prettier --parser typescript --write"
     ]
   }
