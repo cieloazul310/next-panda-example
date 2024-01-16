@@ -21,17 +21,13 @@ export async function generateMetadata({
   });
 }
 
-async function Page({
-  params,
-}: PropsWithChildren<{ params: { slug: string[] } }>) {
+async function Page({ params }: { params: { slug: string[] } }) {
   const { slug } = params;
   const mdx = await useMdx(slug);
   const { context } = await getPostData(slug);
   const components = useMDXComponents();
-  console.log(context);
   if (!mdx) return null;
   const { content, data } = mdx;
-  console.log(data);
   return (
     <>
       <Jumbotron title={data.title} />
