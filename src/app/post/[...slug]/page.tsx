@@ -1,7 +1,13 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { getAllPosts, getPostData, useMdx, siteMetadata } from "@/utils";
-import type { PropsWithChildren } from "react";
+import {
+  getAllPosts,
+  getPostData,
+  useMdx,
+  siteMetadata,
+  rehypeImageSize,
+} from "@/utils";
 import { Jumbotron, Link } from "@/components";
+// import remarkGfm from "remark-gfm";
 import { useMDXComponents } from "../../../mdx-components";
 
 export async function generateStaticParams() {
@@ -31,11 +37,19 @@ async function Page({ params }: { params: { slug: string[] } }) {
   return (
     <>
       <Jumbotron title={data.title} />
-      <MDXRemote
-        options={{ parseFrontmatter: true }}
-        source={content}
-        components={components}
-      />
+      <article>
+        <MDXRemote
+          options={{
+            parseFrontmatter: true,
+            mdxOptions: {
+              rehypePlugins: [[rehypeImageSize, { root: process.cwd() }]],
+              // remarkPlugins: [remarkGfm],
+            },
+          }}
+          source={content}
+          components={components}
+        />
+      </article>
       {context.older && (
         <Link href={context.older.href}>{context.older.title}</Link>
       )}

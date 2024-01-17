@@ -102,7 +102,6 @@ export const td = css({
 
 export const hr = divider({
   orientation: "horizontal",
-  color: { base: "primary.50", _dark: "primary.950" },
   my: "lg",
 });
 

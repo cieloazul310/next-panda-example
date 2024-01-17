@@ -17,6 +17,9 @@ const nextConfig = {
   output: "export",
   basePath: "/next-panda-example",
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default withMdx(nextConfig);

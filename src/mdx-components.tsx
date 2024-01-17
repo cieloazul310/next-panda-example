@@ -1,3 +1,4 @@
+import Image, { type ImageProps } from "next/image";
 import type { MDXComponents } from "mdx/types";
 import {
   createHeadings,
@@ -12,6 +13,7 @@ import {
   Td,
   Ol,
   Ul,
+  Hr,
   Blockquote,
   Link,
 } from "@/components";
@@ -31,8 +33,16 @@ export function useMDXComponents(
     ol: Ol,
     ul: Ul,
     a: Link,
+    hr: Hr,
     blockquote: Blockquote,
     kbd: Kbd,
+    img: (props) => (
+      <Image
+        sizes="100vw"
+        style={{ width: "100%", height: "auto" }}
+        {...(props as ImageProps)}
+      />
+    ),
     ...createHeadings(),
     ...components,
   };
