@@ -7,13 +7,13 @@ const paper = definePattern({
   },
   transform({ hover, ...props }) {
     return {
-      bgct: {
-        base: "colorPalette.600/92",
-        _dark: "colorPalette.600/90",
-        _hover: hover ? "colorPalette.600/84" : undefined,
+      bg: {
+        base: "colorPalette.600/8",
+        _dark: "colorPalette.600/10",
+        _hover: hover ? "colorPalette.600/16" : undefined,
       },
       "&[data-selected]": {
-        bgct: { base: "colorPalette.600/84", _dark: "colorPalette.600/84" },
+        bg: { base: "colorPalette.600/16", _dark: "colorPalette.600/16" },
         color: { base: "colorPalette.800", _dark: "colorPalette.300" },
         pointerEvents: "none",
       },

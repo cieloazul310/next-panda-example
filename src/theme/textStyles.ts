@@ -1,12 +1,5 @@
 import { defineTextStyles } from "@pandacss/dev";
 
-const textStyles = defineTextStyles({
-  headings: {
-    description: "Text style for heading.",
-    value: {
-      fontWeight: "bold",
-    },
-  },
-});
+const textStyles = defineTextStyles({});
 
 export default textStyles;

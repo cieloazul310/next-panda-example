@@ -1,6 +1,6 @@
 import { Link } from "@/components";
 import { getAllPosts } from "@/utils";
-import { linkBox, linkOverlay } from "../../../styled-system/patterns";
+import { linkBox, linkOverlay } from "@styled-system/patterns";
 
 async function Page() {
   const allPosts = await getAllPosts();

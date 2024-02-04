@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
-import { css } from "../../styled-system/css";
-import { flex } from "../../styled-system/patterns";
+import { css } from "@styled-system/css";
+import { flex } from "@styled-system/patterns";
 
 export type JumbotronProps = PropsWithChildren<{
   title?: string;
@@ -85,7 +85,7 @@ function Jumbotron({
             width={40}
             height={40}
             className={css({
-              fill: { base: "secondary.100", _dark: "secondary.950" },
+              fill: { base: "accent.a7", _dark: "accent.a1" },
             })}
           />
           <rect
@@ -94,7 +94,7 @@ function Jumbotron({
             width={40}
             height={40}
             className={css({
-              fill: { base: "primary.200", _dark: "primary.900" },
+              fill: { base: "accent.6", _dark: "accent.1" },
             })}
           />
         </svg>

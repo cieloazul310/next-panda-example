@@ -36,6 +36,7 @@ export function useMDXComponents(
     hr: Hr,
     blockquote: Blockquote,
     kbd: Kbd,
+    /*
     img: (props) => (
       <Image
         sizes="100vw"
@@ -43,6 +44,7 @@ export function useMDXComponents(
         {...(props as ImageProps)}
       />
     ),
+    */
     ...createHeadings(),
     ...components,
   };

@@ -1,4 +1,2 @@
-import { default as buttonRecipe } from "./button.recipe";
-
-const recipes = { button: buttonRecipe };
+const recipes = {};
 export default recipes;

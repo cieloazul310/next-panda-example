@@ -1,7 +1,7 @@
 import { Header, Footer, Providers } from "@/components";
 import { fontClassName } from "@/styles";
 import { siteMetadata } from "@/utils";
-import { container } from "../../styled-system/patterns";
+import { container } from "@styled-system/patterns";
 import "../styles/globals.css";
 
 export const metadata = siteMetadata();

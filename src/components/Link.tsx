@@ -1,5 +1,4 @@
-import type { PropsWithChildren } from "react";
-import NextLink, { type LinkProps as NextLinkProps } from "next/link";
+import NextLink from "next/link";
 import { isInternal } from "@/utils";
 import { anchor } from "./mdx";
 

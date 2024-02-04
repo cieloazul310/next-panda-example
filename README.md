@@ -1,6 +1,7 @@
-# Next.js (App Router), Panda CSS and Storybook example project
+# Next.js (App Router), Ark UI, Panda CSS and Storybook example project
 
 - [Next.js] v14 (App Router)
+- [Ark UI] v1
 - [Panda CSS] v0
 - [Storybook] v7
 - [MDX]
@@ -13,7 +14,7 @@ Demo
 ```txt
 .
 ├── content
-│   └── post // MDX posts 
+│   └── post // MDX posts
 ├── public
 ├── src
 │   ├── app // Next.js App Router 
@@ -48,6 +49,7 @@ Panda CSS - Website
 <https://github.com/chakra-ui/panda/tree/main/website>
 
 [Next.js]: https://nextjs.org/
+[Ark UI]: https://ark-ui.com/
 [Panda CSS]: https://panda-css.com/
 [Storybook]: https://storybook.js.org/
 [MDX]: https://mdxjs.com/

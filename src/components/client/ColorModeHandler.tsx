@@ -1,7 +1,9 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import Button from "../Button";
+import { MdSunny, MdOutlineNightlight } from "react-icons/md";
+import { css } from "@styled-system/css";
+import { Icon } from "../ui";
 
 function ColorModeHandler() {
   const { theme, setTheme } = useTheme();
@@ -10,9 +12,18 @@ function ColorModeHandler() {
   };
 
   return (
-    <Button size="md" variant="rounded" onClick={onClick}>
-      Color
-    </Button>
+    <Icon
+      className={css({
+        cursor: "pointer",
+        rounded: "full",
+        bg: { base: "none", _hover: "bg.muted" },
+      })}
+      size="lg"
+      role="button"
+      onClick={onClick}
+    >
+      {theme === "dark" ? <MdOutlineNightlight /> : <MdSunny />}
+    </Icon>
   );
 }
 

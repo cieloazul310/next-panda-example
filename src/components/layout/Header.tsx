@@ -1,7 +1,8 @@
-import Link from "./Link";
-import { ColorModeHandler } from "./client";
-import { css } from "../../styled-system/css";
-import { flex } from "../../styled-system/patterns";
+import { css } from "@styled-system/css";
+import { flex } from "@styled-system/patterns";
+import { Heading } from "../ui";
+import Link from "../Link";
+import { ColorModeHandler } from "../client";
 
 function Header() {
   return (
@@ -13,24 +14,22 @@ function Header() {
         height: "header-height",
         width: "100%",
         position: "sticky",
-        bg: {
-          base: "rgba(255, 255, 255, 0.4)",
-          _dark: "rgba(66, 66, 66, 0.4)",
-        },
+        bg: "bg.canvas/60",
         backdropFilter: "blur(4px)",
         top: 0,
         px: 4,
         zIndex: 10,
       })}
     >
-      <h1
+      <Heading
+        as="h1"
+        fontWeight="bold"
         className={css({
-          fontWeight: "bold",
           flexGrow: 1,
         })}
       >
         <Link href="/">Site Title</Link>
-      </h1>
+      </Heading>
       <ColorModeHandler />
     </header>
   );

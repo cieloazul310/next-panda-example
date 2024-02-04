@@ -1,6 +1,6 @@
-import { cx, css } from "../../../styled-system/css";
-import { divider, paper } from "../../../styled-system/patterns";
-import type { SystemStyleObject } from "../../../styled-system/types";
+import { cx, css } from "@styled-system/css";
+import { divider, paper } from "@styled-system/patterns";
+import type { SystemStyleObject } from "@styled-system/types";
 
 const common: SystemStyleObject = {
   _first: {
@@ -137,7 +137,7 @@ export const pre = cx(
 export const code = css({
   ":not(pre) > &": {
     color: { base: "secondary.800", _dark: "secondary.400" },
-    bgct: "secondary.600/92",
+    bg: "secondary.600/92",
     px: 1,
     rounded: "md",
   },
