@@ -3,7 +3,7 @@
   "jsFramework": "react",
   "importAliases": {
     "components": "@/components",
-    "utils": "@/utils"
+    "utils": "@/lib"
   },
   "useReactServerComponents": true
 }

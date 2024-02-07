@@ -1,12 +1,16 @@
-import { Jumbotron, Link } from "../components";
+import { Jumbotron, Link, anchor } from "../components";
 
 export default function Home() {
   return (
     <>
       <Jumbotron title="Hello, Panda" headerText="With Next App Router" />
       <p>Hello, World</p>
-      <Link href="/about">About</Link>
-      <Link href="/post">Blog</Link>
+      <Link className={anchor} href="/about">
+        About
+      </Link>
+      <Link className={anchor} href="/post">
+        Blog
+      </Link>
     </>
   );
 }

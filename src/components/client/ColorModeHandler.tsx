@@ -2,28 +2,18 @@
 
 import { useTheme } from "next-themes";
 import { MdSunny, MdOutlineNightlight } from "react-icons/md";
-import { css } from "@styled-system/css";
-import { Icon } from "../ui";
+import { IconButton, type IconButtonProps } from "../ui";
 
-function ColorModeHandler() {
+function ColorModeHandler({ className }: IconButtonProps) {
   const { theme, setTheme } = useTheme();
   const onClick = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
   return (
-    <Icon
-      className={css({
-        cursor: "pointer",
-        rounded: "full",
-        bg: { base: "none", _hover: "bg.muted" },
-      })}
-      size="lg"
-      role="button"
-      onClick={onClick}
-    >
+    <IconButton className={className} variant="ghost" onClick={onClick}>
       {theme === "dark" ? <MdOutlineNightlight /> : <MdSunny />}
-    </Icon>
+    </IconButton>
   );
 }
 

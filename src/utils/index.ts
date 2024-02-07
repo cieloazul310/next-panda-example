@@ -1,4 +1,3 @@
-export * from "./create-style-context";
 export * from "./isInternal";
 export * from "./mdx";
 export * from "./siteMetadata";

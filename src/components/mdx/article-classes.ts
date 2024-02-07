@@ -59,36 +59,41 @@ export const paragraph = css({
 });
 
 export const anchor = css({
-  color: { base: "primary.700", _hover: "primary.500" },
+  color: { base: "accent.9", _hover: "accent.8" },
   textDecoration: { _hover: "underline" },
-  _dark: { color: { base: "primary.300", _hover: "primary.200" } },
+  _dark: { color: { base: "accent.11", _hover: "accent.12" } },
 });
 
 export const blockquote = cx(
-  css({ colorPalette: "primary" }),
+  css({ colorPalette: "accent" }),
   paper({
     my: "md",
   }),
 );
 
 export const table = cx(
-  css({ colorPalette: "primary" }),
+  css({ colorPalette: "accent" }),
   paper({
     width: "100%",
     borderWidth: "1px",
-    borderColor: { base: "primary.50", _dark: "primary.950" },
+    rounded: "l2",
+    borderColor: "accent.1",
     my: "lg",
     fontSize: ["sm", "md"],
   }),
 );
 
-export const thead = paper();
+export const thead = paper({ roundedTop: "l2" });
 
 export const tr = css({
-  borderColor: { base: "primary.50", _dark: "primary.950" },
+  borderColor: "accent.1",
   borderBottomWidth: "1px",
+  _first: {
+    roundedTop: "l2",
+  },
   _last: {
     borderBottomWidth: 0,
+    roundedBottom: "l2",
   },
 });
 
@@ -122,11 +127,11 @@ export const orderedList = css({
 export const img = css({
   my: "md",
   maxWidth: "100%",
-  rounded: "xl",
+  rounded: "l2",
 });
 
 export const pre = cx(
-  css({ colorPalette: "primary" }),
+  css({ colorPalette: "accent" }),
   paper({
     my: "lg",
     overflowX: "auto",
@@ -148,7 +153,7 @@ export const iframe = css({
 });
 
 export const kbd = css({
-  bg: { base: "neutral.50", _dark: "neutral.900" },
+  bg: { base: "gray.3", _dark: "gray.9" },
   px: 1,
   rounded: "md",
 });

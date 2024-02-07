@@ -14,59 +14,71 @@ const meta = {
   tags: ["autodocs"],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    variant: { control: "select", options: ["contained", "rounded"] },
+    variant: {
+      control: "select",
+      options: ["solid", "subtle", "outline", "ghost"],
+    },
+    size: { control: "select", options: ["xs", "sm", "md", "lg", "xl", "2xl"] },
   },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const parameters = {
+  controls: { include: ["children", "variant", "size"] },
+};
+
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
-  render: ({ children, ...props }) => (
-    <Button colorPalette="primary" {...props}>
-      {children}
-    </Button>
-  ),
+  render: ({ children, ...props }) => <Button {...props}>{children}</Button>,
   args: {
     children: "Primary",
     ...button.raw({
-      variant: "contained",
+      variant: "solid",
+      size: "md",
     }),
   },
+  parameters,
 };
 
 export const Secondary: Story = {
-  render: ({ children, ...props }) => (
-    <Button colorPalette="secondary" {...props}>
-      {children}
-    </Button>
-  ),
+  render: ({ children, ...props }) => <Button {...props}>{children}</Button>,
   args: {
     children: "Secondary",
+    colorPalette: "red",
     ...button.raw({
-      variant: "contained",
+      variant: "outline",
+      size: "sm",
     }),
   },
+  parameters,
 };
 
 export const Large: Story = {
   render: ({ children, ...props }) => <Button {...props}>{children}</Button>,
   args: {
-    size: "2xl",
     children: "Double Extra Large",
     ...button.raw({
-      variant: "contained",
+      variant: "ghost",
+      size: "xl",
     }),
   },
+  parameters,
 };
 
 export const Rounded: Story = {
-  render: ({ children, ...props }) => <Button {...props}>{children}</Button>,
+  render: ({ children, ...props }) => (
+    <Button variant="outline" {...props}>
+      {children}
+    </Button>
+  ),
   args: {
     children: "Rounded",
     ...button.raw({
-      variant: "rounded",
+      variant: "subtle",
+      size: "2xl",
     }),
   },
+  parameters,
 };

@@ -1,6 +1,7 @@
-import { Header, Footer, Providers } from "@/components";
+import { Header, Footer, Providers, MyDrawer } from "@/components";
 import { fontClassName } from "@/styles";
 import { siteMetadata } from "@/utils";
+import { css, cx } from "@styled-system/css";
 import { container } from "@styled-system/patterns";
 import "../styles/globals.css";
 
@@ -13,7 +14,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja" suppressHydrationWarning>
-      <body className={fontClassName}>
+      <body
+        className={cx(
+          css({
+            minHeight: "100vh",
+            bgGradient: "to-b",
+            gradientFrom: "bg.canvas",
+            gradientTo: "accent.a1",
+            backgroundAttachment: "fixed",
+          }),
+          fontClassName,
+        )}
+      >
         <Providers>
           <Header />
           <main
@@ -27,6 +39,7 @@ export default function RootLayout({
           >
             {children}
           </main>
+          <MyDrawer variant="left" />
           <Footer />
         </Providers>
       </body>

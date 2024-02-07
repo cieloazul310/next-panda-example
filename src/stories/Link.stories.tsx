@@ -33,12 +33,22 @@ export const Inline: Story = {
   render: ({ children, ...props }) => (
     <article>
       <p>
-        This is <Link {...props}>{children}</Link>. Please check out.
+        This is{" "}
+        <Link href="/" {...props}>
+          {children}
+        </Link>
+        . Please check out.
+      </p>
+      <p>
+        This is{" "}
+        <Link href="https://cieloazul310.github.io" {...props}>
+          {children}
+        </Link>{" "}
+        with External Icon. Please check out.
       </p>
     </article>
   ),
   args: {
-    href: "/",
     children: "Inline link",
   },
 };

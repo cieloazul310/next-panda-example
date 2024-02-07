@@ -3,7 +3,7 @@ import { flex } from "@styled-system/patterns";
 
 function Footer() {
   return (
-    <header
+    <footer
       className={flex({
         alignItems: "center",
         direction: "column",
@@ -18,7 +18,7 @@ function Footer() {
       })}
     >
       <h1 className={css({ fontWeight: "bold" })}>Site Title</h1>
-    </header>
+    </footer>
   );
 }
 

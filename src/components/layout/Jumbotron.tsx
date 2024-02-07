@@ -17,6 +17,7 @@ function Jumbotron({
   return (
     <header
       className={css({
+        width: "full",
         height: "480px",
         position: "relative",
       })}
@@ -42,6 +43,7 @@ function Jumbotron({
               direction: "column",
               justifyContent: "center",
               alignItems: "start",
+              animation: ".25s fade-in",
             })}
           >
             {headerText && (
@@ -61,43 +63,6 @@ function Jumbotron({
             )}
           </hgroup>
         )}
-      </div>
-      <div
-        className={flex({
-          width: "100%",
-          height: "100%",
-          direction: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "absolute",
-          top: 0,
-          zIndex: -1,
-          filter: "blur(20px)",
-        })}
-      >
-        <svg
-          className={css({ width: "100%", height: "100%" })}
-          viewBox="0 0 200 200"
-        >
-          <rect
-            x={120}
-            y={90}
-            width={40}
-            height={40}
-            className={css({
-              fill: { base: "accent.a7", _dark: "accent.a1" },
-            })}
-          />
-          <rect
-            x={100}
-            y={80}
-            width={40}
-            height={40}
-            className={css({
-              fill: { base: "accent.6", _dark: "accent.1" },
-            })}
-          />
-        </svg>
       </div>
     </header>
   );

@@ -26,11 +26,20 @@ function Header() {
         fontWeight="bold"
         className={css({
           flexGrow: 1,
+          display: "flex",
+          justifyContent: { base: "center", smTo2xl: "start" },
         })}
       >
-        <Link href="/">Site Title</Link>
+        <Link
+          className={css({
+            textDecoration: { base: "none", _hover: "underline" },
+          })}
+          href="/"
+        >
+          Site Title
+        </Link>
       </Heading>
-      <ColorModeHandler />
+      <ColorModeHandler className={css({ hideBelow: "sm" })} />
     </header>
   );
 }
