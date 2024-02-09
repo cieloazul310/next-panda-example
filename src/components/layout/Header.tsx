@@ -1,5 +1,6 @@
 import { css } from "@styled-system/css";
 import { flex } from "@styled-system/patterns";
+import { siteTitle } from "@/utils";
 import { Heading } from "../ui";
 import Link from "../Link";
 import { ColorModeHandler } from "../client";
@@ -8,37 +9,29 @@ function Header() {
   return (
     <header
       className={flex({
-        alignItems: "center",
-        direction: "row",
-        gap: 2,
-        height: "header-height",
-        width: "100%",
         position: "sticky",
+        top: 0,
+        height: "header-height",
+        px: 4,
         bg: "bg.canvas/60",
         backdropFilter: "blur(4px)",
-        top: 0,
-        px: 4,
-        zIndex: 10,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: ["center", "start"],
+        zIndex: "header",
       })}
     >
-      <Heading
-        as="h1"
-        fontWeight="bold"
+      <Link
         className={css({
-          flexGrow: 1,
-          display: "flex",
-          justifyContent: { base: "center", smTo2xl: "start" },
+          textDecoration: { base: "none", _hover: "underline" },
         })}
+        href="/"
       >
-        <Link
-          className={css({
-            textDecoration: { base: "none", _hover: "underline" },
-          })}
-          href="/"
-        >
-          Site Title
-        </Link>
-      </Heading>
+        <Heading as="h1" fontWeight="bold">
+          {siteTitle}
+        </Heading>
+      </Link>
+      <div className={css({ flexGrow: 1, hideBelow: "sm" })} />
       <ColorModeHandler className={css({ hideBelow: "sm" })} />
     </header>
   );

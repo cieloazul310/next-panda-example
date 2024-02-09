@@ -1,4 +1,4 @@
-import { Jumbotron } from "@/components";
+import { Jumbotron, Wrapper, Main } from "@/components";
 
 export default function PageLayout({
   children,
@@ -6,9 +6,11 @@ export default function PageLayout({
   children: React.ReactNode;
 }) {
   return (
-    <article>
+    <>
       <Jumbotron title="About" />
-      {children}
-    </article>
+      <Wrapper>
+        <Main>{children}</Main>
+      </Wrapper>
+    </>
   );
 }

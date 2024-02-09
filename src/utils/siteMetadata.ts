@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
-export const siteTitle =
-  "Next.js (App Router), Panda CSS and Storybook example";
+export const siteTitle = "Next.js + Park UI example";
 export const siteDescription =
   "Next.js (App Router), Panda CSS and Storybook example. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 export const siteUrl = "https://cieloazul310.github.io/next-panda-example";

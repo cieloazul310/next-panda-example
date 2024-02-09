@@ -2,7 +2,6 @@ import { Header, Footer, Providers, MyDrawer } from "@/components";
 import { fontClassName } from "@/styles";
 import { siteMetadata } from "@/utils";
 import { css, cx } from "@styled-system/css";
-import { container } from "@styled-system/patterns";
 import "../styles/globals.css";
 
 export const metadata = siteMetadata();
@@ -28,18 +27,10 @@ export default function RootLayout({
       >
         <Providers>
           <Header />
-          <main
-            className={container({
-              maxWidth: "content-max-width",
-              display: "flex",
-              flexDirection: "column",
-              gap: 2,
-              minHeight: "100vh",
-            })}
-          >
-            {children}
+          <main>
+            <article>{children}</article>
           </main>
-          <MyDrawer variant="left" />
+          <MyDrawer />
           <Footer />
         </Providers>
       </body>

@@ -6,7 +6,7 @@ import {
   siteMetadata,
   rehypeImageSize,
 } from "@/utils";
-import { Jumbotron, Link } from "@/components";
+import { Jumbotron, Wrapper, Link } from "@/components";
 // import remarkGfm from "remark-gfm";
 import { useMDXComponents } from "../../../mdx-components";
 
@@ -37,25 +37,27 @@ async function Page({ params }: { params: { slug: string[] } }) {
   return (
     <>
       <Jumbotron title={data.title} />
-      <article>
-        <MDXRemote
-          options={{
-            parseFrontmatter: true,
-            mdxOptions: {
-              rehypePlugins: [[rehypeImageSize, { root: process.cwd() }]],
-              // remarkPlugins: [remarkGfm],
-            },
-          }}
-          source={content}
-          components={components}
-        />
-      </article>
-      {context.older && (
-        <Link href={context.older.href}>{context.older.title}</Link>
-      )}
-      {context.newer && (
-        <Link href={context.newer.href}>{context.newer.title}</Link>
-      )}
+      <Wrapper>
+        <article>
+          <MDXRemote
+            options={{
+              parseFrontmatter: true,
+              mdxOptions: {
+                rehypePlugins: [[rehypeImageSize, { root: process.cwd() }]],
+                // remarkPlugins: [remarkGfm],
+              },
+            }}
+            source={content}
+            components={components}
+          />
+        </article>
+        {context.older && (
+          <Link href={context.older.href}>{context.older.title}</Link>
+        )}
+        {context.newer && (
+          <Link href={context.newer.href}>{context.newer.title}</Link>
+        )}
+      </Wrapper>
     </>
   );
 }

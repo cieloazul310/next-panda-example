@@ -1,8 +1,9 @@
 import { css } from "@styled-system/css";
 import { MdMenu, MdClose } from "react-icons/md";
+import { siteTitle } from "@/utils";
 import { Drawer, Button, IconButton } from "../ui";
 import { ColorModeHandler } from "../client";
-import { siteTitle } from "@/utils";
+import Menu from "./Menu";
 
 function MyDrawer(props: Drawer.RootProps) {
   return (
@@ -14,6 +15,7 @@ function MyDrawer(props: Drawer.RootProps) {
             bottom: 4,
             right: 4,
             zIndex: "fab",
+            hideFrom: "md",
           })}
           size="xl"
         >
@@ -25,7 +27,7 @@ function MyDrawer(props: Drawer.RootProps) {
         <Drawer.Content>
           <Drawer.Header>
             <Drawer.Title>{siteTitle}</Drawer.Title>
-            {/*<Drawer.Description>Description</Drawer.Description>*/}
+            <Menu />
             <Drawer.CloseTrigger asChild position="absolute" top="3" right="4">
               <IconButton variant="ghost">
                 <MdClose />
