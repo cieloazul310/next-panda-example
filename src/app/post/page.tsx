@@ -1,6 +1,7 @@
-import { Link, Wrapper, Jumbotron } from "@/components";
+import NextLink from "next/link";
+import { Wrapper, Jumbotron, Block } from "@/components";
 import { getAllPosts } from "@/utils";
-import { linkBox, linkOverlay } from "@styled-system/patterns";
+import { linkBox, linkOverlay, vstack } from "@styled-system/patterns";
 
 async function Page() {
   const allPosts = await getAllPosts();
@@ -9,27 +10,27 @@ async function Page() {
     <>
       <Jumbotron title="MDX Posts" />
       <Wrapper>
-        <ul>
+        <ul className={vstack({ gap: 1, alignItems: "stretch" })}>
           {allPosts.map(({ title, date, href }) => (
-            <li
+            <Block
+              as="li"
               key={href}
               className={linkBox({
-                p: 4,
-                _hover: { bg: { base: "primary.50", _dark: "primary.950" } },
+                _hover: { bg: "accent.a3" },
               })}
             >
               <hgroup>
                 <h1>
-                  <Link
+                  <NextLink
                     className={linkOverlay({ fontWeight: "bold" })}
                     href={href}
                   >
                     {title}
-                  </Link>
+                  </NextLink>
                 </h1>
                 <p>{new Date(date).toISOString()}</p>
               </hgroup>
-            </li>
+            </Block>
           ))}
         </ul>
       </Wrapper>

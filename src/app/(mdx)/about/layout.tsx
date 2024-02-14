@@ -1,4 +1,4 @@
-import { Jumbotron, Wrapper, Main } from "@/components";
+import { Jumbotron, Wrapper, Block } from "@/components";
 
 export default function PageLayout({
   children,
@@ -9,7 +9,7 @@ export default function PageLayout({
     <>
       <Jumbotron title="About" />
       <Wrapper>
-        <Main>{children}</Main>
+        <Block as="article">{children}</Block>
       </Wrapper>
     </>
   );

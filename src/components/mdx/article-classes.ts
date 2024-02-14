@@ -59,7 +59,7 @@ export const paragraph = css({
 });
 
 export const anchor = css({
-  color: { base: "accent.9", _hover: "accent.8" },
+  color: { base: "accent.10", _hover: "accent.9" },
   textDecoration: { _hover: "underline" },
   _dark: { color: { base: "accent.11", _hover: "accent.12" } },
 });

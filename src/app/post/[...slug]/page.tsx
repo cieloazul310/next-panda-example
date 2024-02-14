@@ -6,7 +6,7 @@ import {
   siteMetadata,
   rehypeImageSize,
 } from "@/utils";
-import { Jumbotron, Wrapper, Link } from "@/components";
+import { Jumbotron, Wrapper, Link, Block } from "@/components";
 // import remarkGfm from "remark-gfm";
 import { useMDXComponents } from "../../../mdx-components";
 
@@ -38,7 +38,7 @@ async function Page({ params }: { params: { slug: string[] } }) {
     <>
       <Jumbotron title={data.title} />
       <Wrapper>
-        <article>
+        <Block as="article">
           <MDXRemote
             options={{
               parseFrontmatter: true,
@@ -50,7 +50,7 @@ async function Page({ params }: { params: { slug: string[] } }) {
             source={content}
             components={components}
           />
-        </article>
+        </Block>
         {context.older && (
           <Link href={context.older.href}>{context.older.title}</Link>
         )}

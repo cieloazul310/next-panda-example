@@ -1,8 +1,8 @@
+import NextLink from "next/link";
 import { css } from "@styled-system/css";
 import { flex } from "@styled-system/patterns";
 import { siteTitle } from "@/utils";
 import { Heading } from "../ui";
-import Link from "../Link";
 import { ColorModeHandler } from "../client";
 
 function Header() {
@@ -21,8 +21,13 @@ function Header() {
         zIndex: "header",
       })}
     >
-      <Link
+      <NextLink
         className={css({
+          color: {
+            base: "fg.default",
+            _dark: "fg.default",
+            _hover: "accent.11",
+          },
           textDecoration: { base: "none", _hover: "underline" },
         })}
         href="/"
@@ -30,7 +35,7 @@ function Header() {
         <Heading as="h1" fontWeight="bold">
           {siteTitle}
         </Heading>
-      </Link>
+      </NextLink>
       <div className={css({ flexGrow: 1, hideBelow: "sm" })} />
       <ColorModeHandler className={css({ hideBelow: "sm" })} />
     </header>

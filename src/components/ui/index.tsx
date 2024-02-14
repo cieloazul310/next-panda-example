@@ -1,10 +1,10 @@
-import * as Drawer from "./Drawer";
-import * as SegmentGroup from "./SegmentGroup";
+import * as Drawer from "./drawer";
+import * as SegmentGroup from "./segment-group";
 
-export * from "./Button";
-export * from "./Heading";
-export * from "./Icon";
-export * from "./IconButton";
-export * from "./Switch";
-export * from "./Text";
+export * from "./button";
+export * from "./heading";
+export * from "./icon";
+export * from "./icon-button";
+export * from "./switch";
+export * from "./text";
 export { Drawer, SegmentGroup };

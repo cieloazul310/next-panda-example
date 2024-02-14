@@ -1,6 +1,6 @@
+import NextLink from "next/link";
 import { css } from "@styled-system/css";
 import { flex } from "@styled-system/patterns";
-import Link from "../Link";
 import { siteTitle } from "@/utils";
 
 function Footer() {
@@ -16,11 +16,21 @@ function Footer() {
         py: "lg",
       })}
     >
-      <Link href="/">
+      <NextLink
+        href="/"
+        className={css({
+          color: {
+            base: "fg.default",
+            _dark: "fg.default",
+            _hover: "accent.11",
+          },
+          textDecoration: { base: "none", _hover: "underline" },
+        })}
+      >
         <p className={css({ fontSize: "md", textStyle: "headings" })}>
           {siteTitle}
         </p>
-      </Link>
+      </NextLink>
       <p>
         © {year} {siteTitle} All rights reserved.
       </p>

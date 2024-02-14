@@ -1,7 +1,8 @@
 import NextLink from "next/link";
 import { isInternal } from "@/utils";
-import { css } from "@styled-system/css";
+import { css, cx } from "@styled-system/css";
 import { RiExternalLinkLine } from "react-icons/ri";
+import { anchor } from "./mdx";
 
 function Link({
   children,
@@ -13,14 +14,14 @@ function Link({
 
   if (href && internal) {
     return (
-      <NextLink className={className} href={href} {...props}>
+      <NextLink className={cx(anchor, className)} href={href} {...props}>
         {children}
       </NextLink>
     );
   }
   return (
     <a
-      className={className}
+      className={cx(anchor, className)}
       href={href}
       target="_blank"
       rel="noreffer noopener"
@@ -29,7 +30,6 @@ function Link({
       {children}
       <RiExternalLinkLine
         className={css({
-          ml: 1,
           display: "inline",
           fontSize: "inherit",
           verticalAlign: "text-top",

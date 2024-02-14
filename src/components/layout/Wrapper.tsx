@@ -1,6 +1,7 @@
 import type { PropsWithChildren } from "react";
 import { css } from "@styled-system/css";
 import { vstack, container } from "@styled-system/patterns";
+import Block from "./Block";
 import Menu from "./Menu";
 
 function Wrapper({ children }: PropsWithChildren) {
@@ -36,7 +37,9 @@ function Wrapper({ children }: PropsWithChildren) {
           overflowY: "auto",
         })}
       >
-        <Menu />
+        <Block>
+          <Menu />
+        </Block>
       </div>
     </div>
   );
