@@ -1,31 +1,40 @@
-import { Link } from "@/components";
+import NextLink from "next/link";
+import { Wrapper, Jumbotron, Block } from "@/components";
 import { getAllPosts } from "@/utils";
-import { linkBox, linkOverlay } from "../../../styled-system/patterns";
+import { linkBox, linkOverlay, vstack } from "@styled-system/patterns";
 
 async function Page() {
   const allPosts = await getAllPosts();
 
   return (
-    <ul>
-      {allPosts.map(({ title, date, href }) => (
-        <li
-          key={href}
-          className={linkBox({
-            p: 4,
-            _hover: { bg: { base: "primary.50", _dark: "primary.950" } },
-          })}
-        >
-          <hgroup>
-            <h1>
-              <Link className={linkOverlay({ fontWeight: "bold" })} href={href}>
-                {title}
-              </Link>
-            </h1>
-            <p>{new Date(date).toISOString()}</p>
-          </hgroup>
-        </li>
-      ))}
-    </ul>
+    <>
+      <Jumbotron title="MDX Posts" />
+      <Wrapper>
+        <ul className={vstack({ gap: 1, alignItems: "stretch" })}>
+          {allPosts.map(({ title, date, href }) => (
+            <Block
+              as="li"
+              key={href}
+              className={linkBox({
+                _hover: { bg: "accent.a3" },
+              })}
+            >
+              <hgroup>
+                <h1>
+                  <NextLink
+                    className={linkOverlay({ fontWeight: "bold" })}
+                    href={href}
+                  >
+                    {title}
+                  </NextLink>
+                </h1>
+                <p>{new Date(date).toISOString()}</p>
+              </hgroup>
+            </Block>
+          ))}
+        </ul>
+      </Wrapper>
+    </>
   );
 }
 

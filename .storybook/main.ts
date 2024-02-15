@@ -1,3 +1,4 @@
+import * as path from "path";
 import type { StorybookConfig } from "@storybook/nextjs";
 
 const config: StorybookConfig = {
@@ -35,6 +36,17 @@ const config: StorybookConfig = {
       },
     },
   ],
+  // ref: https://zenn.dev/nitaking/articles/0d5eb19d6d9529
+  webpackFinal(config) {
+    if (config.resolve) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        "@": path.resolve(__dirname, "../src"),
+        "@styled-system": path.resolve(__dirname, "../styled-system"),
+      };
+    }
+    return config;
+  },
   framework: {
     name: "@storybook/nextjs",
     options: {},

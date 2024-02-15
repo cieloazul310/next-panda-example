@@ -1,14 +1,23 @@
 import { defineConfig } from "@pandacss/dev";
-import { globalCss, patterns, recipes, semanticTokens, textStyles, tokens, utilities } from "./src/theme";
+import { createPreset } from "@park-ui/panda-preset";
+
+import { globalCss, keyframes, patterns, recipes, semanticTokens, textStyles, tokens, utilities } from "./src/theme";
 
 export default defineConfig({
   // Whether to use css reset
   preflight: true,
 
-  // Where to look for your css declarations
-  include: [
-    "./src/**/*.{ts,tsx,js,jsx}",
+  presets: [
+    "@pandacss/preset-base",
+    createPreset({
+      accentColor: "blue",
+      grayColor: "sand",
+      borderRadius: "xl",
+    }),
   ],
+
+  // Where to look for your css declarations
+  include: ["./src/**/*.{ts,tsx,js,jsx}"],
 
   // Files to exclude
   exclude: [],
@@ -23,15 +32,16 @@ export default defineConfig({
   // Useful for theme customization
   theme: {
     extend: {
+      keyframes,
+      semanticTokens,
       recipes,
       textStyles,
       tokens,
-      semanticTokens,
     },
   },
   patterns,
   utilities,
-  
+
   jsxFramework: "react",
 
   // The output directory for your css system

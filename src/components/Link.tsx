@@ -1,22 +1,41 @@
-import type { PropsWithChildren } from "react";
-import NextLink, { type LinkProps as NextLinkProps } from "next/link";
+import NextLink from "next/link";
 import { isInternal } from "@/utils";
+import { css, cx } from "@styled-system/css";
+import { RiExternalLinkLine } from "react-icons/ri";
 import { anchor } from "./mdx";
 
-function Link({ href, ...props }: Omit<React.ComponentProps<"a">, "ref">) {
+function Link({
+  children,
+  href,
+  className,
+  ...props
+}: Omit<React.ComponentProps<"a">, "ref">) {
   const internal = isInternal(href);
 
   if (href && internal) {
-    return <NextLink className={anchor} href={href} {...props} />;
+    return (
+      <NextLink className={cx(anchor, className)} href={href} {...props}>
+        {children}
+      </NextLink>
+    );
   }
   return (
     <a
-      className={anchor}
+      className={cx(anchor, className)}
       href={href}
       target="_blank"
       rel="noreffer noopener"
       {...props}
-    />
+    >
+      {children}
+      <RiExternalLinkLine
+        className={css({
+          display: "inline",
+          fontSize: "inherit",
+          verticalAlign: "text-top",
+        })}
+      />
+    </a>
   );
 }
 

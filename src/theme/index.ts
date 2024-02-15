@@ -1,4 +1,5 @@
 export { default as globalCss } from "./globalCss";
+export { default as keyframes } from "./keyframes";
 export { default as patterns } from "./patterns";
 export { default as recipes } from "./recipes";
 export { default as semanticTokens } from "./semanticTokens";

@@ -4,10 +4,6 @@ const globalCss = defineGlobalStyles({
   html: {
     fontFamily: "sans",
   },
-  body: {
-    bg: "bg",
-    color: "text",
-  },
 });
 
 export default globalCss;

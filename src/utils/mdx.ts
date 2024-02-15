@@ -56,7 +56,7 @@ export function findFilePath(slug: string[]) {
 export async function getAllPosts() {
   const files = fs
     .readdirSync(postPath, { encoding: "utf-8", recursive: true })
-    .filter((fileName) => /\.mdx$/.test(fileName));
+    .filter((fileName) => /\.(md|mdx)$/.test(fileName));
 
   const posts = files.map((filename) => {
     const absolutePath = path.join(postPath, filename);
@@ -71,6 +71,13 @@ export async function getAllPosts() {
       absolutePath,
       slug,
       href: `/post/${slug.join("/")}`,
+    } as PostFrontmatter & {
+      data: {
+        [key: string]: any;
+      };
+      absolutePath: string;
+      slug: string[];
+      href: string;
     };
   });
   return [...posts]

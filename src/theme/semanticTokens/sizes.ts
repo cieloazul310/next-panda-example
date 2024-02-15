@@ -1,5 +1,5 @@
 const sizes = {
-  "content-max-width": { value: "token(sizes.4xl)" },
+  "content-max-width": { value: "{sizes.6xl}" },
 };
 
 export default sizes;

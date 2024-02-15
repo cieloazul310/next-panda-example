@@ -47,28 +47,7 @@ export function definePalette(props: Record<string, PandaPalette>) {
 }
 
 const colors = {
-  bg: {
-    value: { base: "white", _dark: "{colors.neutral.800}" },
-  },
-  text: {
-    value: {
-      base: "{colors.neutral.950}",
-      _dark: "{colors.neutral.50}",
-    },
-  },
-  "gradient-from": {
-    value: {
-      base: "{colors.primary.500}",
-      _dark: "{colors.primary.950}",
-    },
-  },
-  "gradient-to": {
-    value: {
-      base: "{colors.secondary.200}",
-      _dark: "{colors.secondary.950}",
-    },
-  },
-  ...definePalette({ primary: "teal", secondary: "amber" }),
+  // ...definePalette({ primary: "teal", secondary: "amber" }),
 };
 
 export default colors;
