@@ -71,6 +71,13 @@ export async function getAllPosts() {
       absolutePath,
       slug,
       href: `/post/${slug.join("/")}`,
+    } as PostFrontmatter & {
+      data: {
+        [key: string]: any;
+      };
+      absolutePath: string;
+      slug: string[];
+      href: string;
     };
   });
   return [...posts]

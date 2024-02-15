@@ -4,7 +4,7 @@ import {
   getPostData,
   useMdx,
   siteMetadata,
-  rehypeImageSize,
+  // rehypeImageSize,
 } from "@/utils";
 import { Jumbotron, Wrapper, Link, Block } from "@/components";
 // import remarkGfm from "remark-gfm";
@@ -34,16 +34,17 @@ async function Page({ params }: { params: { slug: string[] } }) {
   const components = useMDXComponents();
   if (!mdx) return null;
   const { content, data } = mdx;
+  const date = new Date(data.date);
   return (
     <>
-      <Jumbotron title={data.title} />
+      <Jumbotron title={data.title} headerText={date.toISOString()} />
       <Wrapper>
         <Block as="article">
           <MDXRemote
             options={{
               parseFrontmatter: true,
               mdxOptions: {
-                rehypePlugins: [[rehypeImageSize, { root: process.cwd() }]],
+                // rehypePlugins: [[rehypeImageSize, { root: process.cwd() }]],
                 // remarkPlugins: [remarkGfm],
               },
             }}
