@@ -34,7 +34,7 @@ Demo
 └── tsconfig.json
 ```
 
-## Referrences
+## References
 
 Next.js - Example app with Storybook  
 <https://github.com/vercel/next.js/tree/canary/examples/with-storybook>
