@@ -1,70 +1,49 @@
-import type { PropsWithChildren } from "react";
-import { css } from "@styled-system/css";
+import type { HTMLAttributes, ElementType } from "react";
+import { Heading } from "@/components/ui/heading";
+import { css, cx } from "@styled-system/css";
 import { flex } from "@styled-system/patterns";
 
-export type JumbotronProps = PropsWithChildren<{
+export type JumbotronProps = HTMLAttributes<HTMLOrSVGElement> & {
+  as?: ElementType;
   title?: string;
-  headerText?: string;
-  footerText?: string;
-}>;
+};
 
-function Jumbotron({
-  children,
-  title,
-  headerText,
-  footerText,
-}: JumbotronProps) {
+function Jumbotron({ title, className, as: Tag = "header" }: JumbotronProps) {
   return (
-    <header
-      className={css({
-        width: "full",
-        height: "480px",
-        position: "relative",
-      })}
+    <Tag
+      className={cx(
+        css({
+          width: "full",
+          height: "360px",
+        }),
+        className,
+      )}
     >
       <div
         className={flex({
-          width: "100%",
-          height: "100%",
           direction: "column",
           justifyContent: "center",
           alignItems: "center",
-          fontWeight: "bold",
-          px: [2, 4],
-          mx: "auto",
-          maxWidth: "content-max-width",
-          zIndex: 0,
+          height: "full",
         })}
       >
-        {children}
-        {!children && (
-          <hgroup
-            className={flex({
-              direction: "column",
-              justifyContent: "center",
-              alignItems: "start",
-              animation: ".25s fade-in",
-            })}
-          >
-            {headerText && (
-              <p className={css({ fontSize: ["sm", "md", "lg", "xl"] })}>
-                {headerText}
-              </p>
-            )}
-            {title && (
-              <h1 className={css({ fontSize: ["2xl", "4xl", "6xl", "7xl"] })}>
-                {title}
-              </h1>
-            )}
-            {footerText && (
-              <p className={css({ fontSize: ["sm", "md", "lg"] })}>
-                {footerText}
-              </p>
-            )}
-          </hgroup>
-        )}
+        <hgroup
+          className={flex({
+            direction: "column",
+            justifyContent: "center",
+            alignItems: "start",
+            animation: ".25s fade-in",
+            px: [4, 8],
+          })}
+        >
+          {title && (
+            <Heading as="h1" fontSize={["2xl", "4xl", "6xl"]}>
+              {title}
+            </Heading>
+          )}
+        </hgroup>
       </div>
-    </header>
+    </Tag>
   );
 }
 

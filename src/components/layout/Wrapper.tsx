@@ -2,7 +2,7 @@ import type { PropsWithChildren } from "react";
 import { css } from "@styled-system/css";
 import { vstack, container } from "@styled-system/patterns";
 import Block from "./Block";
-import Menu from "./Menu";
+import { Menu } from "../client";
 
 function Wrapper({ children }: PropsWithChildren) {
   return (

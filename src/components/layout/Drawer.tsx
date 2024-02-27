@@ -1,9 +1,11 @@
 import { css } from "@styled-system/css";
 import { MdMenu, MdClose } from "react-icons/md";
 import { siteTitle } from "@/utils";
-import { Drawer, Button, IconButton } from "../ui";
+import * as Drawer from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
+import { IconButton } from "@/components/ui/icon-button";
 import { ColorModeHandler } from "../client";
-import Menu from "./Menu";
+import { Menu } from "../client";
 
 function MyDrawer(props: Drawer.RootProps) {
   return (
@@ -27,14 +29,15 @@ function MyDrawer(props: Drawer.RootProps) {
         <Drawer.Content>
           <Drawer.Header>
             <Drawer.Title>{siteTitle}</Drawer.Title>
-            <Menu />
             <Drawer.CloseTrigger asChild position="absolute" top="3" right="4">
               <IconButton variant="ghost">
                 <MdClose />
               </IconButton>
             </Drawer.CloseTrigger>
           </Drawer.Header>
-          <Drawer.Body>{/* Content */}</Drawer.Body>
+          <Drawer.Body>
+            <Menu />
+          </Drawer.Body>
           <Drawer.Footer gap="3">
             <ColorModeHandler />
             <Button>Home</Button>

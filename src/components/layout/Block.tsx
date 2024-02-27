@@ -9,7 +9,7 @@ function Block({ children, className, as: Tag = "div" }: BlockProps) {
   return (
     <Tag
       className={cx(
-        css({ rounded: "l2", px: [4, 8], py: 8, bg: "accent.a2" }),
+        css({ rounded: "l2", bg: "accent.a2", p: [4, 8] }),
         className,
       )}
     >
