@@ -1,5 +1,6 @@
 import { css } from "@styled-system/css";
 import { MdMenu, MdClose } from "react-icons/md";
+import NextLink from "next/link";
 import { siteTitle } from "@/utils";
 import * as Drawer from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
@@ -40,7 +41,11 @@ function MyDrawer(props: Drawer.RootProps) {
           </Drawer.Body>
           <Drawer.Footer gap="3">
             <ColorModeHandler />
-            <Button>Home</Button>
+            <Drawer.CloseTrigger asChild>
+              <NextLink href="/">
+                <Button>Home</Button>
+              </NextLink>
+            </Drawer.CloseTrigger>
             <Drawer.CloseTrigger asChild>
               <Button variant="outline">Close</Button>
             </Drawer.CloseTrigger>

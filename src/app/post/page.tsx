@@ -1,7 +1,12 @@
 import NextLink from "next/link";
-import { Wrapper, Jumbotron, Block } from "@/components";
+import { Wrapper, Jumbotron } from "@/components";
 import { getAllPosts } from "@/utils";
-import { linkBox, linkOverlay, vstack } from "@styled-system/patterns";
+import { css, cx } from "@styled-system/css";
+import { vstack, paper } from "@styled-system/patterns";
+import { ark } from "@ark-ui/react";
+import { styled } from "@styled-system/jsx";
+
+const Li = styled(ark.li);
 
 async function Page() {
   const allPosts = await getAllPosts();
@@ -12,25 +17,23 @@ async function Page() {
       <Wrapper>
         <ul className={vstack({ gap: 1, alignItems: "stretch" })}>
           {allPosts.map(({ title, date, href }) => (
-            <Block
-              as="li"
+            <Li
               key={href}
-              className={linkBox({
-                _hover: { bg: "accent.a3" },
-              })}
+              className={cx(
+                css({ colorPalette: "accent" }),
+                paper({
+                  hover: true,
+                }),
+              )}
+              asChild
             >
-              <hgroup>
-                <h1>
-                  <NextLink
-                    className={linkOverlay({ fontWeight: "bold" })}
-                    href={href}
-                  >
-                    {title}
-                  </NextLink>
-                </h1>
-                <p>{new Date(date).toISOString()}</p>
-              </hgroup>
-            </Block>
+              <NextLink className={css({ fontWeight: "bold" })} href={href}>
+                <hgroup>
+                  <h1>{title}</h1>
+                  <p>{new Date(date).toISOString()}</p>
+                </hgroup>
+              </NextLink>
+            </Li>
           ))}
         </ul>
       </Wrapper>

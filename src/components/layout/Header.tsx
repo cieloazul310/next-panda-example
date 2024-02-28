@@ -15,7 +15,8 @@ function Header() {
         alignItems: "center",
         flexDirection: "row",
         height: "56px",
-        bg: "bg.canvas",
+        bg: "bg.canvas/60",
+        backdropFilter: "blur(4px)",
         zIndex: "sticky",
       })}
     >
