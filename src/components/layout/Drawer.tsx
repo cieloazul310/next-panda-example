@@ -1,23 +1,25 @@
 import { css } from "@styled-system/css";
 import { MdMenu, MdClose } from "react-icons/md";
+import NextLink from "next/link";
 import { siteTitle } from "@/utils";
-import { Drawer, Button, IconButton } from "../ui";
+import * as Drawer from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
+import { IconButton } from "@/components/ui/icon-button";
 import { ColorModeHandler } from "../client";
-import Menu from "./Menu";
+import { Menu } from "../client";
 
 function MyDrawer(props: Drawer.RootProps) {
   return (
     <Drawer.Root {...props}>
       <Drawer.Trigger asChild>
         <IconButton
-          className={css({
-            position: "fixed",
-            bottom: 4,
-            right: 4,
-            zIndex: "fab",
-            hideFrom: "md",
-          })}
+          position="fixed"
+          bottom={4}
+          right={4}
+          zIndex="fab"
+          hideFrom="md"
           size="xl"
+          aria-label="Open Menu"
         >
           <MdMenu />
         </IconButton>
@@ -27,19 +29,26 @@ function MyDrawer(props: Drawer.RootProps) {
         <Drawer.Content>
           <Drawer.Header>
             <Drawer.Title>{siteTitle}</Drawer.Title>
-            <Menu />
             <Drawer.CloseTrigger asChild position="absolute" top="3" right="4">
-              <IconButton variant="ghost">
+              <IconButton variant="ghost" aria-label="Close Menu">
                 <MdClose />
               </IconButton>
             </Drawer.CloseTrigger>
           </Drawer.Header>
-          <Drawer.Body>{/* Content */}</Drawer.Body>
+          <Drawer.Body>
+            <Menu />
+          </Drawer.Body>
           <Drawer.Footer gap="3">
             <ColorModeHandler />
-            <Button>Home</Button>
             <Drawer.CloseTrigger asChild>
-              <Button variant="outline">Close</Button>
+              <Button asChild aria-label="Home">
+                <NextLink href="/">Home</NextLink>
+              </Button>
+            </Drawer.CloseTrigger>
+            <Drawer.CloseTrigger asChild>
+              <Button variant="outline" aria-label="Close Menu">
+                Close
+              </Button>
             </Drawer.CloseTrigger>
           </Drawer.Footer>
         </Drawer.Content>

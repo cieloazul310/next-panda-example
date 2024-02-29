@@ -1,11 +1,12 @@
 import NextLink from "next/link";
+import { Text } from "@/components/ui/text";
 import { css } from "@styled-system/css";
 import { flex } from "@styled-system/patterns";
-import { siteTitle } from "@/utils";
+
+const siteTitle = "Next.js + Park UI";
+const year = new Date().getFullYear().toString();
 
 function Footer() {
-  const year = new Date().getFullYear().toString();
-
   return (
     <footer
       className={flex({
@@ -13,7 +14,7 @@ function Footer() {
         direction: "column",
         gap: 2,
         px: [2, 4],
-        py: "lg",
+        py: 8,
       })}
     >
       <NextLink
@@ -27,13 +28,13 @@ function Footer() {
           textDecoration: { base: "none", _hover: "underline" },
         })}
       >
-        <p className={css({ fontSize: "md", textStyle: "headings" })}>
+        <Text fontSize="md" fontWeight="bold">
           {siteTitle}
-        </p>
+        </Text>
       </NextLink>
-      <p>
+      <Text>
         © {year} {siteTitle} All rights reserved.
-      </p>
+      </Text>
     </footer>
   );
 }

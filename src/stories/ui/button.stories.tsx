@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "@/components";
+import { Button } from "@/components/ui/button";
 import { button } from "@styled-system/recipes";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: "Example/Button",
+  title: "ParkUI/Button",
   component: Button,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
@@ -68,13 +68,9 @@ export const Large: Story = {
 };
 
 export const Rounded: Story = {
-  render: ({ children, ...props }) => (
-    <Button variant="outline" {...props}>
-      {children}
-    </Button>
-  ),
+  render: ({ children, ...props }) => <Button {...props}>{children}</Button>,
   args: {
-    children: "Rounded",
+    children: "Outline",
     ...button.raw({
       variant: "subtle",
       size: "2xl",

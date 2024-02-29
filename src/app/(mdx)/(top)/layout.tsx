@@ -5,7 +5,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
     <>
       <Jumbotron title="Hello, Park UI" headerText="With Next App Router" />
       <Wrapper>
-        <Block as="article">{children}</Block>
+        <Block>{children}</Block>
       </Wrapper>
     </>
   );

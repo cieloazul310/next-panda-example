@@ -1,31 +1,29 @@
 import type { PropsWithChildren } from "react";
+import { Container, VStack } from "@styled-system/jsx";
 import { css } from "@styled-system/css";
-import { vstack, container } from "@styled-system/patterns";
+import { flex } from "@styled-system/patterns";
 import Block from "./Block";
-import Menu from "./Menu";
+import { Menu } from "../client";
 
 function Wrapper({ children }: PropsWithChildren) {
   return (
-    <div
-      className={container({
-        maxWidth: "content-max-width",
-        display: "flex",
-        px: 2,
-        py: 4,
-      })}
+    <Container
+      width="full"
+      maxWidth="content-max-width"
+      px="2"
+      py="4"
+      className={flex({ gap: "sm" })}
     >
-      <div
-        className={vstack({
-          flexGrow: 1,
-          gap: "md",
-          px: [0, 2],
-          alignItems: "stretch",
-          maxWidth: "100%",
-          minWidth: 0,
-        })}
+      <VStack
+        gap="md"
+        alignItems="stretch"
+        px={[0, 2]}
+        flexGrow="1"
+        maxWidth="full"
+        minWidth="0"
       >
         {children}
-      </div>
+      </VStack>
       <div
         className={css({
           width: "280px",
@@ -37,11 +35,13 @@ function Wrapper({ children }: PropsWithChildren) {
           overflowY: "auto",
         })}
       >
-        <Block>
-          <Menu />
+        <Block asChild>
+          <nav>
+            <Menu />
+          </nav>
         </Block>
       </div>
-    </div>
+    </Container>
   );
 }
 

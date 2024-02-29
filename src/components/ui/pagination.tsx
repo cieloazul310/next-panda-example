@@ -10,8 +10,8 @@ import {
   type PaginationVariantProps,
 } from "@styled-system/recipes";
 import type { Assign, JsxStyleProps } from "@styled-system/types";
-import { Button } from "./button";
-import { IconButton } from "./icon-button";
+import { Button } from "~/components/ui/button";
+import { IconButton } from "~/components/ui/icon-button";
 
 export interface PaginationProps
   extends Assign<JsxStyleProps, PaginationRootProps>,
@@ -26,9 +26,9 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
 
     return (
       <ArkPagination.Root
-        ref={ref}
         // @ts-expect-error TODO cssProps is to complex to be typed
         className={cx(styles.root, css(cssProps), className)}
+        ref={ref}
         {...rootProps}
       >
         {({ pages }) => (
