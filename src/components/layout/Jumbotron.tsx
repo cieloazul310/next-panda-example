@@ -1,15 +1,25 @@
 import type { HTMLAttributes, ElementType } from "react";
 import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 import { Flex } from "@styled-system/jsx";
 import { css, cx } from "@styled-system/css";
 import { flex } from "@styled-system/patterns";
+import type { ReactNode } from "react";
 
 export type JumbotronProps = HTMLAttributes<HTMLOrSVGElement> & {
   as?: ElementType;
   title?: string;
+  headerText?: ReactNode;
+  footerText?: ReactNode;
 };
 
-function Jumbotron({ title, className, as: Tag = "header" }: JumbotronProps) {
+function Jumbotron({
+  title,
+  headerText,
+  footerText,
+  className,
+  as: Tag = "header",
+}: JumbotronProps) {
   return (
     <Tag
       className={cx(
@@ -35,11 +45,13 @@ function Jumbotron({ title, className, as: Tag = "header" }: JumbotronProps) {
             px: [4, 8],
           })}
         >
+          {headerText && <Text fontWeight="bold">{headerText}</Text>}
           {title && (
             <Heading as="h1" fontSize={["2xl", "4xl", "6xl"]}>
               {title}
             </Heading>
           )}
+          {footerText && <Text fontWeight="bold">{footerText}</Text>}
         </hgroup>
       </Flex>
     </Tag>

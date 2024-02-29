@@ -1,12 +1,14 @@
+import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import {
   getAllPosts,
   getPostData,
   useMdx,
   siteMetadata,
+  parseDate,
   // rehypeImageSize,
 } from "@/utils";
-import { Jumbotron, Wrapper, Link, Block } from "@/components";
+import { Jumbotron, Wrapper, Block } from "@/components";
 // import remarkGfm from "remark-gfm";
 import { useMDXComponents } from "../../../mdx-components";
 
@@ -37,26 +39,32 @@ async function Page({ params }: { params: { slug: string[] } }) {
   const date = new Date(data.date);
   return (
     <>
-      <Jumbotron title={data.title} headerText={date.toISOString()} />
+      <Jumbotron title={data.title} headerText={parseDate(date)} />
       <Wrapper>
-        <Block as="article">
-          <MDXRemote
-            options={{
-              parseFrontmatter: true,
-              mdxOptions: {
-                // rehypePlugins: [[rehypeImageSize, { root: process.cwd() }]],
-                // remarkPlugins: [remarkGfm],
-              },
-            }}
-            source={content}
-            components={components}
-          />
+        <Block asChild>
+          <article>
+            <MDXRemote
+              options={{
+                parseFrontmatter: true,
+                mdxOptions: {
+                  // rehypePlugins: [[rehypeImageSize, { root: process.cwd() }]],
+                  // remarkPlugins: [remarkGfm],
+                },
+              }}
+              source={content}
+              components={components}
+            />
+          </article>
         </Block>
         {context.older && (
-          <Link href={context.older.href}>{context.older.title}</Link>
+          <Block enableHover asChild>
+            <Link href={context.older.href}>{context.older.title}</Link>
+          </Block>
         )}
         {context.newer && (
-          <Link href={context.newer.href}>{context.newer.title}</Link>
+          <Block enableHover asChild>
+            <Link href={context.newer.href}>{context.newer.title}</Link>
+          </Block>
         )}
       </Wrapper>
     </>
