@@ -1,11 +1,11 @@
 import NextLink from "next/link";
 import { Wrapper, Jumbotron, Block } from "@/components";
-import { getAllPosts } from "@/utils";
+import { getAllPosts, parseDate } from "@/utils";
 import { css } from "@styled-system/css";
 import { vstack } from "@styled-system/patterns";
 
 async function Page() {
-  const allPosts = await getAllPosts();
+  const allPosts = await getAllPosts({ sortDesc: true });
 
   return (
     <>
@@ -17,7 +17,7 @@ async function Page() {
               <NextLink className={css({ fontWeight: "bold" })} href={href}>
                 <hgroup>
                   <h1>{title}</h1>
-                  <p>{new Date(date).toISOString()}</p>
+                  <p>{parseDate(date)}</p>
                 </hgroup>
               </NextLink>
             </Block>

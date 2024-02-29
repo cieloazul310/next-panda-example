@@ -53,7 +53,9 @@ export function findFilePath(slug: string[]) {
   });
 }
 
-export async function getAllPosts() {
+export async function getAllPosts(
+  { sortDesc }: { sortDesc: boolean } = { sortDesc: false },
+) {
   const files = fs
     .readdirSync(postPath, { encoding: "utf-8", recursive: true })
     .filter((fileName) => /\.(md|mdx)$/.test(fileName));
@@ -81,7 +83,11 @@ export async function getAllPosts() {
     };
   });
   return [...posts]
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .sort(
+      (a, b) =>
+        (sortDesc ? -1 : 1) *
+        (new Date(a.date).getTime() - new Date(b.date).getTime()),
+    )
     .map((post, index, arr) => ({
       ...post,
       context: {
