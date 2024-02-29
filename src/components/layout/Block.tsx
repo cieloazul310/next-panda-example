@@ -1,21 +1,25 @@
-import type { HTMLAttributes, ElementType } from "react";
+import { ark, type HTMLArkProps } from "@ark-ui/react";
+import {
+  styled,
+  splitCssProps,
+  type HTMLStyledProps,
+} from "@styled-system/jsx";
 import { css, cx } from "@styled-system/css";
+import { paper, type PaperProperties } from "@styled-system/patterns";
 
-export type BlockProps = HTMLAttributes<HTMLOrSVGElement> & {
-  as?: ElementType;
-};
+const Div = styled(ark.div);
 
-function Block({ children, className, as: Tag = "div" }: BlockProps) {
-  return (
-    <Tag
-      className={cx(
-        css({ rounded: "l2", bg: "accent.a2", p: [4, 8] }),
-        className,
-      )}
-    >
-      {children}
-    </Tag>
-  );
+export type BlockProps = HTMLStyledProps<"div"> &
+  HTMLArkProps<"div"> &
+  PaperProperties;
+
+function Block({ colorPalette = "accent", enableHover, ...props }: BlockProps) {
+  const [cssProps, restProps] = splitCssProps({ colorPalette, ...props });
+  const { css: cssProp, ...styleProps } = cssProps;
+
+  const className = cx(css(styleProps, cssProp), paper({ enableHover }));
+
+  return <Div className={className} {...restProps} />;
 }
 
 export default Block;

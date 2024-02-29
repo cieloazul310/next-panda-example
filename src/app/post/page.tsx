@@ -1,12 +1,8 @@
 import NextLink from "next/link";
-import { Wrapper, Jumbotron } from "@/components";
+import { Wrapper, Jumbotron, Block } from "@/components";
 import { getAllPosts } from "@/utils";
-import { css, cx } from "@styled-system/css";
-import { vstack, paper } from "@styled-system/patterns";
-import { ark } from "@ark-ui/react";
-import { styled } from "@styled-system/jsx";
-
-const Li = styled(ark.li);
+import { css } from "@styled-system/css";
+import { vstack } from "@styled-system/patterns";
 
 async function Page() {
   const allPosts = await getAllPosts();
@@ -17,23 +13,14 @@ async function Page() {
       <Wrapper>
         <ul className={vstack({ gap: 1, alignItems: "stretch" })}>
           {allPosts.map(({ title, date, href }) => (
-            <Li
-              key={href}
-              className={cx(
-                css({ colorPalette: "accent" }),
-                paper({
-                  hover: true,
-                }),
-              )}
-              asChild
-            >
+            <Block key={href} enableHover asChild>
               <NextLink className={css({ fontWeight: "bold" })} href={href}>
                 <hgroup>
                   <h1>{title}</h1>
                   <p>{new Date(date).toISOString()}</p>
                 </hgroup>
               </NextLink>
-            </Li>
+            </Block>
           ))}
         </ul>
       </Wrapper>

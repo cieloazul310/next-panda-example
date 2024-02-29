@@ -9,7 +9,7 @@ export default function PageLayout({
     <>
       <Jumbotron title="About" />
       <Wrapper>
-        <Block as="article">{children}</Block>
+        <Block>{children}</Block>
       </Wrapper>
     </>
   );

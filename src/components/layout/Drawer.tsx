@@ -13,14 +13,13 @@ function MyDrawer(props: Drawer.RootProps) {
     <Drawer.Root {...props}>
       <Drawer.Trigger asChild>
         <IconButton
-          className={css({
-            position: "fixed",
-            bottom: 4,
-            right: 4,
-            zIndex: "fab",
-            hideFrom: "md",
-          })}
+          position="fixed"
+          bottom={4}
+          right={4}
+          zIndex="fab"
+          hideFrom="md"
           size="xl"
+          aria-label="Open Menu"
         >
           <MdMenu />
         </IconButton>
@@ -31,7 +30,7 @@ function MyDrawer(props: Drawer.RootProps) {
           <Drawer.Header>
             <Drawer.Title>{siteTitle}</Drawer.Title>
             <Drawer.CloseTrigger asChild position="absolute" top="3" right="4">
-              <IconButton variant="ghost">
+              <IconButton variant="ghost" aria-label="Close Menu">
                 <MdClose />
               </IconButton>
             </Drawer.CloseTrigger>
@@ -42,12 +41,14 @@ function MyDrawer(props: Drawer.RootProps) {
           <Drawer.Footer gap="3">
             <ColorModeHandler />
             <Drawer.CloseTrigger asChild>
-              <NextLink href="/">
-                <Button>Home</Button>
-              </NextLink>
+              <Button asChild aria-label="Home">
+                <NextLink href="/">Home</NextLink>
+              </Button>
             </Drawer.CloseTrigger>
             <Drawer.CloseTrigger asChild>
-              <Button variant="outline">Close</Button>
+              <Button variant="outline" aria-label="Close Menu">
+                Close
+              </Button>
             </Drawer.CloseTrigger>
           </Drawer.Footer>
         </Drawer.Content>

@@ -3,16 +3,16 @@ import { definePattern } from "@pandacss/dev";
 const paper = definePattern({
   description: "Paper component with background and border-radius",
   properties: {
-    hover: { type: "boolean" },
+    enableHover: { type: "boolean" },
   },
-  transform({ hover, ...props }) {
+  transform({ enableHover, ...props }) {
     return {
       bg: {
         base: "colorPalette.8/8",
         _dark: "colorPalette.8/10",
-        _hover: hover ? "colorPalette.8/16" : undefined,
+        _hover: enableHover ? "colorPalette.8/16" : undefined,
       },
-      "&[data-selected]": {
+      _selected: {
         bg: { base: "colorPalette.8/16", _dark: "colorPalette.8/16" },
         color: "colorPalette.8",
         pointerEvents: "none",

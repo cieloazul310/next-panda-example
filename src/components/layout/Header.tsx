@@ -1,6 +1,7 @@
 import NextLink from "next/link";
+import { Container, Spacer, Flex } from "@styled-system/jsx";
 import { css } from "@styled-system/css";
-import { flex, container } from "@styled-system/patterns";
+import { flex } from "@styled-system/patterns";
 import { Heading } from "@/components/ui/heading";
 import { ColorModeHandler } from "../client";
 
@@ -8,23 +9,19 @@ const siteTitle = "Next.js + Park UI";
 
 function Header() {
   return (
-    <header
-      className={flex({
-        position: "sticky",
-        top: 0,
-        alignItems: "center",
-        flexDirection: "row",
-        height: "56px",
-        bg: "bg.canvas/60",
-        backdropFilter: "blur(4px)",
-        zIndex: "sticky",
-      })}
+    <Flex
+      position="sticky"
+      top="0"
+      alignItems="center"
+      height="header-height"
+      bg="bg.canvas/60"
+      backdropFilter="blur(4px)"
+      zIndex="sticky"
     >
-      <div
-        className={container({
-          width: "full",
-          maxWidth: "6xl",
-          display: "flex",
+      <Container
+        width="full"
+        maxWidth="content-max-width"
+        className={flex({
           alignItems: "center",
           justifyContent: ["center", "start"],
         })}
@@ -44,10 +41,10 @@ function Header() {
             {siteTitle}
           </Heading>
         </NextLink>
-        <div className={css({ flexGrow: 1, hideBelow: "sm" })} />
+        <Spacer hideBelow="sm" />
         <ColorModeHandler className={css({ hideBelow: "sm" })} />
-      </div>
-    </header>
+      </Container>
+    </Flex>
   );
 }
 
