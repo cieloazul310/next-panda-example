@@ -2,8 +2,7 @@ import {
   TreeView as ArkTreeView,
   type TreeViewRootProps,
 } from "@ark-ui/react/tree-view";
-import { ChevronRightIcon } from "lucide-react";
-import { forwardRef } from "react";
+import { forwardRef, type ReactNode } from "react";
 import { css, cx } from "@styled-system/css";
 import { splitCssProps } from "@styled-system/jsx";
 import { treeView } from "@styled-system/recipes";
@@ -23,12 +22,13 @@ export interface TreeViewData {
 export interface TreeViewProps
   extends Assign<JsxStyleProps, TreeViewRootProps> {
   data: TreeViewData;
+  indicator: ReactNode;
 }
 
 export const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
   (props, ref) => {
     const [cssProps, localProps] = splitCssProps(props);
-    const { data, className, ...rootProps } = localProps;
+    const { data, indicator, className, ...rootProps } = localProps;
     const styles = treeView();
 
     const renderChild = (child: Child) => (
@@ -39,7 +39,7 @@ export const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
       >
         <ArkTreeView.BranchControl className={styles.branchControl}>
           <ArkTreeView.BranchIndicator className={styles.branchIndicator}>
-            <ChevronRightIcon />
+            {indicator}
           </ArkTreeView.BranchIndicator>
           <ArkTreeView.BranchText className={styles.branchText}>
             {child.name}
