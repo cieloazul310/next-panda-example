@@ -1,4 +1,3 @@
-import Image, { type ImageProps } from "next/image";
 import type { MDXComponents } from "mdx/types";
 import {
   createHeadings,
@@ -16,6 +15,8 @@ import {
   Hr,
   Blockquote,
   Link,
+  Image,
+  type ImageProps,
 } from "@/components";
 
 export function useMDXComponents(
@@ -36,15 +37,19 @@ export function useMDXComponents(
     hr: Hr,
     blockquote: Blockquote,
     kbd: Kbd,
-    /*
-    img: (props) => (
-      <Image
-        sizes="100vw"
-        style={{ width: "100%", height: "auto" }}
-        {...(props as ImageProps)}
-      />
-    ),
-    */
+    img: ({ src, width, height, alt, ...props }) =>
+      src &&
+      alt && (
+        <Image
+          src={src}
+          alt={alt}
+          sizes="100vw"
+          width={1000}
+          height={600}
+          {...props}
+        />
+      ),
+    Image,
     ...createHeadings(),
     ...components,
   };
