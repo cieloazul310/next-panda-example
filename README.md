@@ -7,6 +7,9 @@
 - [MDX]
 
 Demo  
+<https://next-panda-example.vercel.app/>
+
+Storybook  
 <https://cieloazul310.github.io/next-panda-example/>
 
 ## Project structure

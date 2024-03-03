@@ -13,7 +13,11 @@ export type BlockProps = HTMLStyledProps<"div"> &
   HTMLArkProps<"div"> &
   PaperProperties;
 
-function Block({ colorPalette = "accent", enableHover, ...props }: BlockProps) {
+function Block({
+  colorPalette = "accent",
+  enableHover = false,
+  ...props
+}: BlockProps) {
   const [cssProps, restProps] = splitCssProps({ colorPalette, ...props });
   const { css: cssProp, ...styleProps } = cssProps;
 
