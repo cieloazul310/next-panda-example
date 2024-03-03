@@ -18,7 +18,7 @@ const meta = {
   title: "Example/ArticleComponents",
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    layout: "centered",
+    layout: "padded",
   },
 } satisfies Meta;
 
