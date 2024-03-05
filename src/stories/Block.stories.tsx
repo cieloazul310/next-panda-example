@@ -39,6 +39,7 @@ export const Primary: Story = {
       <p>Hello, Block component</p>
     </Block>
   ),
+  // @ts-ignore
   args: {
     colorPalette: "accent",
     ...paper.raw({
@@ -66,6 +67,7 @@ export const Multiple: Story = {
       </Block>
     </VStack>
   ),
+  // @ts-ignore
   args: {
     colorPalette: "accent",
     ...paper.raw({
