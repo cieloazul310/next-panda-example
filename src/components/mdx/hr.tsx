@@ -1,5 +1,5 @@
-import { hr } from "./article-classes";
+import { divider } from "@styled-system/patterns";
 
 export const Hr = (props: React.ComponentProps<"hr">) => {
-  return <hr className={hr} {...props} />;
+  return <hr className={divider({ my: "lg" })} {...props} />;
 };

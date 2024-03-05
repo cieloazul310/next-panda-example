@@ -5,18 +5,18 @@ import {
   Kbd,
   Code,
   Pre,
-  Table,
+  MdxTable as Table,
   Thead,
   Tr,
   Th,
   Td,
   Ol,
   Ul,
+  Li,
   Hr,
   Blockquote,
   Link,
   Image,
-  type ImageProps,
 } from "@/components";
 
 export function useMDXComponents(
@@ -33,6 +33,7 @@ export function useMDXComponents(
     td: Td,
     ol: Ol,
     ul: Ul,
+    li: Li,
     a: Link,
     hr: Hr,
     blockquote: Blockquote,

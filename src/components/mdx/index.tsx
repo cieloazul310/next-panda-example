@@ -1,4 +1,3 @@
-export * from "./article-classes";
 export * from "./blockquote";
 export * from "./code";
 export * from "./headings";

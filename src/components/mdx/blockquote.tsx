@@ -1,5 +1,7 @@
-import { blockquote } from "./article-classes";
+import { Block } from "../layout";
 
 export const Blockquote = (props: React.ComponentProps<"blockquote">) => (
-  <blockquote className={blockquote} {...props} />
+  <Block my="md" asChild>
+    <blockquote {...props} />
+  </Block>
 );
