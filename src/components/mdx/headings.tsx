@@ -1,19 +1,59 @@
-import {
-  heading1,
-  heading2,
-  heading3,
-  heading4,
-  heading5,
-} from "./article-classes";
+import { article } from "@styled-system/patterns";
+import { Heading } from "../ui/heading";
 
 type HeadingTag = `h${1 | 2 | 3 | 4 | 5}`;
 
 export function createHeadings(): Record<HeadingTag, React.FC<any>> {
   return {
-    h1: (props) => <h1 className={heading1} {...props} />,
-    h2: (props) => <h2 className={heading2} {...props} />,
-    h3: (props) => <h3 className={heading3} {...props} />,
-    h4: (props) => <h4 className={heading4} {...props} />,
-    h5: (props) => <h5 className={heading5} {...props} />,
+    h1: (props) => (
+      <Heading
+        className={article({ spacing: "inherit" })}
+        as="h1"
+        fontSize={["xl", "2xl", "4xl"]}
+        mt="calc(token(spacing.md) + token(spacing.lg))"
+        mb="calc(token(spacing.sm) + token(spacing.md))"
+        {...props}
+      />
+    ),
+    h2: (props) => (
+      <Heading
+        className={article({ spacing: "inherit" })}
+        as="h2"
+        fontSize={["xl", "2xl", "3xl"]}
+        mt="calc({spacing.md} + {spacing.lg})"
+        mb="md"
+        {...props}
+      />
+    ),
+    h3: (props) => (
+      <Heading
+        className={article()}
+        as="h3"
+        fontSize={["lg", "lg", "2xl"]}
+        mt="calc({spacing.md} + {spacing.lg})"
+        mb="md"
+        {...props}
+      />
+    ),
+    h4: (props) => (
+      <Heading
+        className={article()}
+        as="h4"
+        mt="lg"
+        mb="md"
+        fontSize={["md", "lg", "xl"]}
+        {...props}
+      />
+    ),
+    h5: (props) => (
+      <Heading
+        className={article()}
+        as="h5"
+        mt="md"
+        mb="sm"
+        fontSize={["md", "md", "lg"]}
+        {...props}
+      />
+    ),
   };
 }

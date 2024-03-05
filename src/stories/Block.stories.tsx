@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Block } from "@/components";
 import { VStack } from "@styled-system/jsx";
+import { paper } from "@styled-system/patterns";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -38,9 +39,12 @@ export const Primary: Story = {
       <p>Hello, Block component</p>
     </Block>
   ),
+  // @ts-ignore
   args: {
     colorPalette: "accent",
-    enableHover: true,
+    ...paper.raw({
+      enableHover: true,
+    }),
   },
   parameters,
 };
@@ -63,9 +67,12 @@ export const Multiple: Story = {
       </Block>
     </VStack>
   ),
+  // @ts-ignore
   args: {
     colorPalette: "accent",
-    enableHover: false,
+    ...paper.raw({
+      enableHover: false,
+    }),
   },
   parameters,
 };

@@ -5,6 +5,9 @@ const paper = definePattern({
   properties: {
     enableHover: { type: "boolean" },
   },
+  defaultValues: {
+    enableHover: false,
+  },
   transform({ enableHover, ...props }) {
     return {
       bg: {

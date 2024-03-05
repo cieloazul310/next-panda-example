@@ -6,7 +6,6 @@ import {
   useMdx,
   siteMetadata,
   parseDate,
-  // rehypeImageSize,
 } from "@/utils";
 import { Jumbotron, Wrapper, Block } from "@/components";
 // import remarkGfm from "remark-gfm";

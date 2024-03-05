@@ -1,5 +1,10 @@
-import { pre } from "./article-classes";
+import { article } from "@styled-system/patterns";
+import { Block } from "../layout";
 
 export const Pre = (props: React.ComponentProps<"pre">) => {
-  return <pre className={pre} {...props} />;
+  return (
+    <Block asChild>
+      <pre className={article({ overflowX: "auto", my: "md" })} {...props} />
+    </Block>
+  );
 };

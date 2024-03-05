@@ -1,17 +1,21 @@
-import { table, thead, tr, th, td } from "./article-classes";
+import { article } from "@styled-system/patterns";
+import * as Table from "../ui/table";
 
-export const Table = (props: React.ComponentProps<"table">) => {
-  return <table className={table} {...props} />;
+export const MdxTable = (props: React.ComponentPropsWithoutRef<"table">) => {
+  return <Table.Root className={article()} variant="outline" {...props} />;
 };
-export const Thead = (props: React.ComponentProps<"thead">) => {
-  return <thead className={thead} {...props} />;
+export const Thead = (props: React.ComponentPropsWithoutRef<"thead">) => {
+  return <Table.Head {...props} />;
 };
-export const Tr = (props: React.ComponentProps<"tr">) => {
-  return <tr className={tr} {...props} />;
+export const Tbody = (props: React.ComponentPropsWithoutRef<"tbody">) => {
+  return <Table.Body {...props} />;
 };
-export const Th = (props: React.ComponentProps<"th">) => {
-  return <th className={th} {...props} />;
+export const Tr = (props: React.ComponentPropsWithoutRef<"tr">) => {
+  return <Table.Row {...props} />;
 };
-export const Td = (props: React.ComponentProps<"td">) => {
-  return <td className={td} {...props} />;
+export const Th = (props: React.ComponentPropsWithoutRef<"th">) => {
+  return <Table.Header {...props} />;
+};
+export const Td = (props: React.ComponentPropsWithoutRef<"td">) => {
+  return <Table.Cell {...props} />;
 };
