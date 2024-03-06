@@ -2,10 +2,16 @@ import type { PropsWithChildren } from "react";
 import { Container, VStack } from "@styled-system/jsx";
 import { css } from "@styled-system/css";
 import { flex } from "@styled-system/patterns";
-import Block from "./Block";
-import { Menu } from "../client";
+import Menu from "./Menu";
 
-function Wrapper({ children }: PropsWithChildren) {
+function Wrapper({
+  children,
+  sidebarTop,
+  sidebarBottom,
+}: PropsWithChildren<{
+  sidebarTop?: React.ReactNode;
+  sidebarBottom?: React.ReactNode;
+}>) {
   return (
     <Container
       width="full"
@@ -35,11 +41,9 @@ function Wrapper({ children }: PropsWithChildren) {
           overflowY: "auto",
         })}
       >
-        <Block asChild>
-          <nav>
-            <Menu />
-          </nav>
-        </Block>
+        {sidebarTop}
+        <Menu />
+        {sidebarBottom}
       </div>
     </Container>
   );

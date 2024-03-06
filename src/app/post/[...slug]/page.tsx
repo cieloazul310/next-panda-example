@@ -8,6 +8,8 @@ import {
   parseDate,
 } from "@/utils";
 import { Jumbotron, Wrapper, Block } from "@/components";
+import { Heading } from "@/components/ui/heading";
+import { Text } from "@/components/ui/text";
 // import remarkGfm from "remark-gfm";
 import { useMDXComponents } from "../../../mdx-components";
 
@@ -46,7 +48,6 @@ async function Page({ params }: { params: { slug: string[] } }) {
               options={{
                 parseFrontmatter: true,
                 mdxOptions: {
-                  // rehypePlugins: [[rehypeImageSize, { root: process.cwd() }]],
                   // remarkPlugins: [remarkGfm],
                 },
               }}
@@ -57,14 +58,33 @@ async function Page({ params }: { params: { slug: string[] } }) {
         </Block>
         {context.older && (
           <Block enableHover asChild>
-            <Link href={context.older.href}>{context.older.title}</Link>
+            <Link href={context.older.href}>
+              <hgroup>
+                <Text mb="sm">Older Post</Text>
+                <Heading as="h3" fontSize="lg">
+                  {context.older.title}
+                </Heading>
+                <Text>{parseDate(context.older.date)}</Text>
+              </hgroup>
+            </Link>
           </Block>
         )}
         {context.newer && (
           <Block enableHover asChild>
-            <Link href={context.newer.href}>{context.newer.title}</Link>
+            <Link href={context.newer.href}>
+              <hgroup>
+                <Text mb="sm">Newer Post</Text>
+                <Heading as="h3" fontSize="lg">
+                  {context.newer.title}
+                </Heading>
+                <Text>{parseDate(context.newer.date)}</Text>
+              </hgroup>
+            </Link>
           </Block>
         )}
+        <Block enableHover fontWeight="bold" asChild>
+          <Link href="/post">Post</Link>
+        </Block>
       </Wrapper>
     </>
   );
