@@ -38,6 +38,7 @@ async function Page({ params }: { params: { slug: string[] } }) {
   if (!mdx) return null;
   const { content, data } = mdx;
   const date = new Date(data.date);
+
   return (
     <>
       <Jumbotron title={data.title} headerText={parseDate(date)} />
