@@ -1,12 +1,11 @@
-import { css } from "@styled-system/css";
 import { MdMenu, MdClose } from "react-icons/md";
 import NextLink from "next/link";
-import { siteTitle } from "@/utils";
+import { siteTitle } from "@/data";
 import * as Drawer from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
 import { ColorModeHandler } from "../client";
-import { Menu } from "../client";
+import Menu from "./Menu";
 
 function MyDrawer(props: Drawer.RootProps) {
   return (

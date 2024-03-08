@@ -2,6 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { access } from "fs/promises";
 import { read } from "gray-matter";
+import { postPath } from "@/data";
 
 export type PostFrontmatter = {
   title: string;
@@ -38,9 +39,6 @@ export function slugTofileNames(slug: string[], prefix?: string) {
   );
 }
 
-export const contentPath = "content/post";
-export const postPath = path.resolve(process.cwd(), contentPath);
-
 /**
  * detect filepath
  */
@@ -65,6 +63,7 @@ export async function getAllPosts(
     const { data } = read(absolutePath);
     const { title, date, ...rest } = data;
     const slug = fileNameToSlug(filename);
+    const href = path.join("/post", ...slug);
 
     return {
       title,
@@ -72,7 +71,7 @@ export async function getAllPosts(
       data: rest,
       absolutePath,
       slug,
-      href: `/post/${slug.join("/")}`,
+      href,
     } as PostFrontmatter & {
       data: {
         [key: string]: any;
