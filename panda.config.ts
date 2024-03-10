@@ -8,7 +8,7 @@ export default defineConfig({
   preflight: true,
 
   presets: [
-    "@pandacss/preset-base",
+    "@pandacss/preset-panda",
     createPreset({
       accentColor: "blue",
       grayColor: "sand",

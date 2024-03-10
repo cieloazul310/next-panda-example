@@ -1,7 +1,7 @@
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import { Container, VStack } from "@styled-system/jsx";
 import { css } from "@styled-system/css";
-import { flex } from "@styled-system/patterns";
+import { flex, vstack } from "@styled-system/patterns";
 import Menu from "./Menu";
 
 function Wrapper({
@@ -9,8 +9,8 @@ function Wrapper({
   sidebarTop,
   sidebarBottom,
 }: PropsWithChildren<{
-  sidebarTop?: React.ReactNode;
-  sidebarBottom?: React.ReactNode;
+  sidebarTop?: ReactNode;
+  sidebarBottom?: ReactNode;
 }>) {
   return (
     <Container
@@ -21,6 +21,7 @@ function Wrapper({
       className={flex({ gap: "sm" })}
     >
       <VStack
+        containerType="inline-size"
         gap="md"
         alignItems="stretch"
         px={[0, 2]}
@@ -31,14 +32,17 @@ function Wrapper({
         {children}
       </VStack>
       <div
-        className={css({
+        className={vstack({
+          containerType: "inline-size",
           width: "280px",
           hideBelow: "md",
           position: "sticky",
           flexShrink: 0,
+          alignItems: "stretch",
           top: "calc(token(sizes.header-height) + token(spacing.4))",
           maxHeight: "calc(100vh - token(sizes.header-height))",
           overflowY: "auto",
+          gap: "md",
         })}
       >
         {sidebarTop}

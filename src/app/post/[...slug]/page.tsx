@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import { author } from "@/data/content";
 import {
   getAllPosts,
   getPostData,
@@ -7,7 +8,7 @@ import {
   siteMetadata,
   parseDate,
 } from "@/utils";
-import { Jumbotron, Wrapper, Block } from "@/components";
+import { Jumbotron, Wrapper, Block, Author } from "@/components";
 import { Heading } from "@/components/ui/heading";
 import { Text } from "@/components/ui/text";
 // import remarkGfm from "remark-gfm";
@@ -38,11 +39,12 @@ async function Page({ params }: { params: { slug: string[] } }) {
   if (!mdx) return null;
   const { content, data } = mdx;
   const date = new Date(data.date);
+  const authorItem = author.get("name", data.author);
 
   return (
     <>
       <Jumbotron title={data.title} headerText={parseDate(date)} />
-      <Wrapper>
+      <Wrapper sidebarTop={authorItem && <Author {...authorItem} />}>
         <Block asChild>
           <article>
             <MDXRemote

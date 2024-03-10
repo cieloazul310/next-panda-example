@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 import { Wrapper, Jumbotron, Block, Author } from "@/components";
-import { author } from "@/data";
+import { author } from "@/data/content";
 import { css } from "@styled-system/css";
 import { vstack } from "@styled-system/patterns";
 

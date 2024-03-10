@@ -3,7 +3,7 @@ import * as path from "path";
 import * as yaml from "yaml";
 import type { ZodType } from "zod";
 
-export function defineCollection<T extends { id: string }>({
+export function defineCollection<T extends Record<string, any>>({
   contentPath,
   schema,
 }: {
@@ -18,9 +18,12 @@ export function defineCollection<T extends { id: string }>({
     const datum = yaml.parse(fs.readFileSync(absolutePath, "utf8"));
     return schema.parse(datum);
   });
+  const has = Object.prototype.hasOwnProperty;
+
   return {
     schema,
-    get: (contentId: string) => data.find((datum) => datum.id === contentId),
+    get: (key: string, value: any) =>
+      data.find((datum) => datum?.[key] === value),
     getAll: () => data,
   };
 }
