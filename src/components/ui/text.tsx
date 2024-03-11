@@ -3,8 +3,8 @@ import {
   styled,
   type HTMLStyledProps,
   type StyledComponent,
-} from "@styled-system/jsx";
-import { text, type TextVariantProps } from "@styled-system/recipes";
+} from "styled-system/jsx";
+import { text, type TextVariantProps } from "styled-system/recipes";
 
 type As =
   | "p"

@@ -3,13 +3,10 @@ import {
   type PaginationRootProps,
 } from "@ark-ui/react/pagination";
 import { forwardRef } from "react";
-import { css, cx } from "@styled-system/css";
-import { splitCssProps } from "@styled-system/jsx";
-import {
-  pagination,
-  type PaginationVariantProps,
-} from "@styled-system/recipes";
-import type { Assign, JsxStyleProps } from "@styled-system/types";
+import { css, cx } from "styled-system/css";
+import { splitCssProps } from "styled-system/jsx";
+import { pagination, type PaginationVariantProps } from "styled-system/recipes";
+import type { Assign, JsxStyleProps } from "styled-system/types";
 import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
 

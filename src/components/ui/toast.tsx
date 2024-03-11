@@ -2,8 +2,8 @@
 
 import { Toast } from "@ark-ui/react/toast";
 import type { ComponentProps } from "react";
-import { styled } from "@styled-system/jsx";
-import { toast } from "@styled-system/recipes";
+import { styled } from "styled-system/jsx";
+import { toast } from "styled-system/recipes";
 import { createStyleContext } from "@/lib/create-style-context";
 
 const { withProvider, withContext } = createStyleContext(toast);

@@ -1,4 +1,4 @@
-import { article } from "@styled-system/patterns";
+import { article } from "styled-system/patterns";
 import { Block } from "../layout";
 
 export const Pre = (props: React.ComponentProps<"pre">) => {

@@ -1,4 +1,4 @@
-import { article } from "@styled-system/patterns";
+import { article } from "styled-system/patterns";
 import * as Table from "../ui/table";
 
 export const MdxTable = (props: React.ComponentPropsWithoutRef<"table">) => {

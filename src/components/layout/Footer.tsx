@@ -1,7 +1,7 @@
 import NextLink from "next/link";
 import { Text } from "@/components/ui";
-import { css } from "@styled-system/css";
-import { flex } from "@styled-system/patterns";
+import { css } from "styled-system/css";
+import { flex } from "styled-system/patterns";
 
 const siteTitle = "Next.js + Park UI";
 const year = new Date().getFullYear().toString();

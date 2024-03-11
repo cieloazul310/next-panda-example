@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import NextLink from "next/link";
 import { z } from "zod";
 import { author } from "@/content";
-import { stack, vstack } from "@styled-system/patterns";
+import { stack, vstack } from "styled-system/patterns";
 import { Avatar } from "./ui/avatar";
 import { Heading } from "./ui/heading";
 import { Text } from "./ui/text";

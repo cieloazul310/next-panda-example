@@ -1,6 +1,6 @@
 import NextImage, { type ImageProps as NextImageProps } from "next/image";
 import { isInternal } from "@/utils";
-import { css, cx } from "@styled-system/css";
+import { css, cx } from "styled-system/css";
 import type { ComponentPropsWithoutRef, PropsWithChildren } from "react";
 
 function isString(src: ImageProps["src"]): src is string {

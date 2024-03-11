@@ -1,4 +1,4 @@
-import { article } from "@styled-system/patterns";
+import { article } from "styled-system/patterns";
 import { Text } from "../ui/text";
 
 export const Paragraph = (props: React.ComponentPropsWithoutRef<"p">) => (

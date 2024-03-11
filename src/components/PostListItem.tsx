@@ -4,7 +4,7 @@ import { Block } from "@/components";
 import { Heading, Text } from "@/components/ui";
 import { parseDate } from "@/utils";
 import type { PostMetadata } from "@/content";
-import { vstack } from "@styled-system/patterns";
+import { vstack } from "styled-system/patterns";
 
 export type PostListItemProps = Pick<
   PostMetadata,
