@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import * as Carousel from "@/components/ui/carousel";
-import { checkbox } from "@styled-system/recipes";
+import { checkbox } from "styled-system/recipes";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

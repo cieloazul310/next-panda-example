@@ -1,7 +1,7 @@
 ---
 title: アストラット・太平洋ベルト
 date: 2023-06-30
-author: cieloazul310
+author: 那珂川緑波
 ---
 
 ## 若干前倒しで

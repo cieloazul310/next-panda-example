@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 import { isInternal } from "@/utils";
-import { css, cx } from "@styled-system/css";
+import { css, cx } from "styled-system/css";
 import { RiExternalLinkLine } from "react-icons/ri";
 
 const anchor = css({

@@ -1,9 +1,8 @@
 import type { HTMLAttributes, ElementType } from "react";
-import { Heading } from "@/components/ui/heading";
-import { Text } from "@/components/ui/text";
-import { Flex } from "@styled-system/jsx";
-import { css, cx } from "@styled-system/css";
-import { flex } from "@styled-system/patterns";
+import { Heading, Text } from "@/components/ui";
+import { Flex } from "styled-system/jsx";
+import { css, cx } from "styled-system/css";
+import { flex } from "styled-system/patterns";
 import type { ReactNode } from "react";
 
 export type JumbotronProps = HTMLAttributes<HTMLOrSVGElement> & {

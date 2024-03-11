@@ -2,11 +2,19 @@ import * as fs from "fs";
 import * as path from "path";
 import { access } from "fs/promises";
 import { read } from "gray-matter";
-import { postPath } from "@/data";
+import { postPath } from "./collection";
 
 export type PostFrontmatter = {
   title: string;
   date: string;
+  author?: string;
+};
+
+export type PostMetadata = Pick<PostFrontmatter, "title" | "date"> & {
+  data: Omit<PostFrontmatter, "title" | "date">;
+  absolutePath: string;
+  slug: string[];
+  href: string;
 };
 
 /**
@@ -53,7 +61,11 @@ export function findFilePath(slug: string[]) {
 
 export async function getAllPosts(
   { sortDesc }: { sortDesc: boolean } = { sortDesc: false },
-) {
+): Promise<
+  (PostMetadata & {
+    context: { older: PostMetadata | null; newer: PostMetadata | null };
+  })[]
+> {
   const files = fs
     .readdirSync(postPath, { encoding: "utf-8", recursive: true })
     .filter((fileName) => /\.(md|mdx)$/.test(fileName));
@@ -72,13 +84,6 @@ export async function getAllPosts(
       absolutePath,
       slug,
       href,
-    } as PostFrontmatter & {
-      data: {
-        [key: string]: any;
-      };
-      absolutePath: string;
-      slug: string[];
-      href: string;
     };
   });
   return [...posts]

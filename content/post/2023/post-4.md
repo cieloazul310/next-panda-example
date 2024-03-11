@@ -1,7 +1,7 @@
 ---
 title: アストロへようこそ
 date: 2023-07-02
-author: cieloazul310
+author: 那珂川緑波
 ---
 
 ## 新しいフロントエンド

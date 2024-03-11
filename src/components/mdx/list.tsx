@@ -1,5 +1,5 @@
-import { css } from "@styled-system/css";
-import { article } from "@styled-system/patterns";
+import { css } from "styled-system/css";
+import { article } from "styled-system/patterns";
 
 export const Ol = (props: React.ComponentProps<"ol">) => (
   <ol

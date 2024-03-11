@@ -1,11 +1,7 @@
 import { ark, type HTMLArkProps } from "@ark-ui/react";
-import {
-  styled,
-  splitCssProps,
-  type HTMLStyledProps,
-} from "@styled-system/jsx";
-import { css, cx } from "@styled-system/css";
-import { paper, type PaperProperties } from "@styled-system/patterns";
+import { styled, splitCssProps, type HTMLStyledProps } from "styled-system/jsx";
+import { css, cx } from "styled-system/css";
+import { paper, type PaperProperties } from "styled-system/patterns";
 
 const Div = styled(ark.div);
 

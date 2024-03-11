@@ -1,7 +1,7 @@
 ---
 title: 毎年恒例おなじみ納涼
 date: 2023-07-10
-author: cieloazul310
+author: 那珂川緑波
 ---
 
 ## 砲弾
