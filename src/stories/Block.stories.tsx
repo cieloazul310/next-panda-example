@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Block } from "@/components";
-import { VStack } from "@styled-system/jsx";
-import { paper } from "@styled-system/patterns";
+import { VStack } from "styled-system/jsx";
+import { paper } from "styled-system/patterns";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getAllPosts, author } from "@/content";
 import { siteMetadata } from "@/utils";
 import { Jumbotron, Wrapper, Block, Author, PostListItem } from "@/components";
-import { vstack } from "@styled-system/patterns";
+import { vstack } from "styled-system/patterns";
 
 export async function generateStaticParams() {
   const allAuthor = await author.getAll();

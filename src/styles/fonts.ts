@@ -1,5 +1,5 @@
 import { Noto_Sans_JP } from "next/font/google";
-import { cx } from "@styled-system/css";
+import { cx } from "styled-system/css";
 
 export const NotoSans = Noto_Sans_JP({
   subsets: ["latin"],

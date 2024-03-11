@@ -3,7 +3,7 @@ import * as Card from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FormLabel } from "@/components/ui/form-label";
 import { Input } from "@/components/ui/input";
-import { Stack } from "@styled-system/jsx";
+import { Stack } from "styled-system/jsx";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

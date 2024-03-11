@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
-import { Container } from "@styled-system/jsx";
+import { Container } from "styled-system/jsx";
 import { Block } from "@/components";
 import { useMDXComponents } from "@/mdx-components";
 import { mdxEn, mdxJa } from "./data";
