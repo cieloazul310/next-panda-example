@@ -1,7 +1,7 @@
 ---
 title: アストロへようこそ2
 date: 2023-06-24
-author: cieloazul310
+author: 那珂川緑波
 ---
 
 ## イートハーブの毛虫

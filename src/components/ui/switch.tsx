@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   Switch as ArkSwitch,
   type SwitchRootProps,

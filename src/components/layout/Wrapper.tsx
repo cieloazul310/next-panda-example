@@ -18,13 +18,12 @@ function Wrapper({
       maxWidth="content-max-width"
       px="2"
       py="4"
-      className={flex({ gap: "sm" })}
+      className={flex({ gap: "md" })}
     >
       <VStack
         containerType="inline-size"
         gap="md"
         alignItems="stretch"
-        px={[0, 2]}
         flexGrow="1"
         maxWidth="full"
         minWidth="0"

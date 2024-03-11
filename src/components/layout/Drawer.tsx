@@ -1,9 +1,7 @@
 import { MdMenu, MdClose } from "react-icons/md";
 import NextLink from "next/link";
 import { siteTitle } from "@/data";
-import * as Drawer from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
-import { IconButton } from "@/components/ui/icon-button";
+import { Drawer, Button, IconButton } from "@/components/ui";
 import { ColorModeHandler } from "../client";
 import Menu from "./Menu";
 

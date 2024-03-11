@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   Checkbox as ArkCheckbox,
   type CheckboxRootProps,

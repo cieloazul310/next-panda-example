@@ -1,19 +1,17 @@
 import Link from "next/link";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { author } from "@/data/content";
-import { getAllPosts, siteMetadata } from "@/utils";
-import { Jumbotron, Wrapper, Block } from "@/components";
-import { Heading } from "@/components/ui/heading";
-import { Text } from "@/components/ui/text";
+import { getAllPosts, author } from "@/content";
+import { siteMetadata } from "@/utils";
+import { Jumbotron, Wrapper, Block, Author, PostListItem } from "@/components";
+import { vstack } from "@styled-system/patterns";
 
-export function generateStaticParams() {
-  const allAuthor = author.getAll();
+export async function generateStaticParams() {
+  const allAuthor = await author.getAll();
   return allAuthor;
 }
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const { id } = params;
-  const item = author.get("id", id);
+  const item = await author.get("id", id);
   if (!item) return undefined;
   const { name, description } = item;
   return siteMetadata({
@@ -24,20 +22,22 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 
 async function Page({ params }: { params: { id: string } }) {
   const { id } = params;
-  const item = author.get("id", id);
+  const item = await author.get("id", id);
   if (!item) return null;
-  const { name, description } = item;
+  const { name } = item;
+  const posts = await getAllPosts();
+  const authorsPosts = posts.filter(({ data }) => data.author === name);
 
   return (
     <>
       <Jumbotron title={name} headerText="Author" />
       <Wrapper>
-        <Block asChild>
-          <article>
-            <Heading as="h1">{name}</Heading>
-            {description && <p>{description}</p>}
-          </article>
-        </Block>
+        <Author {...item} />
+        <ul className={vstack({ gap: "sm", alignItems: "stretch" })}>
+          {authorsPosts.map((post) => (
+            <PostListItem key={post.href} {...post} />
+          ))}
+        </ul>
         <Block enableHover fontWeight="bold" asChild>
           <Link href="/author">Author</Link>
         </Block>

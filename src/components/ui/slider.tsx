@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   Slider as ArkSlider,
   type SliderRootProps,

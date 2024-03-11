@@ -1,16 +1,9 @@
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { author } from "@/data/content";
-import {
-  getAllPosts,
-  getPostData,
-  useMdx,
-  siteMetadata,
-  parseDate,
-} from "@/utils";
-import { Jumbotron, Wrapper, Block, Author } from "@/components";
-import { Heading } from "@/components/ui/heading";
-import { Text } from "@/components/ui/text";
+import { author, getAllPosts, getPostData, useMdx } from "@/content";
+import { siteMetadata, parseDate } from "@/utils";
+import { Jumbotron, Wrapper, Block, Author, PostListItem } from "@/components";
+import { Text } from "@/components/ui";
 // import remarkGfm from "remark-gfm";
 import { useMDXComponents } from "../../../mdx-components";
 
@@ -39,12 +32,18 @@ async function Page({ params }: { params: { slug: string[] } }) {
   if (!mdx) return null;
   const { content, data } = mdx;
   const date = new Date(data.date);
-  const authorItem = author.get("name", data.author);
+  const authorItem = await author.get("name", data.author);
+  const sidebarAuthor = authorItem && (
+    <Author
+      headerText={<Text fontWeight="bold">Author</Text>}
+      {...authorItem}
+    />
+  );
 
   return (
     <>
       <Jumbotron title={data.title} headerText={parseDate(date)} />
-      <Wrapper sidebarTop={authorItem && <Author {...authorItem} />}>
+      <Wrapper sidebarTop={sidebarAuthor}>
         <Block asChild>
           <article>
             <MDXRemote
@@ -60,30 +59,16 @@ async function Page({ params }: { params: { slug: string[] } }) {
           </article>
         </Block>
         {context.older && (
-          <Block enableHover asChild>
-            <Link href={context.older.href}>
-              <hgroup>
-                <Text mb="sm">Older Post</Text>
-                <Heading as="h3" fontSize="lg">
-                  {context.older.title}
-                </Heading>
-                <Text>{parseDate(context.older.date)}</Text>
-              </hgroup>
-            </Link>
-          </Block>
+          <PostListItem
+            headerText={<Text fontWeight="bold">Older Post</Text>}
+            {...context.older}
+          />
         )}
         {context.newer && (
-          <Block enableHover asChild>
-            <Link href={context.newer.href}>
-              <hgroup>
-                <Text mb="sm">Newer Post</Text>
-                <Heading as="h3" fontSize="lg">
-                  {context.newer.title}
-                </Heading>
-                <Text>{parseDate(context.newer.date)}</Text>
-              </hgroup>
-            </Link>
-          </Block>
+          <PostListItem
+            headerText={<Text fontWeight="bold">Newer Post</Text>}
+            {...context.newer}
+          />
         )}
         <Block enableHover fontWeight="bold" asChild>
           <Link href="/post">Post</Link>

@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { access } from "fs/promises";
 import { read } from "gray-matter";
-import { postPath } from "@/data/content";
+import { postPath } from "./collection";
 
 export type PostFrontmatter = {
   title: string;

@@ -1,6 +1,6 @@
 import * as path from "path";
 import { z } from "zod";
-import { defineCollection } from "@/utils";
+import { defineCollection } from "./defineCollection";
 
 export const postPath = path.resolve(process.cwd(), "content/post");
 export const authorPath = path.resolve(process.cwd(), "content/author");

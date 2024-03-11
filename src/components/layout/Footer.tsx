@@ -1,5 +1,5 @@
 import NextLink from "next/link";
-import { Text } from "@/components/ui/text";
+import { Text } from "@/components/ui";
 import { css } from "@styled-system/css";
 import { flex } from "@styled-system/patterns";
 

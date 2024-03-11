@@ -1,6 +1,7 @@
+import type { ReactNode } from "react";
 import NextLink from "next/link";
 import { z } from "zod";
-import { author } from "@/data/content";
+import { author } from "@/content";
 import { stack, vstack } from "@styled-system/patterns";
 import { Avatar } from "./ui/avatar";
 import { Heading } from "./ui/heading";
@@ -12,12 +13,26 @@ type AuthorSchema = z.infer<typeof author.schema>;
 export type AuthorProps = Pick<
   AuthorSchema,
   "id" | "name" | "description" | "image"
->;
+> & {
+  headerText?: ReactNode;
+  footerText?: ReactNode;
+};
 
-export function Author({ id, name, description, image }: AuthorProps) {
+export function Author({
+  id,
+  name,
+  description,
+  image,
+  headerText,
+  footerText,
+}: AuthorProps) {
   return (
     <Block enableHover asChild>
-      <NextLink href={`/author/${id}`}>
+      <NextLink
+        className={vstack({ alignItems: "flex-start", gap: "sm" })}
+        href={`/author/${id}`}
+      >
+        {headerText}
         <article
           className={stack({
             flexDirection: "column",
@@ -40,15 +55,12 @@ export function Author({ id, name, description, image }: AuthorProps) {
               },
             })}
           >
-            <Heading as="h3" fontSize={["lg", "xl"]}>
+            <Heading as="h1" fontSize={{ base: "lg", "@/md": "xl" }}>
               {name}
             </Heading>
-            {description && (
-              <Text fontSize={["sm", "md"]} width="full">
-                {description}
-              </Text>
-            )}
+            {description && <Text width="full">{description}</Text>}
           </hgroup>
+          {footerText}
         </article>
       </NextLink>
     </Block>
