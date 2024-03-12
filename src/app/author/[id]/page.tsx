@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getAllPosts, author } from "@/content";
 import { siteMetadata } from "@/utils";
-import { Jumbotron, Wrapper, Block, Author, PostListItem } from "@/components";
+import { Jumbotron, Wrapper, Block, Author, PostItem } from "@/components";
 import { vstack } from "styled-system/patterns";
 
 export async function generateStaticParams() {
@@ -35,7 +35,7 @@ async function Page({ params }: { params: { id: string } }) {
         <Author {...item} />
         <ul className={vstack({ gap: "sm", alignItems: "stretch" })}>
           {authorsPosts.map((post) => (
-            <PostListItem key={post.href} {...post} />
+            <PostItem key={post.href} {...post} />
           ))}
         </ul>
         <Block enableHover fontWeight="bold" asChild>

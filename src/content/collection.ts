@@ -12,5 +12,12 @@ export const author = defineCollection({
     name: z.string(),
     description: z.string().optional(),
     image: z.string().optional(),
+    socials: z
+      .object({
+        url: z.string().optional(),
+        twitter: z.string().optional(),
+        github: z.string().optional(),
+      })
+      .optional(),
   }),
 });

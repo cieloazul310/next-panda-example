@@ -1,17 +1,19 @@
 import * as React from "react";
 import type { Preview } from "@storybook/react";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
-import { fontClassName } from "../src/styles";
+import { fontClassName } from "@/styles";
 import "@/styles/globals.css";
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
+    },
+    nextjs: {
+      appDirectory: true, // 👈 Set this
     },
   },
 };

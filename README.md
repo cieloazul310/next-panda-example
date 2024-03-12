@@ -3,7 +3,7 @@
 - [Next.js] v14 (App Router)
 - [Park UI] v0
 - [Panda CSS] v0
-- [Storybook] v7
+- [Storybook] v8
 - [MDX]
 
 Demo  
