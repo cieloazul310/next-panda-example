@@ -13,7 +13,11 @@ const meta = {
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
   render: ({ headerText, footerText, ...args }) => {
-    const ht = headerText && <Text fontWeight="bold">{headerText}</Text>;
+    const ht = headerText && (
+      <Text fontWeight="bold" fontSize={{ base: "md", "@/md": "lg" }}>
+        {headerText}
+      </Text>
+    );
     const ft = footerText && <Text>{footerText}</Text>;
     return (
       <div className={cq()}>
@@ -45,6 +49,11 @@ export const WithImage: Story = {
     name: "cieloazul310",
     description: "風が吹くと条件反射で面白い顔になってしまう。",
     image: "https://avatars.githubusercontent.com/u/21035603",
+    socials: {
+      github: "cieloazul310",
+      twitter: "cieloazul310",
+      url: "https://cieloazul310.github.io",
+    },
   },
 };
 
@@ -53,5 +62,8 @@ export const WithoutImage: Story = {
     id: "cieloazul310",
     name: "cieloazul310",
     description: "風が吹くと条件反射で面白い顔になってしまう。",
+    socials: {
+      github: "cieloazul310",
+    },
   },
 };

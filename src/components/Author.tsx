@@ -1,15 +1,66 @@
-import type { ReactNode } from "react";
+import type { ReactNode, PropsWithChildren } from "react";
 import NextLink from "next/link";
 import { z } from "zod";
+import { IconButton } from "@/components/ui";
 import { author } from "@/content";
 import { css } from "styled-system/css";
-import { stack, vstack } from "styled-system/patterns";
-import { Avatar } from "./ui/avatar";
-import { Heading } from "./ui/heading";
-import { Text } from "./ui/text";
+import { hstack, stack, vstack } from "styled-system/patterns";
+import { FaXTwitter, FaGithub, FaLink } from "react-icons/fa6";
+import { Avatar, Heading, Text } from "./ui";
 import { Block } from "./layout";
 
 type AuthorSchema = z.infer<typeof author.schema>;
+
+type AuthorSocialButtonProps = PropsWithChildren<{
+  href: string;
+  label: string;
+}>;
+
+function AuthorSocialButton({
+  children,
+  href,
+  label,
+}: AuthorSocialButtonProps) {
+  return (
+    <IconButton variant="ghost" aria-label={label} asChild>
+      <a href={href} target="_blank" rel="noreferer noopener" title={label}>
+        {children}
+      </a>
+    </IconButton>
+  );
+}
+
+type AuthorSocialProps = Pick<AuthorSchema, "socials">;
+
+function AuthorSocial({ socials }: AuthorSocialProps) {
+  if (!socials) return null;
+  const { github, twitter, url } = socials;
+  return (
+    <address className={hstack({ gap: 1, zIndex: 1 })}>
+      {url && (
+        <AuthorSocialButton href={url} label="Web">
+          <FaLink />
+        </AuthorSocialButton>
+      )}
+      {github && (
+        <AuthorSocialButton
+          href={`https://github.com/${github}`}
+          label="GitHub"
+        >
+          <FaGithub />
+        </AuthorSocialButton>
+      )}
+      {twitter && (
+        <AuthorSocialButton
+          href={`https://twitter.com/${twitter}`}
+          label="Twitter"
+        >
+          <FaXTwitter />
+        </AuthorSocialButton>
+      )}
+    </address>
+  );
+}
 
 export type AuthorProps = Pick<
   AuthorSchema,
@@ -42,6 +93,7 @@ export function Author({
             className={stack({
               flexDirection: "column",
               gap: "sm",
+              width: "full",
               alignItems: "center",
               "@/md": { flexDirection: "row", gap: "md" },
             })}
@@ -49,22 +101,36 @@ export function Author({
             <Avatar src={image} size="2xl">
               {name}
             </Avatar>
-            <hgroup
+            <div
               className={vstack({
-                gap: "xs",
-                alignItems: "center",
+                gap: "sm",
+                alignItems: { base: "center", "@/md": "flex-start" },
                 width: "full",
-                "@/md": {
-                  gap: 0,
-                  alignItems: "flex-start",
-                },
+                flexGrow: 1,
               })}
             >
-              <Heading as="h1" fontSize={{ base: "lg", "@/md": "xl" }}>
-                {name}
-              </Heading>
-              {description && <Text width="full">{description}</Text>}
-            </hgroup>
+              <hgroup
+                className={vstack({
+                  gap: "xs",
+                  alignItems: "center",
+                  width: "full",
+                  "@/md": {
+                    gap: 0,
+                    alignItems: "flex-start",
+                  },
+                })}
+              >
+                <Heading as="h1" fontSize={{ base: "lg", "@/md": "xl" }}>
+                  {name}
+                </Heading>
+                {description && (
+                  <Text width="full" fontSize={{ base: "sm", "@/md": "md" }}>
+                    {description}
+                  </Text>
+                )}
+              </hgroup>
+              <AuthorSocial socials={socials} />
+            </div>
           </div>
           {footerText && <footer>{footerText}</footer>}
         </article>
