@@ -6,21 +6,18 @@ import { parseDate } from "@/utils";
 import type { PostMetadata } from "@/content";
 import { vstack } from "styled-system/patterns";
 
-export type PostListItemProps = Pick<
-  PostMetadata,
-  "href" | "title" | "date"
-> & {
+export type PostItemProps = Pick<PostMetadata, "href" | "title" | "date"> & {
   headerText?: ReactNode;
   footerText?: ReactNode;
 };
 
-export function PostListItem({
+export function PostItem({
   href,
   title,
   date,
   headerText,
   footerText,
-}: PostListItemProps) {
+}: PostItemProps) {
   return (
     <Block enableHover asChild>
       <NextLink
@@ -29,10 +26,14 @@ export function PostListItem({
       >
         {headerText}
         <hgroup>
-          <Heading as="h1" fontWeight="bold" fontSize={["md", "lg", "xl"]}>
+          <Heading
+            as="h1"
+            fontWeight="bold"
+            fontSize={{ base: "md", "@/sm": "lg", "@/md": "xl" }}
+          >
             {title}
           </Heading>
-          <Text>{parseDate(date)}</Text>
+          <Text fontSize={{ base: "sm", "@/sm": "md" }}>{parseDate(date)}</Text>
         </hgroup>
         {footerText}
       </NextLink>

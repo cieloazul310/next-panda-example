@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import NextLink from "next/link";
 import { z } from "zod";
 import { author } from "@/content";
+import { css } from "styled-system/css";
 import { stack, vstack } from "styled-system/patterns";
 import { Avatar } from "./ui/avatar";
 import { Heading } from "./ui/heading";
@@ -12,7 +13,7 @@ type AuthorSchema = z.infer<typeof author.schema>;
 
 export type AuthorProps = Pick<
   AuthorSchema,
-  "id" | "name" | "description" | "image"
+  "id" | "name" | "description" | "image" | "socials"
 > & {
   headerText?: ReactNode;
   footerText?: ReactNode;
@@ -23,44 +24,49 @@ export function Author({
   name,
   description,
   image,
+  socials,
   headerText,
   footerText,
 }: AuthorProps) {
   return (
     <Block enableHover asChild>
-      <NextLink
-        className={vstack({ alignItems: "flex-start", gap: "sm" })}
-        href={`/author/${id}`}
-      >
-        {headerText}
+      <NextLink href={`/author/${id}`} className={css({ display: "block" })}>
         <article
-          className={stack({
-            flexDirection: "column",
-            gap: 2,
-            alignItems: "center",
-            "@/md": { flexDirection: "row", gap: 4 },
+          className={vstack({
+            alignItems: "flex-start",
+            gap: "sm",
           })}
         >
-          <Avatar src={image} size="2xl">
-            {name}
-          </Avatar>
-          <hgroup
-            className={vstack({
-              gap: 1,
+          {headerText && <header>{headerText}</header>}
+          <div
+            className={stack({
+              flexDirection: "column",
+              gap: "sm",
               alignItems: "center",
-              width: "full",
-              "@/md": {
-                gap: 0,
-                alignItems: "flex-start",
-              },
+              "@/md": { flexDirection: "row", gap: "md" },
             })}
           >
-            <Heading as="h1" fontSize={{ base: "lg", "@/md": "xl" }}>
+            <Avatar src={image} size="2xl">
               {name}
-            </Heading>
-            {description && <Text width="full">{description}</Text>}
-          </hgroup>
-          {footerText}
+            </Avatar>
+            <hgroup
+              className={vstack({
+                gap: "xs",
+                alignItems: "center",
+                width: "full",
+                "@/md": {
+                  gap: 0,
+                  alignItems: "flex-start",
+                },
+              })}
+            >
+              <Heading as="h1" fontSize={{ base: "lg", "@/md": "xl" }}>
+                {name}
+              </Heading>
+              {description && <Text width="full">{description}</Text>}
+            </hgroup>
+          </div>
+          {footerText && <footer>{footerText}</footer>}
         </article>
       </NextLink>
     </Block>

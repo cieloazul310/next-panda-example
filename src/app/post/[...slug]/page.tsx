@@ -2,7 +2,7 @@ import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { author, getAllPosts, getPostData, useMdx } from "@/content";
 import { siteMetadata, parseDate } from "@/utils";
-import { Jumbotron, Wrapper, Block, Author, PostListItem } from "@/components";
+import { Jumbotron, Wrapper, Block, Author, PostItem } from "@/components";
 import { Text } from "@/components/ui";
 // import remarkGfm from "remark-gfm";
 import { useMDXComponents } from "../../../mdx-components";
@@ -59,13 +59,13 @@ async function Page({ params }: { params: { slug: string[] } }) {
           </article>
         </Block>
         {context.older && (
-          <PostListItem
+          <PostItem
             headerText={<Text fontWeight="bold">Older Post</Text>}
             {...context.older}
           />
         )}
         {context.newer && (
-          <PostListItem
+          <PostItem
             headerText={<Text fontWeight="bold">Newer Post</Text>}
             {...context.newer}
           />
