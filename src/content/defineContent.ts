@@ -1,7 +1,7 @@
 import * as path from "path";
 import { readdir, readFile } from "fs/promises";
 import { compileMDX, type MDXRemoteProps } from "next-mdx-remote/rsc";
-import { z, type ZodObject } from "zod";
+import { z, ZodString, type ZodObject, ZodRawShape } from "zod";
 
 /**
  * example:
@@ -26,7 +26,11 @@ type PostMetadata<T> = PostFrontmatter<T> & {
   href: string;
 };
 
-export function defineContent<T extends Record<string, any>>({
+type Fuge = ZodObject<{
+  a: ZodString;
+}>;
+
+export function defineContent<T extends ZodRawShape>({
   contentPath,
   basePath,
   schema,
@@ -48,8 +52,11 @@ export function defineContent<T extends Record<string, any>>({
   async function getData(
     { sortDesc }: { sortDesc: boolean } = { sortDesc: false },
   ): Promise<
-    (PostMetadata<T> & {
-      context: { older: PostMetadata<T> | null; newer: PostMetadata<T> | null };
+    (PostMetadata<z.infer<ZodObject<T>>> & {
+      context: {
+        older: PostMetadata<z.infer<ZodObject<T>>> | null;
+        newer: PostMetadata<z.infer<ZodObject<T>>> | null;
+      };
     })[]
   > {
     const filesInDir = await readdir(contentPath, {
@@ -61,7 +68,9 @@ export function defineContent<T extends Record<string, any>>({
     const posts = files.map(async (filename) => {
       const absolutePath = path.join(contentPath, filename);
       const source = await readFile(absolutePath, { encoding: "utf8" });
-      const { frontmatter } = await compileMDX<PostFrontmatter<T>>({
+      const { frontmatter } = await compileMDX<
+        PostFrontmatter<z.infer<ZodObject<T>>>
+      >({
         source,
         options: { parseFrontmatter: true },
       });
@@ -118,7 +127,9 @@ export function defineContent<T extends Record<string, any>>({
     ) => {
       const { absolutePath, context } = await getPostData(slug);
       const file = await readFile(absolutePath, { encoding: "utf8" });
-      const { content, frontmatter } = await compileMDX<PostFrontmatter<T>>({
+      const { content, frontmatter } = await compileMDX<
+        PostFrontmatter<z.infer<ZodObject<T>>>
+      >({
         source: file,
         components,
         options: {
