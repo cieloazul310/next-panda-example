@@ -1,10 +1,8 @@
 import Link from "next/link";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { author, getAllPosts, getPostData, useMdx } from "@/content";
 import { siteMetadata, parseDate } from "@/utils";
 import { Jumbotron, Wrapper, Block, Author, PostItem } from "@/components";
 import { Text } from "@/components/ui";
-// import remarkGfm from "remark-gfm";
 import { useMDXComponents } from "../../../mdx-components";
 
 export async function generateStaticParams() {
@@ -26,38 +24,29 @@ export async function generateMetadata({
 
 async function Page({ params }: { params: { slug: string[] } }) {
   const { slug } = params;
-  const mdx = await useMdx(slug);
-  const { context } = await getPostData(slug);
   const components = useMDXComponents();
-  if (!mdx) return null;
-  const { content, data } = mdx;
-  const date = new Date(data.date);
-  const authorItem = await author.get("name", data.author);
-  const sidebarAuthor = authorItem && (
+  const { content, frontmatter, context } = await useMdx(slug, { components });
+  const date = new Date(frontmatter.date);
+  const authorItem = await author.get("name", frontmatter.author);
+  const authorBox = authorItem && (
     <Author
-      headerText={<Text fontWeight="bold">Author</Text>}
+      headerText={
+        <Text fontWeight="bold" fontSize={{ base: "md", "@/md": "lg" }}>
+          Author
+        </Text>
+      }
       {...authorItem}
     />
   );
 
   return (
     <>
-      <Jumbotron title={data.title} headerText={parseDate(date)} />
-      <Wrapper sidebarTop={sidebarAuthor}>
+      <Jumbotron title={frontmatter.title} headerText={parseDate(date)} />
+      <Wrapper sidebarTop={authorBox}>
         <Block asChild>
-          <article>
-            <MDXRemote
-              options={{
-                parseFrontmatter: true,
-                mdxOptions: {
-                  // remarkPlugins: [remarkGfm],
-                },
-              }}
-              source={content}
-              components={components}
-            />
-          </article>
+          <article>{content}</article>
         </Block>
+        {authorBox}
         {context.older && (
           <PostItem
             headerText={<Text fontWeight="bold">Older Post</Text>}
