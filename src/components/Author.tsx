@@ -36,7 +36,7 @@ function AuthorSocial({ socials }: AuthorSocialProps) {
   if (!socials) return null;
   const { github, twitter, url } = socials;
   return (
-    <address className={hstack({ gap: 1, zIndex: 1 })}>
+    <address className={hstack({ gap: 1, zIndex: 2 })}>
       {url && (
         <AuthorSocialButton href={url} label="Web">
           <FaLink />
@@ -81,60 +81,75 @@ export function Author({
 }: AuthorProps) {
   return (
     <Block enableHover asChild>
-      <NextLink href={`/author/${id}`} className={css({ display: "block" })}>
-        <article
-          className={vstack({
-            alignItems: "flex-start",
+      <article
+        className={vstack({
+          alignItems: "flex-start",
+          gap: "sm",
+          position: "relative",
+        })}
+      >
+        {headerText && <header>{headerText}</header>}
+        <div
+          className={stack({
+            flexDirection: "column",
             gap: "sm",
+            width: "full",
+            alignItems: "center",
+            "@/md": { flexDirection: "row", gap: "md" },
           })}
         >
-          {headerText && <header>{headerText}</header>}
+          <Avatar src={image} size="2xl">
+            {name}
+          </Avatar>
           <div
-            className={stack({
-              flexDirection: "column",
+            className={vstack({
               gap: "sm",
+              alignItems: { base: "center", "@/md": "flex-start" },
               width: "full",
-              alignItems: "center",
-              "@/md": { flexDirection: "row", gap: "md" },
+              flexGrow: 1,
             })}
           >
-            <Avatar src={image} size="2xl">
-              {name}
-            </Avatar>
-            <div
+            <hgroup
               className={vstack({
-                gap: "sm",
-                alignItems: { base: "center", "@/md": "flex-start" },
+                gap: "xs",
+                alignItems: "center",
                 width: "full",
-                flexGrow: 1,
+                "@/md": {
+                  gap: 0,
+                  alignItems: "flex-start",
+                },
               })}
             >
-              <hgroup
-                className={vstack({
-                  gap: "xs",
-                  alignItems: "center",
-                  width: "full",
-                  "@/md": {
-                    gap: 0,
-                    alignItems: "flex-start",
-                  },
-                })}
-              >
-                <Heading as="h1" fontSize={{ base: "lg", "@/md": "xl" }}>
+              <Heading as="h1" fontSize={{ base: "lg", "@/md": "xl" }}>
+                <NextLink
+                  href={`/author/${id}`}
+                  className={css({
+                    _after: {
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      inset: 0,
+                      width: "full",
+                      height: "full",
+                      zIndex: 1,
+                      content: '""',
+                    },
+                  })}
+                >
                   {name}
-                </Heading>
-                {description && (
-                  <Text width="full" fontSize={{ base: "sm", "@/md": "md" }}>
-                    {description}
-                  </Text>
-                )}
-              </hgroup>
-              <AuthorSocial socials={socials} />
-            </div>
+                </NextLink>
+              </Heading>
+              {description && (
+                <Text width="full" fontSize={{ base: "sm", "@/md": "md" }}>
+                  {description}
+                </Text>
+              )}
+            </hgroup>
+            <AuthorSocial socials={socials} />
           </div>
-          {footerText && <footer>{footerText}</footer>}
-        </article>
-      </NextLink>
+        </div>
+        {footerText && <footer>{footerText}</footer>}
+      </article>
     </Block>
   );
 }

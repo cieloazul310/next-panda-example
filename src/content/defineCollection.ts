@@ -33,10 +33,7 @@ export function defineCollection<T extends Record<string, any>>({
     schema,
     get: async (key: string, value: any) => {
       const data = await getData();
-      return data.find(async (datum) => {
-        const d = await datum;
-        return d?.[key] === value;
-      });
+      return data.find((datum) => datum?.[key] === value);
     },
     getAll: async () => await getData(),
   };
