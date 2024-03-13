@@ -26,10 +26,6 @@ type PostMetadata<T> = PostFrontmatter<T> & {
   href: string;
 };
 
-type Fuge = ZodObject<{
-  a: ZodString;
-}>;
-
 export function defineContent<T extends ZodRawShape>({
   contentPath,
   basePath,
@@ -74,12 +70,16 @@ export function defineContent<T extends ZodRawShape>({
         source,
         options: { parseFrontmatter: true },
       });
+      const frontmatterX = {
+        ...frontmatter,
+        date: new Date(frontmatter.date),
+      };
 
       const slug = fileNameToSlug(filename);
       const href = path.join(basePath, ...slug);
 
       return {
-        ...frontmatter,
+        ...frontmatterX,
         absolutePath,
         slug,
         href,
@@ -89,9 +89,7 @@ export function defineContent<T extends ZodRawShape>({
     return Promise.all(posts).then((allPosts) =>
       allPosts
         .sort(
-          (a, b) =>
-            (sortDesc ? -1 : 1) *
-            (new Date(a.date).getTime() - new Date(b.date).getTime()),
+          (a, b) => (sortDesc ? -1 : 1) * (a.date.getTime() - b.date.getTime()),
         )
         .map((post, index, arr) => ({
           ...post,
