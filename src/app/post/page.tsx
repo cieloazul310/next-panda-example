@@ -1,9 +1,9 @@
 import { Wrapper, Jumbotron, PostItem } from "@/components";
-import { getAllPosts } from "@/content";
+import { post } from "@/content";
 import { vstack } from "styled-system/patterns";
 
 async function Page() {
-  const allPosts = await getAllPosts({ sortDesc: true });
+  const allPosts = await post.getAll();
 
   return (
     <>

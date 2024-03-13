@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { author, getAllPosts, getPostData, useMdx } from "@/content";
+import { author, post } from "@/content";
 import { siteMetadata, parseDate } from "@/utils";
 import { Jumbotron, Wrapper, Block, Author, PostItem } from "@/components";
 import { Text } from "@/components/ui";
 import { useMDXComponents } from "../../../mdx-components";
 
 export async function generateStaticParams() {
-  const allPosts = await getAllPosts();
+  const allPosts = await post.getAll();
   return allPosts;
 }
 
@@ -16,7 +16,7 @@ export async function generateMetadata({
   params: { slug: string[] };
 }) {
   const { slug } = params;
-  const { title } = await getPostData(slug);
+  const { title } = await post.get(slug);
   return siteMetadata({
     title,
   });
@@ -25,7 +25,9 @@ export async function generateMetadata({
 async function Page({ params }: { params: { slug: string[] } }) {
   const { slug } = params;
   const components = useMDXComponents();
-  const { content, frontmatter, context } = await useMdx(slug, { components });
+  const { content, frontmatter, context } = await post.useMdx(slug, {
+    components,
+  });
   const date = new Date(frontmatter.date);
   const authorItem = await author.get("name", frontmatter.author);
   const authorBox = authorItem && (

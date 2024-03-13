@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getAllPosts, author } from "@/content";
+import { author, post } from "@/content";
 import { siteMetadata } from "@/utils";
 import { Jumbotron, Wrapper, Block, Author, PostItem } from "@/components";
 import { vstack } from "styled-system/patterns";
@@ -25,7 +25,7 @@ async function Page({ params }: { params: { id: string } }) {
   const item = await author.get("id", id);
   if (!item) return null;
   const { name } = item;
-  const posts = await getAllPosts();
+  const posts = await post.getAll();
   const authorsPosts = posts.filter((post) => post.author === name);
 
   return (
