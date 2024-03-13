@@ -43,7 +43,7 @@ export const Basic: Story = {
   args: {
     href: "/",
     title: "Example Title",
-    date: "2024-03-10",
+    date: new Date("2024-03-10"),
   },
 };
 
@@ -51,6 +51,6 @@ export const BasicJa: Story = {
   args: {
     href: "/",
     title: "日本語のタイトル",
-    date: "2024-03-10",
+    date: new Date("2024-03-10"),
   },
 };
