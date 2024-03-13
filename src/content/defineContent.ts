@@ -1,7 +1,7 @@
 import * as path from "path";
 import { readdir, readFile } from "fs/promises";
 import { compileMDX, type MDXRemoteProps } from "next-mdx-remote/rsc";
-import type { ZodType } from "zod";
+import { z, type ZodObject } from "zod";
 
 /**
  * example:
@@ -33,8 +33,18 @@ export function defineContent<T extends Record<string, any>>({
 }: {
   contentPath: string;
   basePath: string;
-  schema: ZodType<T>;
+  schema: ZodObject<T>;
 }) {
+  const frontmatterSchema = schema.extend({
+    title: z.string(),
+    date: z.date(),
+  });
+  const metadataSchema = frontmatterSchema.extend({
+    absolutePath: z.string(),
+    slug: z.array(z.string()),
+    href: z.string(),
+  });
+
   async function getData(
     { sortDesc }: { sortDesc: boolean } = { sortDesc: false },
   ): Promise<
@@ -92,9 +102,11 @@ export function defineContent<T extends Record<string, any>>({
   }
 
   return {
-    schema,
+    schema: frontmatterSchema,
+    metadataSchema,
     get: async (slug: string[]) => await getPostData(slug),
-    getAll: async () => await getData(),
+    getAll: async ({ sortDesc }: { sortDesc: boolean } = { sortDesc: false }) =>
+      await getData({ sortDesc }),
     useMdx: async (
       slug: string[],
       {

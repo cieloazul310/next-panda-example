@@ -1,14 +1,14 @@
 import { readFile, readdir } from "fs/promises";
 import * as path from "path";
 import * as yaml from "yaml";
-import type { ZodType } from "zod";
+import type { ZodObject } from "zod";
 
 export function defineCollection<T extends Record<string, any>>({
   contentPath,
   schema,
 }: {
   contentPath: string;
-  schema: ZodType<T>;
+  schema: ZodObject<T>;
 }) {
   async function getData() {
     const filesInDir = await readdir(contentPath, {
