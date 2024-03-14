@@ -10,9 +10,11 @@ async function Page() {
       <Jumbotron title="MDX Posts" />
       <Wrapper>
         <ul className={vstack({ gap: "sm", alignItems: "stretch" })}>
-          {allPosts.map((post) => (
-            <PostItem key={post.href} {...post} />
-          ))}
+          {allPosts
+            .sort((a, b) => b.date.getTime() - a.date.getTime())
+            .map((post) => (
+              <PostItem key={post.href} {...post} />
+            ))}
         </ul>
       </Wrapper>
     </>

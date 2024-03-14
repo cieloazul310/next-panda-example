@@ -2,7 +2,8 @@ import Link from "next/link";
 import { author, post } from "@/content";
 import { siteMetadata, parseDate } from "@/utils";
 import { Jumbotron, Wrapper, Block, Author, PostItem } from "@/components";
-import { Text } from "@/components/ui";
+import { Text, Alert } from "@/components/ui";
+import { MdInfo as InfoIcon } from "react-icons/md";
 import { useMDXComponents } from "../../../mdx-components";
 
 export async function generateStaticParams() {
@@ -28,7 +29,6 @@ async function Page({ params }: { params: { slug: string[] } }) {
   const { content, frontmatter, context } = await post.useMdx(slug, {
     components,
   });
-  const date = new Date(frontmatter.date);
   const authorItem = await author.get("name", frontmatter.author);
   const authorBox = authorItem && (
     <Author
@@ -43,10 +43,28 @@ async function Page({ params }: { params: { slug: string[] } }) {
 
   return (
     <>
-      <Jumbotron title={frontmatter.title} headerText={parseDate(date)} />
+      <Jumbotron
+        title={frontmatter.title}
+        headerText={parseDate(frontmatter.date)}
+      />
       <Wrapper sidebarTop={authorBox}>
         <Block asChild>
-          <article>{content}</article>
+          <article>
+            {frontmatter.draft && (
+              <Alert.Root>
+                <Alert.Icon asChild>
+                  <InfoIcon />
+                </Alert.Icon>
+                <Alert.Content>
+                  <Alert.Title>Draft post</Alert.Title>
+                  <Alert.Description>
+                    For the best experience, please update your browser.
+                  </Alert.Description>
+                </Alert.Content>
+              </Alert.Root>
+            )}
+            {content}
+          </article>
         </Block>
         {authorBox}
         {context.older && (
