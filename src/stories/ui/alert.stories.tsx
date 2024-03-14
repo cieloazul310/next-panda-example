@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import * as Alert from "@/components/ui/alert";
+import { Alert } from "@/components/ui";
 import { MdInfo as InfoIcon } from "react-icons/md";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
