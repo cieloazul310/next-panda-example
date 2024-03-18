@@ -4,10 +4,6 @@ import { readdir, readFile } from "fs/promises";
 import { compileMDX, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { z, type ZodObject, ZodRawShape } from "zod";
 
-function removeNull<T>(input: T | null | undefined): input is T {
-  return !!input;
-}
-
 /**
  * example:
  * getting-started.mdx => ["getting-started"]
@@ -68,7 +64,7 @@ export function defineArticle<Z extends ZodRawShape>({
     lastmod,
     draft,
     ...rest
-  }: PostFrontmatterInput<RestFrontmatter>): PostFrontmatter<RestFrontmatter> | null {
+  }: PostFrontmatterInput<RestFrontmatter>): PostFrontmatter<RestFrontmatter> {
     const frontmatter = {
       title,
       date: new Date(date),
@@ -76,13 +72,9 @@ export function defineArticle<Z extends ZodRawShape>({
       draft: typeof draft === "boolean" ? draft : false,
       ...rest,
     };
-
-    const result = frontmatterSchema.safeParse(frontmatter);
-    if (!result.success) {
-      console.error(result.error);
-      return null;
-    }
-    return result.data as PostFrontmatter<RestFrontmatter>;
+    return frontmatterSchema.parse(
+      frontmatter,
+    ) as PostFrontmatter<RestFrontmatter>;
   }
 
   async function getAll(
@@ -103,7 +95,7 @@ export function defineArticle<Z extends ZodRawShape>({
       extensions.some((ext) => new RegExp(ext).test(fileName)),
     );
 
-    const posts = await Promise.all(
+    const allPosts = await Promise.all(
       files.map(async (filename) => {
         const absolutePath = path.join(contentPath, filename);
         const source = await readFile(absolutePath, { encoding: "utf8" });
@@ -116,21 +108,15 @@ export function defineArticle<Z extends ZodRawShape>({
 
         const slug = fileNameToSlug(filename);
         const href = path.join(basePath, ...slug);
-        const complementedFrontmatter = complementFrontmatter(frontmatter);
 
         return {
-          frontmatter: complementedFrontmatter,
+          ...complementFrontmatter(frontmatter),
           absolutePath,
           slug,
           href,
         };
       }),
     );
-    const allPosts = posts
-      .map(({ frontmatter, ...rest }) =>
-        !!frontmatter ? { ...frontmatter, ...rest } : null,
-      )
-      .filter(removeNull);
 
     return allPosts
       .filter(({ draft }) => process.env.NODE_ENV === "development" || !draft)
