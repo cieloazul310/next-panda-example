@@ -1,12 +1,12 @@
 import * as path from "path";
 import { z } from "zod";
-import { defineCollection } from "./defineCollection";
-import { defineContent } from "./defineContent";
+import { defineData } from "./defineData";
+import { defineArticle } from "./defineArticle";
 
 export const postPath = path.resolve(process.cwd(), "content/post");
 export const authorPath = path.resolve(process.cwd(), "content/author");
 
-export const author = defineCollection({
+export const author = defineData({
   contentPath: authorPath,
   schema: z.object({
     id: z.string(),
@@ -23,7 +23,7 @@ export const author = defineCollection({
   }),
 });
 
-export const post = defineContent({
+export const post = defineArticle({
   contentPath: postPath,
   basePath: "/post",
   schema: z.object({
