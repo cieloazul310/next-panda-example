@@ -17,7 +17,7 @@
   },
   "overrides": [
     {
-      "files": ["src/lib"],
+      "files": ["src/lib/**/*"],
       "rules": {
         "@typescript-eslint/no-explicit-any": "warn"
       }
