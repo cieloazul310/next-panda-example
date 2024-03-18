@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   Progress as ArkProgress,
   type ProgressRootProps,

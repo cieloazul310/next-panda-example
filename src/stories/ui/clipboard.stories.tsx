@@ -1,40 +1,52 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import * as Carousel from "@/components/ui/carousel";
-import { checkbox } from "styled-system/recipes";
+import { Clipboard, FormLabel, Input, IconButton } from "@/components/ui";
+import { FaRegClipboard, FaCheck } from "react-icons/fa6";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
   title: "ParkUI/Clipboard",
-  component: Carousel.Root,
+  component: Clipboard.Root,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: "centered",
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    size: {
-      control: "select",
-      options: ["sm", "md"],
-    },
-    orientation: {
-      control: "select",
-      options: ["vertical", "horizontal"],
-    },
-    align: {
-      control: "select",
-      options: ["start", "center", "end"],
-    },
-    loop: {
-      control: "boolean",
-    },
+    // label: { control: "text" },
   },
-} satisfies Meta<typeof Carousel.Root>;
+  render: ({ ...props }) => (
+    <Clipboard.Root value="https://park-ui.com" {...props}>
+      <Clipboard.Label asChild>
+        <FormLabel>Copy</FormLabel>
+      </Clipboard.Label>
+      <Clipboard.Control>
+        <Clipboard.Input asChild>
+          <Input />
+        </Clipboard.Input>
+        <Clipboard.Trigger asChild>
+          <IconButton variant="outline">
+            <Clipboard.Indicator copied={<FaCheck />}>
+              <FaRegClipboard />
+            </Clipboard.Indicator>
+          </IconButton>
+        </Clipboard.Trigger>
+      </Clipboard.Control>
+    </Clipboard.Root>
+  ),
+  // More on argTypes: https://storybook.js.org/docs/api/argtypes
+} satisfies Meta<typeof Clipboard.Root>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export function Hoge() {
-  return <></>;
-}
+const parameters = {
+  controls: { include: ["label"] },
+};
+
+export const One: Story = {
+  args: {
+    // label: ""
+  },
+  parameters,
+};

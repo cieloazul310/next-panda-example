@@ -1,3 +1,5 @@
+/* eslint @typescript-eslint/no-unused-vars: warn */
+
 import type { MDXComponents } from "mdx/types";
 import {
   createHeadings,

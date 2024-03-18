@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-unused-vars: warn */
 import { definePattern } from "@pandacss/dev";
 
 export default definePattern({

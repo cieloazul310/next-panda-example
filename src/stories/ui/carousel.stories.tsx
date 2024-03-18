@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import * as Carousel from "@/components/ui/carousel";
+import { Carousel, IconButton } from "@/components/ui";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import { IconButton } from "@/components/ui/icon-button";
 import { carousel } from "styled-system/recipes";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export

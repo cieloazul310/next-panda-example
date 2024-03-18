@@ -1,3 +1,5 @@
+/* eslint @typescript-eslint/no-explicit-any: warn */
+
 import { readFile, readdir } from "fs/promises";
 import * as path from "path";
 import * as yaml from "yaml";

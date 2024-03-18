@@ -1,3 +1,5 @@
+/* eslint @typescript-eslint/no-explicit-any: warn */
+
 import * as path from "path";
 import { readdir, readFile } from "fs/promises";
 import { compileMDX, type MDXRemoteProps } from "next-mdx-remote/rsc";
