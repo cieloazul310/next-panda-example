@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { PostItem } from "@/components";
 import { Text } from "@/components/ui";
-import { vstack, cq } from "styled-system/patterns";
+import { cq } from "styled-system/patterns";
 
 const meta = {
   title: "Example/PostItem",

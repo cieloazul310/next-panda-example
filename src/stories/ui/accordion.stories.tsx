@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import * as Accordion from "@/components/ui/accordion";
+import { Accordion } from "@/components/ui";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { accordion } from "styled-system/recipes";
 

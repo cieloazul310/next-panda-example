@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   RatingGroup as ArkRatingGroup,
   type RatingGroupRootProps,

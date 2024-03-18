@@ -39,7 +39,7 @@ export const Primary: Story = {
       <p>Hello, Block component</p>
     </Block>
   ),
-  // @ts-ignore
+  // @ts-expect-error: panda css raw
   args: {
     colorPalette: "accent",
     ...paper.raw({
@@ -67,7 +67,7 @@ export const Multiple: Story = {
       </Block>
     </VStack>
   ),
-  // @ts-ignore
+  // @ts-expect-error: panda css raw
   args: {
     colorPalette: "accent",
     ...paper.raw({

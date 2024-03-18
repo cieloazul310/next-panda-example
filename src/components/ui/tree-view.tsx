@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   TreeView as ArkTreeView,
   type TreeViewRootProps,

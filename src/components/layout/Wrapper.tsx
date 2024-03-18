@@ -1,6 +1,5 @@
 import type { PropsWithChildren, ReactNode } from "react";
 import { Container, VStack } from "styled-system/jsx";
-import { css } from "styled-system/css";
 import { flex, vstack } from "styled-system/patterns";
 import Menu from "./Menu";
 

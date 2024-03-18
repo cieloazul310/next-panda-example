@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-explicit-any: warn */
 import * as path from "path";
 import { readdir, readFile } from "fs/promises";
 import { compileMDX, type MDXRemoteProps } from "next-mdx-remote/rsc";
@@ -38,14 +39,16 @@ type PostMetadata<T extends Record<string, any>> = PostFrontmatter<T> & {
   href: string;
 };
 
-export function defineContent<Z extends ZodRawShape>({
+export function defineArticle<Z extends ZodRawShape>({
   contentPath,
   basePath,
   schema,
+  extensions = ["md", "mdx"],
 }: {
   contentPath: string;
   basePath: string;
   schema: ZodObject<Z>;
+  extensions?: string[];
 }) {
   type RestFrontmatter = z.infer<typeof schema>;
   const frontmatterSchema = defaultFrontmatterSchema.merge(schema);
@@ -88,29 +91,32 @@ export function defineContent<Z extends ZodRawShape>({
       encoding: "utf8",
       recursive: true,
     });
-    const files = filesInDir.filter((fileName) => /\.(md|mdx)$/.test(fileName));
+    const files = filesInDir.filter((fileName) =>
+      extensions.some((ext) => new RegExp(ext).test(fileName)),
+    );
 
-    const posts = files.map(async (filename) => {
-      const absolutePath = path.join(contentPath, filename);
-      const source = await readFile(absolutePath, { encoding: "utf8" });
-      const { frontmatter } = await compileMDX<
-        PostFrontmatterInput<RestFrontmatter>
-      >({
-        source,
-        options: { parseFrontmatter: true },
-      });
+    const allPosts = await Promise.all(
+      files.map(async (filename) => {
+        const absolutePath = path.join(contentPath, filename);
+        const source = await readFile(absolutePath, { encoding: "utf8" });
+        const { frontmatter } = await compileMDX<
+          PostFrontmatterInput<RestFrontmatter>
+        >({
+          source,
+          options: { parseFrontmatter: true },
+        });
 
-      const slug = fileNameToSlug(filename);
-      const href = path.join(basePath, ...slug);
+        const slug = fileNameToSlug(filename);
+        const href = path.join(basePath, ...slug);
 
-      return {
-        ...complementFrontmatter(frontmatter),
-        absolutePath,
-        slug,
-        href,
-      };
-    });
-    const allPosts = await Promise.all(posts);
+        return {
+          ...complementFrontmatter(frontmatter),
+          absolutePath,
+          slug,
+          href,
+        };
+      }),
+    );
 
     return allPosts
       .filter(({ draft }) => process.env.NODE_ENV === "development" || !draft)

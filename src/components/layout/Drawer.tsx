@@ -26,7 +26,7 @@ function MyDrawer(props: Drawer.RootProps) {
         <Drawer.Content>
           <Drawer.Header>
             <Drawer.Title>{siteTitle}</Drawer.Title>
-            <Drawer.CloseTrigger asChild position="absolute" top="3" right="4">
+            <Drawer.CloseTrigger asChild position="absolute" top={3} right={4}>
               <IconButton variant="ghost" aria-label="Close Menu">
                 <MdClose />
               </IconButton>

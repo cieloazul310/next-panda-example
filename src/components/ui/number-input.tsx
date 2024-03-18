@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   NumberInput as ArkNumberInput,
   type NumberInputRootProps,

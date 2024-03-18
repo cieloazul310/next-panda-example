@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   Avatar as ArkAvatar,
   type AvatarRootProps,
