@@ -24,6 +24,6 @@
       "styled-system/*": ["./styled-system/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "styled-system", ".storybook"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "styled-system", ".storybook", "postcss.config.cjs", "next.config.mjs"],
   "exclude": ["node_modules"]
 }

@@ -3,6 +3,7 @@ import * as path from "path";
 import { readdir, readFile } from "fs/promises";
 import { compileMDX, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { z, type ZodObject, ZodRawShape } from "zod";
+import { dataSchemaVaridator } from "./utils";
 
 /**
  * example:
@@ -18,8 +19,8 @@ export function fileNameToSlug(filename: string) {
 
 const defaultFrontmatterSchema = z.object({
   title: z.string(),
-  date: z.date(),
-  lastmod: z.date(),
+  date: z.coerce.date(),
+  lastmod: z.coerce.date(),
   draft: z.boolean(),
 });
 const defaultFrontmatterSchemaInput = defaultFrontmatterSchema.partial({
@@ -39,6 +40,22 @@ type PostMetadata<T extends Record<string, any>> = PostFrontmatter<T> & {
   href: string;
 };
 
+function complementFrontmatter<T extends Record<string, any>>({
+  title,
+  date,
+  lastmod,
+  draft,
+  ...rest
+}: PostFrontmatterInput<T>): PostFrontmatter<T> {
+  return {
+    title,
+    date: new Date(date),
+    lastmod: lastmod ? new Date(lastmod) : new Date(date),
+    draft: typeof draft === "boolean" ? draft : false,
+    ...rest,
+  } as PostFrontmatter<T>;
+}
+
 export function defineArticle<Z extends ZodRawShape>({
   contentPath,
   basePath,
@@ -57,25 +74,7 @@ export function defineArticle<Z extends ZodRawShape>({
     slug: z.array(z.string()),
     href: z.string(),
   });
-
-  function complementFrontmatter({
-    title,
-    date,
-    lastmod,
-    draft,
-    ...rest
-  }: PostFrontmatterInput<RestFrontmatter>): PostFrontmatter<RestFrontmatter> {
-    const frontmatter = {
-      title,
-      date: new Date(date),
-      lastmod: lastmod ? new Date(lastmod) : new Date(date),
-      draft: typeof draft === "boolean" ? draft : false,
-      ...rest,
-    };
-    return frontmatterSchema.parse(
-      frontmatter,
-    ) as PostFrontmatter<RestFrontmatter>;
-  }
+  const varidator = dataSchemaVaridator(defaultFrontmatterSchemaInput);
 
   async function getAll(
     { sortDesc }: { sortDesc: boolean } = { sortDesc: false },
@@ -95,28 +94,33 @@ export function defineArticle<Z extends ZodRawShape>({
       extensions.some((ext) => new RegExp(ext).test(fileName)),
     );
 
-    const allPosts = await Promise.all(
-      files.map(async (filename) => {
-        const absolutePath = path.join(contentPath, filename);
-        const source = await readFile(absolutePath, { encoding: "utf8" });
-        const { frontmatter } = await compileMDX<
-          PostFrontmatterInput<RestFrontmatter>
-        >({
-          source,
-          options: { parseFrontmatter: true },
-        });
-
+    const allPosts = (
+      await Promise.all(
+        files.map(async (filename) => {
+          const absolutePath = path.join(contentPath, filename);
+          const source = await readFile(absolutePath, { encoding: "utf8" });
+          const { frontmatter } = await compileMDX<
+            PostFrontmatterInput<RestFrontmatter>
+          >({
+            source,
+            options: { parseFrontmatter: true },
+          });
+          return { data: frontmatter, absolutePath, filename };
+        }),
+      )
+    )
+      .filter(varidator)
+      .map(({ data, absolutePath, filename }) => {
         const slug = fileNameToSlug(filename);
         const href = path.join(basePath, ...slug);
 
         return {
-          ...complementFrontmatter(frontmatter),
+          ...complementFrontmatter(data),
           absolutePath,
           slug,
           href,
         };
-      }),
-    );
+      });
 
     return allPosts
       .filter(({ draft }) => process.env.NODE_ENV === "development" || !draft)

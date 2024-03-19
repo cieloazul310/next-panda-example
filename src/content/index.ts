@@ -1,10 +1,15 @@
 import * as path from "path";
 import { z } from "zod";
 import { defineData } from "./defineData";
+import { defineDataFromFile } from "./defineDataFromFile";
 import { defineArticle } from "./defineArticle";
 
 export const postPath = path.resolve(process.cwd(), "content/post");
 export const authorPath = path.resolve(process.cwd(), "content/author");
+export const categoriesPath = path.resolve(
+  process.cwd(),
+  "content/categories.yml",
+);
 
 export const author = defineData({
   contentPath: authorPath,
@@ -28,5 +33,13 @@ export const post = defineArticle({
   basePath: "/post",
   schema: z.object({
     author: z.string().optional(),
+  }),
+});
+
+export const categories = defineDataFromFile({
+  filePath: categoriesPath,
+  schema: z.object({
+    id: z.string(),
+    title: z.string(),
   }),
 });
