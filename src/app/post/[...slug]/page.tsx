@@ -1,10 +1,17 @@
 import Link from "next/link";
 import { author, post } from "@/content";
 import { siteMetadata, parseDate } from "@/utils";
-import { Jumbotron, Wrapper, Block, Author, PostItem } from "@/components";
-import { Text, Alert } from "@/components/ui";
+import {
+  Jumbotron,
+  Wrapper,
+  Block,
+  Author,
+  PostItem,
+  Alert,
+} from "@/components";
+import { Text } from "@/components/ui";
+import { useMDXComponents } from "@/mdx-components";
 import { MdInfo as InfoIcon } from "react-icons/md";
-import { useMDXComponents } from "../../../mdx-components";
 
 export async function generateStaticParams() {
   const allPosts = await post.getAll();
@@ -50,19 +57,7 @@ async function Page({ params }: { params: { slug: string[] } }) {
       <Wrapper sidebarTop={authorBox}>
         <Block asChild>
           <article>
-            {frontmatter.draft && (
-              <Alert.Root>
-                <Alert.Icon asChild>
-                  <InfoIcon />
-                </Alert.Icon>
-                <Alert.Content>
-                  <Alert.Title>Draft post</Alert.Title>
-                  <Alert.Description>
-                    For the best experience, please update your browser.
-                  </Alert.Description>
-                </Alert.Content>
-              </Alert.Root>
-            )}
+            {frontmatter.draft && <Alert title="Draft" icon={<InfoIcon />} />}
             {content}
           </article>
         </Block>

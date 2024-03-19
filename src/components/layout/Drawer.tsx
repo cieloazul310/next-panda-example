@@ -1,14 +1,14 @@
 import { MdMenu, MdClose } from "react-icons/md";
 import NextLink from "next/link";
 import { siteTitle } from "@/data";
-import { Drawer, Button, IconButton } from "@/components/ui";
+import { Drawer as ParkDrawer, Button, IconButton } from "@/components/ui";
 import { ColorModeHandler } from "../client";
 import Menu from "./Menu";
 
-function MyDrawer(props: Drawer.RootProps) {
+function Drawer(props: ParkDrawer.RootProps) {
   return (
-    <Drawer.Root {...props}>
-      <Drawer.Trigger asChild>
+    <ParkDrawer.Root {...props}>
+      <ParkDrawer.Trigger asChild>
         <IconButton
           position="fixed"
           bottom={4}
@@ -20,38 +20,43 @@ function MyDrawer(props: Drawer.RootProps) {
         >
           <MdMenu />
         </IconButton>
-      </Drawer.Trigger>
-      <Drawer.Backdrop />
-      <Drawer.Positioner>
-        <Drawer.Content>
-          <Drawer.Header>
-            <Drawer.Title>{siteTitle}</Drawer.Title>
-            <Drawer.CloseTrigger asChild position="absolute" top={3} right={4}>
+      </ParkDrawer.Trigger>
+      <ParkDrawer.Backdrop />
+      <ParkDrawer.Positioner>
+        <ParkDrawer.Content>
+          <ParkDrawer.Header>
+            <ParkDrawer.Title>{siteTitle}</ParkDrawer.Title>
+            <ParkDrawer.CloseTrigger
+              asChild
+              position="absolute"
+              top={3}
+              right={4}
+            >
               <IconButton variant="ghost" aria-label="Close Menu">
                 <MdClose />
               </IconButton>
-            </Drawer.CloseTrigger>
-          </Drawer.Header>
-          <Drawer.Body>
+            </ParkDrawer.CloseTrigger>
+          </ParkDrawer.Header>
+          <ParkDrawer.Body>
             <Menu />
-          </Drawer.Body>
-          <Drawer.Footer gap="3">
+          </ParkDrawer.Body>
+          <ParkDrawer.Footer gap="3">
             <ColorModeHandler />
-            <Drawer.CloseTrigger asChild>
+            <ParkDrawer.CloseTrigger asChild>
               <Button asChild aria-label="Home">
                 <NextLink href="/">Home</NextLink>
               </Button>
-            </Drawer.CloseTrigger>
-            <Drawer.CloseTrigger asChild>
+            </ParkDrawer.CloseTrigger>
+            <ParkDrawer.CloseTrigger asChild>
               <Button variant="outline" aria-label="Close Menu">
                 Close
               </Button>
-            </Drawer.CloseTrigger>
-          </Drawer.Footer>
-        </Drawer.Content>
-      </Drawer.Positioner>
-    </Drawer.Root>
+            </ParkDrawer.CloseTrigger>
+          </ParkDrawer.Footer>
+        </ParkDrawer.Content>
+      </ParkDrawer.Positioner>
+    </ParkDrawer.Root>
   );
 }
 
-export default MyDrawer;
+export default Drawer;

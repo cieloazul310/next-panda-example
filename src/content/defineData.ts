@@ -3,6 +3,7 @@ import { readFile, readdir } from "fs/promises";
 import * as path from "path";
 import * as yaml from "yaml";
 import type { ZodObject } from "zod";
+import { dataSchemaVaridator } from "./utils";
 
 function formatToExts(format: "yaml" | "json") {
   if (format === "yaml") return ["yml", "yaml"];
@@ -20,10 +21,6 @@ function formatter(format: "yaml" | "json") {
   return { extensions, parser };
 }
 
-function removeNull<T>(input: T | null | undefined): input is T {
-  return !!input;
-}
-
 export function defineData<T extends Record<string, any>>({
   contentPath,
   schema,
@@ -34,8 +31,9 @@ export function defineData<T extends Record<string, any>>({
   format?: "yaml" | "json";
 }) {
   const { extensions, parser } = formatter(format);
+  const varidator = dataSchemaVaridator(schema);
 
-  async function getData() {
+  async function getAll() {
     const filesInDir = await readdir(contentPath, {
       encoding: "utf8",
       recursive: true,
@@ -43,29 +41,30 @@ export function defineData<T extends Record<string, any>>({
     const files = filesInDir.filter((fileName) =>
       extensions.some((ext) => new RegExp(ext).test(fileName)),
     );
-    const data = await Promise.all(
-      files.map(async (filename) => {
-        const absolutePath = path.join(contentPath, filename);
-        const file = await readFile(absolutePath, "utf8");
-        const datum = parser(file);
+    const data = (
+      await Promise.all(
+        files.map(async (filename) => {
+          const absolutePath = path.join(contentPath, filename);
+          const file = await readFile(absolutePath, "utf8");
+          const datum = parser(file);
+          return { data: datum, filename };
+        }),
+      )
+    )
+      .filter(varidator)
+      .map(({ data }) => data);
 
-        const result = schema.safeParse(datum);
-        if (!result.success) {
-          console.error(result.error);
-          return null;
-        }
-        return result.data;
-      }),
-    );
-    return data.filter(removeNull);
+    return data;
+  }
+
+  async function get(key: string, value: unknown) {
+    const data = await getAll();
+    return data.find((datum) => datum?.[key] === value);
   }
 
   return {
     schema,
-    get: async (key: string, value: any) => {
-      const data = await getData();
-      return data.find((datum) => datum?.[key] === value);
-    },
-    getAll: getData,
+    get,
+    getAll,
   };
 }
