@@ -3,19 +3,7 @@ import * as path from "path";
 import { readdir, readFile } from "fs/promises";
 import { compileMDX, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { z, type ZodObject, ZodRawShape } from "zod";
-import { dataSchemaVaridator } from "./utils";
-
-/**
- * example:
- * getting-started.mdx => ["getting-started"]
- * 2024/hoge.mdx => ["2024", "hoge"]
- * 2024/nested-post/index.md => ["2024", "nested-post"]
- */
-export function fileNameToSlug(filename: string) {
-  const indexPattern = /\/index.(md|mdx)$/;
-  const pattern = /.(md|mdx)$/;
-  return filename.replace(indexPattern, ".mdx").replace(pattern, "").split("/");
-}
+import { fileNameToSlug, dataSchemaVaridator } from "./utils";
 
 const defaultFrontmatterSchema = z.object({
   title: z.string(),

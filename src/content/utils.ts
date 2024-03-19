@@ -1,5 +1,6 @@
 /* eslint @typescript-eslint/no-explicit-any: warn */
 import { z, type ZodType } from "zod";
+import * as yaml from "yaml";
 
 export function schemaVaridator<T extends ZodType>(schema: T) {
   return (data: any): data is z.infer<typeof schema> => {
@@ -9,6 +10,18 @@ export function schemaVaridator<T extends ZodType>(schema: T) {
     }
     return result.success;
   };
+}
+
+/**
+ * example:
+ * getting-started.mdx => ["getting-started"]
+ * 2024/hoge.mdx => ["2024", "hoge"]
+ * 2024/nested-post/index.md => ["2024", "nested-post"]
+ */
+export function fileNameToSlug(filename: string) {
+  const indexPattern = /\/index.(md|mdx)$/;
+  const pattern = /.(md|mdx)$/;
+  return filename.replace(indexPattern, ".mdx").replace(pattern, "").split("/");
 }
 
 export function dataSchemaVaridator<T extends ZodType>(schema: T) {
@@ -23,4 +36,20 @@ export function dataSchemaVaridator<T extends ZodType>(schema: T) {
     }
     return result.success;
   };
+}
+
+export function dataformatToExts(format: "yaml" | "json") {
+  if (format === "yaml") return ["yml", "yaml"];
+  return ["json"];
+}
+
+export function parseData(format: "yaml" | "json") {
+  if (format === "yaml") return (raw: string) => yaml.parse(raw);
+  return (raw: string) => JSON.parse(raw);
+}
+
+export function dataFormatter(format: "yaml" | "json") {
+  const extensions = dataformatToExts(format);
+  const parser = parseData(format);
+  return { extensions, parser };
 }

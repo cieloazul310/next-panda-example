@@ -52,7 +52,7 @@ async function Page({ params }: { params: { slug: string[] } }) {
     <>
       <Jumbotron
         title={frontmatter.title}
-        headerText={parseDate(frontmatter.date)}
+        headerText={<time>{parseDate(frontmatter.date)}</time>}
       />
       <Wrapper sidebarTop={authorBox}>
         <Block asChild>
