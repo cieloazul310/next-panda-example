@@ -2,16 +2,6 @@
 import { z, type ZodType } from "zod";
 import * as yaml from "yaml";
 
-export function schemaVaridator<T extends ZodType>(schema: T) {
-  return (data: any): data is z.infer<typeof schema> => {
-    const result = schema.safeParse(data);
-    if (!result.success) {
-      console.error(result.error.message);
-    }
-    return result.success;
-  };
-}
-
 /**
  * example:
  * getting-started.mdx => ["getting-started"]
@@ -24,9 +14,19 @@ export function fileNameToSlug(filename: string) {
   return filename.replace(indexPattern, ".mdx").replace(pattern, "").split("/");
 }
 
+export function schemaVaridator<T extends ZodType>(schema: T) {
+  return (data: unknown): data is z.infer<typeof schema> => {
+    const result = schema.safeParse(data);
+    if (!result.success) {
+      console.error(result.error.message);
+    }
+    return result.success;
+  };
+}
+
 export function dataSchemaVaridator<T extends ZodType>(schema: T) {
   return (input: {
-    data: any;
+    data: unknown;
     filename: string;
   }): input is { data: z.infer<typeof schema>; filename: string } => {
     const { data, filename } = input;

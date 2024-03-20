@@ -4,15 +4,19 @@ import { defineData } from "./defineData";
 import { defineDataFromFile } from "./defineDataFromFile";
 import { defineArticle } from "./defineArticle";
 
-export const postPath = path.resolve(process.cwd(), "content/post");
-export const authorPath = path.resolve(process.cwd(), "content/author");
-export const categoriesPath = path.resolve(
-  process.cwd(),
-  "content/categories.yml",
-);
+export const post = defineArticle({
+  contentPath: path.resolve(process.cwd(), "content/post"),
+  basePath: "/post",
+  schema: z.object({
+    author: z.string().optional(),
+    category: z.string().optional(),
+    featuredImg: z.string().optional(),
+    featuredImgAlt: z.string().optional(),
+  }),
+});
 
 export const author = defineData({
-  contentPath: authorPath,
+  contentPath: path.resolve(process.cwd(), "content/author"),
   schema: z.object({
     id: z.string(),
     name: z.string(),
@@ -28,16 +32,8 @@ export const author = defineData({
   }),
 });
 
-export const post = defineArticle({
-  contentPath: postPath,
-  basePath: "/post",
-  schema: z.object({
-    author: z.string().optional(),
-  }),
-});
-
 export const categories = defineDataFromFile({
-  filePath: categoriesPath,
+  filePath: path.resolve(process.cwd(), "content/categories.yml"),
   schema: z.object({
     id: z.string(),
     title: z.string(),

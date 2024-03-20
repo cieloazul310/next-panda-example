@@ -1,6 +1,6 @@
 /* eslint @typescript-eslint/no-explicit-any: warn */
 import { readFile } from "fs/promises";
-import type { ZodObject } from "zod";
+import { z, type ZodObject } from "zod";
 import { schemaVaridator, dataFormatter } from "./utils";
 
 export function defineDataFromFile<T extends Record<string, any>>({
@@ -23,7 +23,7 @@ export function defineDataFromFile<T extends Record<string, any>>({
     return data;
   }
 
-  async function get(key: string, value: unknown) {
+  async function get(key: keyof z.infer<typeof schema>, value: unknown) {
     const data = await getAll();
     return data.find((datum) => datum?.[key] === value);
   }

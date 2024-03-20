@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { author, post } from "@/content";
+import { author, post, categories } from "@/content";
 import { siteMetadata, parseDate } from "@/utils";
 import {
   Jumbotron,
@@ -8,6 +8,7 @@ import {
   Author,
   PostItem,
   Alert,
+  CategoriesBadge,
 } from "@/components";
 import { Text } from "@/components/ui";
 import { useMDXComponents } from "@/mdx-components";
@@ -24,9 +25,12 @@ export async function generateMetadata({
   params: { slug: string[] };
 }) {
   const { slug } = params;
-  const { title } = await post.get(slug);
+  const { title, featuredImg } = await post.get(slug);
   return siteMetadata({
     title,
+    openGraph: {
+      images: featuredImg,
+    },
   });
 }
 
@@ -37,6 +41,7 @@ async function Page({ params }: { params: { slug: string[] } }) {
     components,
   });
   const authorItem = await author.get("name", frontmatter.author);
+  const category = await categories.get("title", frontmatter.category);
   const authorBox = authorItem && (
     <Author
       headerText={
@@ -53,6 +58,7 @@ async function Page({ params }: { params: { slug: string[] } }) {
       <Jumbotron
         title={frontmatter.title}
         headerText={<time>{parseDate(frontmatter.date)}</time>}
+        footerText={category && <CategoriesBadge {...category} />}
       />
       <Wrapper sidebarTop={authorBox}>
         <Block asChild>
