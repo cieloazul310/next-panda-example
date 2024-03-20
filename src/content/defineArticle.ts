@@ -3,19 +3,7 @@ import * as path from "path";
 import { readdir, readFile } from "fs/promises";
 import { compileMDX, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { z, type ZodObject, ZodRawShape } from "zod";
-import { dataSchemaVaridator } from "./utils";
-
-/**
- * example:
- * getting-started.mdx => ["getting-started"]
- * 2024/hoge.mdx => ["2024", "hoge"]
- * 2024/nested-post/index.md => ["2024", "nested-post"]
- */
-export function fileNameToSlug(filename: string) {
-  const indexPattern = /\/index.(md|mdx)$/;
-  const pattern = /.(md|mdx)$/;
-  return filename.replace(indexPattern, ".mdx").replace(pattern, "").split("/");
-}
+import { fileNameToSlug, dataSchemaVaridator } from "./utils";
 
 const defaultFrontmatterSchema = z.object({
   title: z.string(),
@@ -28,17 +16,18 @@ const defaultFrontmatterSchemaInput = defaultFrontmatterSchema.partial({
   draft: true,
 });
 
-type PostFrontmatter<T extends Record<string, any>> = T &
+type Frontmatter<T extends Record<string, any> = Record<string, unknown>> = T &
   z.infer<typeof defaultFrontmatterSchema>;
 
-type PostFrontmatterInput<T extends Record<string, any>> = T &
-  z.infer<typeof defaultFrontmatterSchemaInput>;
+type FrontmatterInput<T extends Record<string, any> = Record<string, unknown>> =
+  T & z.infer<typeof defaultFrontmatterSchemaInput>;
 
-type PostMetadata<T extends Record<string, any>> = PostFrontmatter<T> & {
-  absolutePath: string;
-  slug: string[];
-  href: string;
-};
+type Metadata<T extends Record<string, any> = Record<string, unknown>> =
+  Frontmatter<T> & {
+    absolutePath: string;
+    slug: string[];
+    href: string;
+  };
 
 function complementFrontmatter<T extends Record<string, any>>({
   title,
@@ -46,14 +35,14 @@ function complementFrontmatter<T extends Record<string, any>>({
   lastmod,
   draft,
   ...rest
-}: PostFrontmatterInput<T>): PostFrontmatter<T> {
+}: FrontmatterInput<T>): Frontmatter<T> {
   return {
     title,
     date: new Date(date),
     lastmod: lastmod ? new Date(lastmod) : new Date(date),
     draft: typeof draft === "boolean" ? draft : false,
     ...rest,
-  } as PostFrontmatter<T>;
+  } as Frontmatter<T>;
 }
 
 export function defineArticle<Z extends ZodRawShape>({
@@ -74,15 +63,15 @@ export function defineArticle<Z extends ZodRawShape>({
     slug: z.array(z.string()),
     href: z.string(),
   });
-  const varidator = dataSchemaVaridator(defaultFrontmatterSchemaInput);
+  const varidator = dataSchemaVaridator(frontmatterSchema);
 
   async function getAll(
     { sortDesc }: { sortDesc: boolean } = { sortDesc: false },
   ): Promise<
-    (PostMetadata<RestFrontmatter> & {
+    (Metadata<RestFrontmatter> & {
       context: {
-        older: PostMetadata<RestFrontmatter> | null;
-        newer: PostMetadata<RestFrontmatter> | null;
+        older: Metadata<RestFrontmatter> | null;
+        newer: Metadata<RestFrontmatter> | null;
       };
     })[]
   > {
@@ -100,12 +89,16 @@ export function defineArticle<Z extends ZodRawShape>({
           const absolutePath = path.join(contentPath, filename);
           const source = await readFile(absolutePath, { encoding: "utf8" });
           const { frontmatter } = await compileMDX<
-            PostFrontmatterInput<RestFrontmatter>
+            FrontmatterInput<RestFrontmatter>
           >({
             source,
             options: { parseFrontmatter: true },
           });
-          return { data: frontmatter, absolutePath, filename };
+          return {
+            data: complementFrontmatter(frontmatter),
+            absolutePath,
+            filename,
+          };
         }),
       )
     )
@@ -115,7 +108,7 @@ export function defineArticle<Z extends ZodRawShape>({
         const href = path.join(basePath, ...slug);
 
         return {
-          ...complementFrontmatter(data),
+          ...data,
           absolutePath,
           slug,
           href,
@@ -137,11 +130,11 @@ export function defineArticle<Z extends ZodRawShape>({
   }
 
   async function get(slug: string[]) {
-    const allPosts = await getAll();
-    const index = allPosts.findIndex(
+    const alls = await getAll();
+    const index = alls.findIndex(
       (post) => post.slug.join("/") === slug.join("/"),
     );
-    return allPosts[index];
+    return alls[index];
   }
   async function useMdx(
     slug: string[],
@@ -155,7 +148,7 @@ export function defineArticle<Z extends ZodRawShape>({
     const { absolutePath, context } = await get(slug);
     const file = await readFile(absolutePath, { encoding: "utf8" });
     const { content, frontmatter } = await compileMDX<
-      PostFrontmatterInput<RestFrontmatter>
+      FrontmatterInput<RestFrontmatter>
     >({
       source: file,
       components,

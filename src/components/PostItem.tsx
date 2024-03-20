@@ -36,7 +36,9 @@ export function PostItem({
           >
             {title}
           </Heading>
-          <Text fontSize={{ base: "sm", "@/sm": "md" }}>{parseDate(date)}</Text>
+          <Text fontSize={{ base: "sm", "@/sm": "md" }}>
+            <time>{parseDate(date)}</time>
+          </Text>
         </hgroup>
         {footerText}
       </NextLink>
