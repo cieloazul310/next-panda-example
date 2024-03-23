@@ -1,3 +1,4 @@
+import type { ComponentProps } from "react";
 import NextLink from "next/link";
 import { isInternal } from "@/utils";
 import { css, cx } from "styled-system/css";
@@ -14,7 +15,7 @@ function Link({
   href,
   className,
   ...props
-}: Omit<React.ComponentProps<"a">, "ref">) {
+}: Omit<ComponentProps<"a">, "ref">) {
   const internal = isInternal(href);
 
   if (href && internal) {

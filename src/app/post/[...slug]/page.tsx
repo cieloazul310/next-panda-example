@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { author, post, categories } from "@/content";
 import { siteMetadata, parseDate } from "@/utils";
@@ -31,7 +32,7 @@ export async function generateMetadata({
     openGraph: {
       images: featuredImg,
     },
-  });
+  }) satisfies Metadata;
 }
 
 async function Page({ params }: { params: { slug: string[] } }) {

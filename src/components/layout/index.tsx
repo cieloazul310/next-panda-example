@@ -1,7 +1,7 @@
-export { default as Block } from "./Block";
-export { default as MyDrawer } from "./Drawer";
-export { default as Footer } from "./Footer";
-export { default as Header } from "./Header";
-export { default as Jumbotron } from "./Jumbotron";
-export { default as Menu } from "./Menu";
-export { default as Wrapper } from "./Wrapper";
+export { default as Block } from "./block";
+export { default as MyDrawer } from "./drawer";
+export { default as Footer } from "./footer";
+export { default as Header } from "./header";
+export { default as Jumbotron } from "./jumbotron";
+export { default as Menu } from "./menu";
+export { default as Wrapper } from "./wrapper";

@@ -1,15 +1,12 @@
 import type { ReactNode, PropsWithChildren } from "react";
 import NextLink from "next/link";
-import { z } from "zod";
 import { IconButton } from "@/components/ui";
-import { author } from "@/content";
+import type { Author } from "@/content";
 import { css } from "styled-system/css";
 import { hstack, stack, vstack } from "styled-system/patterns";
 import { FaXTwitter, FaGithub, FaLink } from "react-icons/fa6";
 import { Avatar, Heading, Text } from "./ui";
 import { Block } from "./layout";
-
-type AuthorSchema = z.infer<typeof author.schema>;
 
 type AuthorSocialButtonProps = PropsWithChildren<{
   href: string;
@@ -30,7 +27,7 @@ function AuthorSocialButton({
   );
 }
 
-type AuthorSocialProps = Pick<AuthorSchema, "socials">;
+type AuthorSocialProps = Pick<Author, "socials">;
 
 function AuthorSocial({ socials }: AuthorSocialProps) {
   if (!socials) return null;
@@ -63,7 +60,7 @@ function AuthorSocial({ socials }: AuthorSocialProps) {
 }
 
 export type AuthorProps = Pick<
-  AuthorSchema,
+  Author,
   "id" | "name" | "description" | "image" | "socials"
 > & {
   headerText?: ReactNode;

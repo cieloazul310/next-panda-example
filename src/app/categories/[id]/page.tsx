@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { categories, post } from "@/content";
 import { siteMetadata } from "@/utils";
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   const { title } = item;
   return siteMetadata({
     title,
-  });
+  }) satisfies Metadata;
 }
 
 async function Page({ params }: { params: { id: string } }) {
