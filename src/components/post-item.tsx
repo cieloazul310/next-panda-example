@@ -1,13 +1,10 @@
 import type { ReactNode } from "react";
 import NextLink from "next/link";
-import { z } from "zod";
 import { Block } from "@/components";
 import { Heading, Text } from "@/components/ui";
 import { parseDate } from "@/utils";
-import { post } from "@/content";
+import type { PostMetadata } from "@/content";
 import { vstack } from "styled-system/patterns";
-
-type PostMetadata = z.infer<typeof post.metadataSchema>;
 
 export type PostItemProps = Pick<PostMetadata, "href" | "title" | "date"> & {
   headerText?: ReactNode;

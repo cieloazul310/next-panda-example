@@ -3,7 +3,7 @@ import NextLink from "next/link";
 import { siteTitle } from "@/data";
 import { Drawer as ParkDrawer, Button, IconButton } from "@/components/ui";
 import { ColorModeHandler } from "../client";
-import Menu from "./Menu";
+import Menu from "./menu";
 
 function Drawer(props: ParkDrawer.RootProps) {
   return (

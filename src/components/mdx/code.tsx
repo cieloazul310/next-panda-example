@@ -1,6 +1,7 @@
+import type { ComponentProps } from "react";
 import { css } from "styled-system/css";
 
-export const Code = (props: React.ComponentProps<"code">) => {
+export const Code = (props: ComponentProps<"code">) => {
   return (
     <code
       className={css({

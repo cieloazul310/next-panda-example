@@ -1,7 +1,8 @@
+import type { ComponentProps } from "react";
 import { css } from "styled-system/css";
 import { article } from "styled-system/patterns";
 
-export const Ol = (props: React.ComponentProps<"ol">) => (
+export const Ol = (props: ComponentProps<"ol">) => (
   <ol
     className={article({
       my: "md",
@@ -15,7 +16,7 @@ export const Ol = (props: React.ComponentProps<"ol">) => (
   />
 );
 
-export const Ul = (props: React.ComponentProps<"ul">) => (
+export const Ul = (props: ComponentProps<"ul">) => (
   <ul
     className={article({
       my: "md",
@@ -29,6 +30,6 @@ export const Ul = (props: React.ComponentProps<"ul">) => (
   />
 );
 
-export const Li = (props: React.ComponentProps<"li">) => (
+export const Li = (props: ComponentProps<"li">) => (
   <li className={css({ my: "sm" })} {...props} />
 );

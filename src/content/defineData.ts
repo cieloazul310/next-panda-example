@@ -14,7 +14,8 @@ export function defineData<T extends Record<string, any>>({
   format?: "yaml" | "json";
 }) {
   const { extensions, parser } = dataFormatter(format);
-  const varidator = dataSchemaVaridator(schema);
+  const dataSchema = z.object({ id: z.string() }).merge(schema);
+  const varidator = dataSchemaVaridator(dataSchema);
 
   async function getAll() {
     const filesInDir = await readdir(contentPath, {
@@ -22,7 +23,7 @@ export function defineData<T extends Record<string, any>>({
       recursive: true,
     });
     const files = filesInDir.filter((fileName) =>
-      extensions.some((ext) => new RegExp(ext).test(fileName)),
+      extensions.some((ext) => new RegExp(`.${ext}$`).test(fileName)),
     );
     const data = (
       await Promise.all(
@@ -30,7 +31,10 @@ export function defineData<T extends Record<string, any>>({
           const absolutePath = path.join(contentPath, filename);
           const file = await readFile(absolutePath, "utf8");
           const datum = parser(file);
-          return { data: datum, filename };
+          return {
+            data: { id: filename.replace(/\.[^/.]+$/, ""), ...datum },
+            filename,
+          };
         }),
       )
     )
@@ -40,13 +44,13 @@ export function defineData<T extends Record<string, any>>({
     return data;
   }
 
-  async function get(key: keyof z.infer<typeof schema>, value: unknown) {
+  async function get(key: keyof z.infer<typeof dataSchema>, value: unknown) {
     const data = await getAll();
     return data.find((datum) => datum?.[key] === value);
   }
 
   return {
-    schema,
+    schema: dataSchema,
     get,
     getAll,
   };

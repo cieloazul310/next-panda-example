@@ -1,7 +1,7 @@
 import type { PropsWithChildren, ReactNode } from "react";
 import { Container, VStack } from "styled-system/jsx";
 import { flex, vstack } from "styled-system/patterns";
-import Menu from "./Menu";
+import Menu from "./menu";
 
 function Wrapper({
   children,

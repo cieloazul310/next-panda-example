@@ -1,9 +1,8 @@
 import NextLink from "next/link";
 import { Badge } from "@/components/ui";
-import { categories } from "@/content";
-import { z } from "zod";
+import type { Categories } from "@/content";
 
-type CategoriesBadgeProps = z.infer<typeof categories.schema>;
+type CategoriesBadgeProps = Categories;
 
 function CategoriesBadge({ id, title }: CategoriesBadgeProps) {
   return (
