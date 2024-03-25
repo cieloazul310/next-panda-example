@@ -26,7 +26,10 @@ export async function generateMetadata({
   params: { slug: string[] };
 }) {
   const { slug } = params;
-  const { title, featuredImg } = await post.get(slug);
+  const item = await post.get(slug);
+  if (!item) return siteMetadata();
+  const { frontmatter } = item;
+  const { title, featuredImg } = frontmatter;
   return siteMetadata({
     title,
     openGraph: {
@@ -38,9 +41,11 @@ export async function generateMetadata({
 async function Page({ params }: { params: { slug: string[] } }) {
   const { slug } = params;
   const components = useMDXComponents();
-  const { content, frontmatter, context } = await post.useMdx(slug, {
+  const item = await post.useMdx(slug, {
     components,
   });
+  if (!item) return null;
+  const { content, frontmatter, context } = item;
   const authorItem = await author.get("name", frontmatter.author);
   const category = await categories.get("title", frontmatter.category);
   const authorBox = authorItem && (

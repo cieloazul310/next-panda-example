@@ -42,15 +42,19 @@ type Story = StoryObj<typeof meta>;
 export const Basic: Story = {
   args: {
     href: "/",
-    title: "Example Title",
-    date: new Date("2024-03-10"),
+    frontmatter: {
+      title: "Example Title",
+      date: new Date("2024-03-10"),
+    },
   },
 };
 
 export const BasicJa: Story = {
   args: {
     href: "/",
-    title: "日本語のタイトル",
-    date: new Date("2024-03-10"),
+    frontmatter: {
+      title: "日本語のタイトル",
+      date: new Date("2024-03-10"),
+    },
   },
 };

@@ -27,7 +27,7 @@ async function Page({ params }: { params: { id: string } }) {
   if (!item) return null;
   const { name } = item;
   const posts = await post.getAll();
-  const authorsPosts = posts.filter((post) => post.author === name);
+  const authorsPosts = posts.filter((post) => post.frontmatter.author === name);
 
   return (
     <>

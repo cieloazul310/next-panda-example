@@ -6,18 +6,19 @@ import { parseDate } from "@/utils";
 import type { PostMetadata } from "@/content";
 import { vstack } from "styled-system/patterns";
 
-export type PostItemProps = Pick<PostMetadata, "href" | "title" | "date"> & {
+export type PostItemProps = Pick<PostMetadata, "href"> & {
+  frontmatter: Pick<PostMetadata["frontmatter"], "title" | "date">;
   headerText?: ReactNode;
   footerText?: ReactNode;
 };
 
 export function PostItem({
   href,
-  title,
-  date,
+  frontmatter,
   headerText,
   footerText,
 }: PostItemProps) {
+  const { title, date } = frontmatter;
   return (
     <Block enableHover asChild>
       <NextLink
