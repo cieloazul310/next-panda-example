@@ -27,7 +27,9 @@ async function Page({ params }: { params: { id: string } }) {
   if (!item) return null;
   const { title } = item;
   const posts = await post.getAll();
-  const categoryPosts = posts.filter((post) => post.category === title);
+  const categoryPosts = posts.filter(
+    (post) => post.frontmatter.category === title,
+  );
 
   return (
     <>

@@ -11,7 +11,10 @@ async function Page() {
       <Wrapper>
         <ul className={vstack({ gap: "sm", alignItems: "stretch" })}>
           {allPosts
-            .sort((a, b) => b.date.getTime() - a.date.getTime())
+            .sort(
+              (a, b) =>
+                b.frontmatter.date.getTime() - a.frontmatter.date.getTime(),
+            )
             .map((post) => (
               <PostItem key={post.href} {...post} />
             ))}
