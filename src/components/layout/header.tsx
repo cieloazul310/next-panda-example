@@ -2,8 +2,8 @@ import NextLink from "next/link";
 import { Container, Spacer, Flex } from "styled-system/jsx";
 import { css } from "styled-system/css";
 import { flex } from "styled-system/patterns";
-import { Heading } from "@/components/ui";
-import { ColorModeHandler } from "../client";
+import { Heading } from "../ui/heading";
+import ColorModeHandler from "../color-mode-handler";
 
 const siteTitle = "Next.js + Park UI";
 

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Author } from "@/components";
-import { Text } from "@/components/ui";
+import { Author } from "@/components/author";
+import { Text } from "@/components/ui/text";
 import { cq } from "styled-system/patterns";
 
 const meta = {

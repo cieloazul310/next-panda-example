@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { author, post } from "@/content";
-import { siteMetadata } from "@/utils";
-import { Jumbotron, Wrapper, Block, Author, PostItem } from "@/components";
+import { siteMetadata } from "@/utils/siteMetadata";
+import Jumbotron from "@/components/layout/jumbotron";
+import Wrapper from "@/components/layout/wrapper";
+import { Author } from "@/components/author";
+import Block from "@/components/layout/block";
+import { PostItem } from "@/components/post-item";
 import { vstack } from "styled-system/patterns";
 
 export async function generateStaticParams() {
@@ -14,7 +18,8 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   const { id } = params;
   const item = await author.get("id", id);
   if (!item) return undefined;
-  const { name, description } = item;
+  const { data } = item;
+  const { name, description } = data;
   return siteMetadata({
     title: name,
     description,
@@ -25,7 +30,8 @@ async function Page({ params }: { params: { id: string } }) {
   const { id } = params;
   const item = await author.get("id", id);
   if (!item) return null;
-  const { name } = item;
+  const { data } = item;
+  const { name } = data;
   const posts = await post.getAll();
   const authorsPosts = posts.filter((post) => post.frontmatter.author === name);
 
@@ -33,7 +39,7 @@ async function Page({ params }: { params: { id: string } }) {
     <>
       <Jumbotron title={name} headerText="Author" />
       <Wrapper>
-        <Author {...item} />
+        <Author id={id} {...data} />
         <ul className={vstack({ gap: "sm", alignItems: "stretch" })}>
           {authorsPosts.map((post) => (
             <PostItem key={post.href} {...post} />

@@ -27,6 +27,14 @@
       "rules": {
         "@typescript-eslint/no-unused-vars": "warn"
       }
+    },
+    {
+      "files": ["src/lib/*", "src/components/ui/*"],
+      "rules": {
+        "react/display-name": "warn",
+        "@typescript-eslint/ban-types": "warn",
+        "@typescript-eslint/no-unused-vars": "warn"
+      }
     }
   ]
 }

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Carousel, IconButton } from "@/components/ui";
+import * as Carousel from "@/components/ui/carousel";
+import { IconButton } from "@/components/ui/icon-button";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { carousel } from "styled-system/recipes";
 

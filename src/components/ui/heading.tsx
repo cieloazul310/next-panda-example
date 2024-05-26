@@ -1,15 +1,10 @@
 import { forwardRef } from "react";
 import { Text, type TextProps } from "./text";
 
-export type HeadingProps = Omit<TextProps, "variant"> & {
-  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-};
+interface HeadingProps extends TextProps<React.ElementType> {}
 
 export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
-  (props, ref) => {
-    const { as = "h2", ...textProps } = props;
-    return <Text ref={ref} as={as} variant="heading" {...textProps} />;
-  },
+  (props, ref) => <Text as="h2" variant="heading" ref={ref} {...props} />,
 );
 
 Heading.displayName = "Heading";

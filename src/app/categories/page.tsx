@@ -1,5 +1,7 @@
 import NextLink from "next/link";
-import { Wrapper, Jumbotron, Block } from "@/components";
+import Block from "@/components/layout/block";
+import Jumbotron from "@/components/layout/jumbotron";
+import Wrapper from "@/components/layout/wrapper";
 import { categories } from "@/content";
 import { vstack } from "styled-system/patterns";
 

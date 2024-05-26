@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Block } from "@/components";
+import Block from "@/components/layout/block";
 import { VStack } from "styled-system/jsx";
 import { paper } from "styled-system/patterns";
 

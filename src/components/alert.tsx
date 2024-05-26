@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Alert as ParkAlert } from "./ui";
+import * as ParkAlert from "./ui/alert";
 
 type AlertProps = {
   title: string;

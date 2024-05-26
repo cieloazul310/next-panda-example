@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { siteTitle, siteDescription, siteUrl } from "@/data";
+import { siteTitle, siteDescription, siteUrl } from "@/data/siteMetadata";
 
 export function siteMetadata({
   title,

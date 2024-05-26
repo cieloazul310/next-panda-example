@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Avatar } from "@/components/ui";
+import { Avatar } from "@/components/ui/avatar";
 import { avatar } from "styled-system/recipes";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export

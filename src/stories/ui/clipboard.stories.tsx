@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Clipboard, FormLabel, Input, IconButton } from "@/components/ui";
+import * as Clipboard from "@/components/ui/clipboard";
+import { FormLabel } from "@/components/ui/form-label";
+import { Input } from "@/components/ui/input";
+import { IconButton } from "@/components/ui/icon-button";
 import { FaRegClipboard, FaCheck } from "react-icons/fa6";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export

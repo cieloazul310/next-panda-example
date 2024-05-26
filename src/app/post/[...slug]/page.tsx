@@ -2,17 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import remarkGfm from "remark-gfm";
 import { author, post, categories } from "@/content";
-import { siteMetadata, parseDate } from "@/utils";
-import {
-  Jumbotron,
-  Wrapper,
-  Block,
-  Author,
-  PostItem,
-  Alert,
-  CategoriesBadge,
-} from "@/components";
-import { Text } from "@/components/ui";
+import { Author } from "@/components/author";
+import Alert from "@/components/alert";
+import CategoriesBadge from "@/components/category-badge";
+import Block from "@/components/layout/block";
+import Jumbotron from "@/components/layout/jumbotron";
+import Wrapper from "@/components/layout/wrapper";
+import { PostItem } from "@/components/post-item";
+import { Text } from "@/components/ui/text";
+import { siteMetadata } from "@/utils/siteMetadata";
+import parseDate from "@/utils/date";
 import { useMDXComponents } from "@/mdx-components";
 import { MdInfo as InfoIcon } from "react-icons/md";
 

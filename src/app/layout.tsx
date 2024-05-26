@@ -1,9 +1,12 @@
 import type { ReactNode } from "react";
-import { Header, Footer, Providers, MyDrawer } from "@/components";
-import { fontClassName } from "@/styles";
-import { siteMetadata } from "@/utils";
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
+import Drawer from "@/components/layout/drawer";
+import ThemeProvider from "@/components/providers/theme-provider";
+import { fontClassName } from "@/styles/fonts";
+import { siteMetadata } from "@/utils/siteMetadata";
 import { css, cx } from "styled-system/css";
-import "../styles/globals.css";
+import "@/styles/globals.css";
 
 export const metadata = siteMetadata();
 
@@ -22,14 +25,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           fontClassName,
         )}
       >
-        <Providers>
+        <ThemeProvider>
           <Header />
           <main>
             <article>{children}</article>
           </main>
-          <MyDrawer />
+          <Drawer />
           <Footer />
-        </Providers>
+        </ThemeProvider>
       </body>
     </html>
   );
