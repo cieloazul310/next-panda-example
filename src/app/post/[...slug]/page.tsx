@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import remarkGfm from "remark-gfm";
 import { author, post, categories } from "@/content";
 import { siteMetadata, parseDate } from "@/utils";
 import {
@@ -43,6 +44,9 @@ async function Page({ params }: { params: { slug: string[] } }) {
   const components = useMDXComponents();
   const item = await post.useMdx(slug, {
     components,
+    mdxOptions: {
+      remarkPlugins: [remarkGfm],
+    },
   });
   if (!item) return null;
   const { content, frontmatter, context } = item;
@@ -50,12 +54,13 @@ async function Page({ params }: { params: { slug: string[] } }) {
   const category = await categories.get("title", frontmatter.category);
   const authorBox = authorItem && (
     <Author
+      id={authorItem.id}
       headerText={
         <Text fontWeight="bold" fontSize={{ base: "md", "@/md": "lg" }}>
           Author
         </Text>
       }
-      {...authorItem}
+      {...authorItem.data}
     />
   );
 

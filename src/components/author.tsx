@@ -61,8 +61,9 @@ function AuthorSocial({ socials }: AuthorSocialProps) {
 
 export type AuthorProps = Pick<
   Author,
-  "id" | "name" | "description" | "image" | "socials"
+  "name" | "description" | "image" | "socials"
 > & {
+  id: string;
   headerText?: ReactNode;
   footerText?: ReactNode;
 };

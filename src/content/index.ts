@@ -21,7 +21,7 @@ export type PostMetadata = z.infer<typeof post.metadataSchema>;
 
 export const author = defineData({
   contentPath: path.resolve(process.cwd(), "content/author"),
-  schema: {
+  schema: z.object({
     name: z.string(),
     description: z.string().optional(),
     image: z.string().optional(),
@@ -32,15 +32,15 @@ export const author = defineData({
         github: z.string().optional(),
       })
       .optional(),
-  },
+  }),
 });
 export type Author = z.infer<typeof author.schema>;
 
 export const categories = defineDataFromFile({
   filePath: path.resolve(process.cwd(), "content/categories.yml"),
-  schema: {
+  schema: z.object({
     id: z.string(),
     title: z.string(),
-  },
+  }),
 });
 export type Categories = z.infer<typeof categories.schema>;
