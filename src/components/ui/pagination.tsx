@@ -1,3 +1,4 @@
+import type { Assign } from "@ark-ui/react";
 import {
   Pagination as ArkPagination,
   type PaginationRootProps,
@@ -5,8 +6,8 @@ import {
 import { forwardRef } from "react";
 import { css, cx } from "styled-system/css";
 import { splitCssProps } from "styled-system/jsx";
-import { pagination, type PaginationVariantProps } from "styled-system/recipes";
-import type { Assign, JsxStyleProps } from "styled-system/types";
+import { type PaginationVariantProps, pagination } from "styled-system/recipes";
+import type { JsxStyleProps } from "styled-system/types";
 import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
 
@@ -23,19 +24,18 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
 
     return (
       <ArkPagination.Root
-        // @ts-expect-error TODO cssProps is to complex to be typed
         className={cx(styles.root, css(cssProps), className)}
         ref={ref}
         {...rootProps}
       >
-        {({ pages }) => (
-          <>
-            <ArkPagination.PrevTrigger className={styles.prevTrigger} asChild>
-              <IconButton variant="ghost" aria-label="Next Page">
-                <ChevronLeftIcon />
-              </IconButton>
-            </ArkPagination.PrevTrigger>
-            {pages.map((page, index) =>
+        <ArkPagination.PrevTrigger className={styles.prevTrigger} asChild>
+          <IconButton variant="ghost" aria-label="Next Page">
+            <ChevronLeftIcon />
+          </IconButton>
+        </ArkPagination.PrevTrigger>
+        <ArkPagination.Context>
+          {(pagination) =>
+            pagination.pages.map((page, index) =>
               page.type === "page" ? (
                 <ArkPagination.Item
                   className={styles.item}
@@ -47,21 +47,21 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                 </ArkPagination.Item>
               ) : (
                 <ArkPagination.Ellipsis
-                  className={styles.ellipsis}
                   key={index}
                   index={index}
+                  className={styles.ellipsis}
                 >
                   &#8230;
                 </ArkPagination.Ellipsis>
               ),
-            )}
-            <ArkPagination.NextTrigger className={styles.nextTrigger} asChild>
-              <IconButton variant="ghost" aria-label="Next Page">
-                <ChevronRightIcon />
-              </IconButton>
-            </ArkPagination.NextTrigger>
-          </>
-        )}
+            )
+          }
+        </ArkPagination.Context>
+        <ArkPagination.NextTrigger className={styles.nextTrigger} asChild>
+          <IconButton variant="ghost" aria-label="Next Page">
+            <ChevronRightIcon />
+          </IconButton>
+        </ArkPagination.NextTrigger>
       </ArkPagination.Root>
     );
   },

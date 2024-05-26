@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react";
 import NextLink from "next/link";
-import { isInternal } from "@/utils";
+import { isInternal } from "@/utils/isInternal";
 import { css, cx } from "styled-system/css";
 import { RiExternalLinkLine } from "react-icons/ri";
 

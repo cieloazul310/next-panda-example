@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { serialize } from "next-mdx-remote/serialize";
-import { MDXRemote } from "next-mdx-remote";
+import {} from "@mdx-js/mdx";
+// import { serialize } from "next-mdx-remote/serialize";
+// import { MDXRemote } from "next-mdx-remote";
 import { Container } from "styled-system/jsx";
-import { Block } from "@/components";
+import Block from "@/components/layout/block";
 import { useMDXComponents } from "@/mdx-components";
 import { mdxEn, mdxJa } from "./data";
 
@@ -18,6 +19,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const Hoge: Story = {
+  render: () => (
+    <Container>
+      <Block>Hoge</Block>
+    </Container>
+  ),
+};
+/*
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const En: Story = {
   loaders: [
@@ -129,3 +138,4 @@ export const InBlockJa: Story = {
     );
   },
 };
+*/

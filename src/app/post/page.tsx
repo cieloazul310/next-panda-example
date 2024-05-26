@@ -1,4 +1,6 @@
-import { Wrapper, Jumbotron, PostItem } from "@/components";
+import Jumbotron from "@/components/layout/jumbotron";
+import Wrapper from "@/components/layout/wrapper";
+import { PostItem } from "@/components/post-item";
 import { post } from "@/content";
 import { vstack } from "styled-system/patterns";
 

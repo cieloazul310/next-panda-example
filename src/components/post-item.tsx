@@ -1,10 +1,11 @@
 import type { ReactNode } from "react";
 import NextLink from "next/link";
-import { Block } from "@/components";
-import { Heading, Text } from "@/components/ui";
-import { parseDate } from "@/utils";
+import parseDate from "@/utils/date";
 import type { PostMetadata } from "@/content";
 import { vstack } from "styled-system/patterns";
+import Block from "./layout/block";
+import { Heading } from "./ui/heading";
+import { Text } from "./ui/text";
 
 export type PostItemProps = Pick<PostMetadata, "href"> & {
   frontmatter: Pick<PostMetadata["frontmatter"], "title" | "date">;

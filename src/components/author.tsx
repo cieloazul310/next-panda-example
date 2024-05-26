@@ -1,12 +1,14 @@
 import type { ReactNode, PropsWithChildren } from "react";
 import NextLink from "next/link";
-import { IconButton } from "@/components/ui";
 import type { Author } from "@/content";
 import { css } from "styled-system/css";
 import { hstack, stack, vstack } from "styled-system/patterns";
 import { FaXTwitter, FaGithub, FaLink } from "react-icons/fa6";
-import { Avatar, Heading, Text } from "./ui";
-import { Block } from "./layout";
+import { Text } from "./ui/text";
+import { Heading } from "./ui/heading";
+import { Avatar } from "./ui/avatar";
+import { IconButton } from "./ui/icon-button";
+import Block from "./layout/block";
 
 type AuthorSocialButtonProps = PropsWithChildren<{
   href: string;
@@ -61,8 +63,9 @@ function AuthorSocial({ socials }: AuthorSocialProps) {
 
 export type AuthorProps = Pick<
   Author,
-  "id" | "name" | "description" | "image" | "socials"
+  "name" | "description" | "image" | "socials"
 > & {
+  id: string;
   headerText?: ReactNode;
   footerText?: ReactNode;
 };

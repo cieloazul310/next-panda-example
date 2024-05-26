@@ -1,5 +1,5 @@
 import NextImage, { type ImageProps as NextImageProps } from "next/image";
-import { isInternal } from "@/utils";
+import { isInternal } from "@/utils/isInternal";
 import { css, cx } from "styled-system/css";
 import type { ComponentPropsWithoutRef, PropsWithChildren } from "react";
 

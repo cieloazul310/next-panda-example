@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { categories, post } from "@/content";
-import { siteMetadata } from "@/utils";
-import { Jumbotron, Wrapper, Block, PostItem } from "@/components";
-import { Text } from "@/components/ui";
+import { siteMetadata } from "@/utils/siteMetadata";
+import Block from "@/components/layout/block";
+import Jumbotron from "@/components/layout/jumbotron";
+import Wrapper from "@/components/layout/wrapper";
+import { PostItem } from "@/components/post-item";
+import { Text } from "@/components/ui/text";
 import { vstack } from "styled-system/patterns";
 
 export async function generateStaticParams() {

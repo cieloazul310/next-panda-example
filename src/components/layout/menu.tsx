@@ -1,7 +1,7 @@
 import NextLink from "next/link";
-import { menu } from "@/data";
+import { menu } from "@/data/menu";
 import { vstack } from "styled-system/patterns";
-import { Block } from "../layout";
+import Block from "../layout/block";
 
 function Menu() {
   return (

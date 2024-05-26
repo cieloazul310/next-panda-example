@@ -17,9 +17,9 @@ import {
   Li,
   Hr,
   Blockquote,
-  Link,
-  Image,
-} from "@/components";
+} from "@/components/mdx";
+import Image from "@/components/image";
+import Link from "@/components/link";
 
 export function useMDXComponents(
   components: MDXComponents = {},

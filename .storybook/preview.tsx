@@ -1,8 +1,8 @@
 import * as React from "react";
 import type { Preview } from "@storybook/react";
 import { withThemeByDataAttribute } from "@storybook/addon-themes";
-import { fontClassName } from "@/styles";
-import "@/styles/globals.css";
+import { fontClassName } from "../src/styles/fonts";
+import "../src/styles/globals.css";
 
 const preview: Preview = {
   parameters: {

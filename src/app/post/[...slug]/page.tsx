@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import remarkGfm from "remark-gfm";
 import { author, post, categories } from "@/content";
-import { siteMetadata, parseDate } from "@/utils";
-import {
-  Jumbotron,
-  Wrapper,
-  Block,
-  Author,
-  PostItem,
-  Alert,
-  CategoriesBadge,
-} from "@/components";
-import { Text } from "@/components/ui";
+import { Author } from "@/components/author";
+import Alert from "@/components/alert";
+import CategoriesBadge from "@/components/category-badge";
+import Block from "@/components/layout/block";
+import Jumbotron from "@/components/layout/jumbotron";
+import Wrapper from "@/components/layout/wrapper";
+import { PostItem } from "@/components/post-item";
+import { Text } from "@/components/ui/text";
+import { siteMetadata } from "@/utils/siteMetadata";
+import parseDate from "@/utils/date";
 import { useMDXComponents } from "@/mdx-components";
 import { MdInfo as InfoIcon } from "react-icons/md";
 
@@ -43,6 +43,9 @@ async function Page({ params }: { params: { slug: string[] } }) {
   const components = useMDXComponents();
   const item = await post.useMdx(slug, {
     components,
+    mdxOptions: {
+      remarkPlugins: [remarkGfm],
+    },
   });
   if (!item) return null;
   const { content, frontmatter, context } = item;
@@ -50,12 +53,13 @@ async function Page({ params }: { params: { slug: string[] } }) {
   const category = await categories.get("title", frontmatter.category);
   const authorBox = authorItem && (
     <Author
+      id={authorItem.id}
       headerText={
         <Text fontWeight="bold" fontSize={{ base: "md", "@/md": "lg" }}>
           Author
         </Text>
       }
-      {...authorItem}
+      {...authorItem.data}
     />
   );
 

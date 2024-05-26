@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react";
 import { article } from "styled-system/patterns";
-import { Block } from "../layout";
+import Block from "../layout/block";
 
 export const Pre = (props: ComponentProps<"pre">) => {
   return (

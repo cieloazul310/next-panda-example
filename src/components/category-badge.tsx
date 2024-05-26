@@ -1,6 +1,6 @@
 import NextLink from "next/link";
-import { Badge } from "@/components/ui";
 import type { Categories } from "@/content";
+import { Badge } from "./ui/badge";
 
 type CategoriesBadgeProps = Categories;
 
